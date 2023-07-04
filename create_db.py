@@ -14,6 +14,12 @@ def create_database():
         print("Could not open the database!")
         return False
 
+    # Create the "Players" table
+    query = QSqlQuery()
+    query.exec("CREATE TABLE IF NOT EXISTS Player ("
+            "user_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            "player_name TEXT NOT NULL)")
+    
     # Create the "Users" table
     query = QSqlQuery()
     query.exec("CREATE TABLE IF NOT EXISTS Users ("
