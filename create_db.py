@@ -33,8 +33,15 @@ def create_database():
                "incorrect_answers TEXT NOT NULL,"
                "difficulty TEXT NOT NULL)")
 
+    print("Database and table created successfully!")
+    #return True
 
-    return True
+# Create a function to create the database and table
+def close_database():
+    print("Database and table closed successfully!")
+    # Close the database connection
+    QSqlDatabase.database().close()
+    QSqlDatabase.removeDatabase("QSQLITE")
 
 # Create the QApplication instance
 app = QApplication([])
