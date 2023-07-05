@@ -25,6 +25,6 @@ Database Structure is as follows
 | category   | TEXT NOT NULL|
 | question_text  | TEXT NOT NULL|
 | correct_answer    | TEXT NOT NULL|
-| incorrect_answers   |  TIMESTAMP DEFAULT CURRENT_TIMESTAMP|
+| incorrect_answers   |  TIMESTAMP DEFAULT CURRENT_TIMESTAMP| NOTE: Is this a timestamp? What is the rationale behind storing incorrect_answers?
 | difficulty   | TEXT NOT NULL|
 
