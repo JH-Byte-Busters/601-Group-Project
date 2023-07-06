@@ -14,13 +14,13 @@
    <string>TrivialCompute</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 127);</string>
+   <string notr="true">background-color: rgb(130, 130, 130);</string>
   </property>
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
      <x>250</x>
-     <y>680</y>
+     <y>600</y>
      <width>361</width>
      <height>51</height>
     </rect>
@@ -35,9 +35,9 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(85, 255, 255);
+    <string notr="true">background-color: rgb(0, 0, 255);
 font: 87 16pt &quot;Segoe UI Black&quot;;
-border-color: rgb(0, 0, 0);</string>
+border-color: rgb(255, 0, 0);</string>
    </property>
    <property name="text">
     <string>Category/Question Setup</string>
@@ -74,13 +74,13 @@ border-color: rgb(0, 0, 0);</string>
      <pointsize>16</pointsize>
      <weight>10</weight>
      <italic>false</italic>
-     <bold>false</bold>
+     <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(0, 255, 0);
+    <string notr="true">background-color: rgb(255, 0, 0);
 font: 87 16pt &quot;Segoe UI Black&quot;;
-border-color: rgb(0, 0, 0);</string>
+border-color: rgb(0, 0, 255);</string>
    </property>
    <property name="text">
     <string>Start Game</string>
