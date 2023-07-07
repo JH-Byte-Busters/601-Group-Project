@@ -40,22 +40,13 @@ def create_database():
                "difficulty TEXT NOT NULL)")
 
     print("Database and table created successfully!")
-    #return True
+    
+    return database
 
 # Create a function to create the database and table
-def close_database():
+def close_database(database):
     print("Database and table closed successfully!")
     # Close the database connection
-    QSqlDatabase.database().close()
-    QSqlDatabase.removeDatabase("QSQLITE")
-
-# Create the QApplication instance
-app = QApplication([])
-
-# Call the create_database function to create the database and table
-if create_database():
-    print("Database and table created successfully!")
-
-# Close the database connection
-QSqlDatabase.database().close()
-QSqlDatabase.removeDatabase("QSQLITE")
+    database.database().close()
+    database.removeDatabase("QSQLITE")
+    database.removeDatabase(database.database().connectionName())
