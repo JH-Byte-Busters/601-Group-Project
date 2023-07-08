@@ -14,6 +14,12 @@ def create_database():
         print("Could not open the database!")
         return False
 
+    # Create the "Players" table
+    query = QSqlQuery()
+    query.exec("CREATE TABLE IF NOT EXISTS Player ("
+            "user_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            "player_name TEXT NOT NULL)")
+    
     # Create the "Users" table
     query = QSqlQuery()
     query.exec("CREATE TABLE IF NOT EXISTS Users ("
@@ -33,16 +39,14 @@ def create_database():
                "incorrect_answers TEXT NOT NULL,"
                "difficulty TEXT NOT NULL)")
 
-
-    return True
-
-# Create the QApplication instance
-app = QApplication([])
-
-# Call the create_database function to create the database and table
-if create_database():
     print("Database and table created successfully!")
+    
+    return database
 
-# Close the database connection
-QSqlDatabase.database().close()
-QSqlDatabase.removeDatabase("QSQLITE")
+# Create a function to create the database and table
+def close_database(database):
+    print("Database and table closed successfully!")
+    # Close the database connection
+    database.database().close()
+    database.removeDatabase("QSQLITE")
+    database.removeDatabase(database.database().connectionName())
