@@ -95,7 +95,7 @@ class App(QDialog):
         layout.addWidget(cell17,2,0)
         
         layout.addWidget(QPushButton('8'),2,1)
-        layout.addWidget(QPushButton('9'),2,2)
+        layout.addWidget(QPushButton('PLAYER_1\nEARNED BADGES'),2,2)
         layout.addWidget(QPushButton('10'),2,3)
         
         cell21 = QPushButton('B')
@@ -103,7 +103,7 @@ class App(QDialog):
         layout.addWidget(cell21,2,4)
         
         layout.addWidget(QPushButton('12'),2,5)
-        layout.addWidget(QPushButton('13'),2,6)
+        layout.addWidget(QPushButton('PLAYER_2\nEARNED BADGES'),2,6)
         layout.addWidget(QPushButton('14'),2,7)
         
         cell25 = QPushButton('Y')
