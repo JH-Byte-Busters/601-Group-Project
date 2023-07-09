@@ -1,13 +1,13 @@
-import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QGroupBox, QDialog, QVBoxLayout, QGridLayout
-from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtGui import QIcon
+import sys
 
 class App(QDialog):
 
     def __init__(self):
         super().__init__()
-        self.title = 'PyQt5 layout - pythonspot.com'
+        self.title = 'PyQt5 layout - Trivial Compute Game'
         self.left = 10
         self.top = 10
         self.width = 320
@@ -99,50 +99,50 @@ class App(QDialog):
         layout.addWidget(cell25,2,8)
         
         # 4th row:
-        layout.addWidget(QPushButton('10'),3,0)
-        layout.addWidget(QPushButton('11'),3,4)
-        layout.addWidget(QPushButton('12'),3,8)
+        layout.addWidget(QPushButton('1'),3,0)
+        layout.addWidget(QPushButton('2'),3,4)
+        layout.addWidget(QPushButton('3'),3,8)
         
         # 5th row:
-        layout.addWidget(QPushButton('10'),4,0)
-        layout.addWidget(QPushButton('11'),4,1)
-        layout.addWidget(QPushButton('12'),4,2)
-        layout.addWidget(QPushButton('10'),4,3)
-        layout.addWidget(QPushButton('11'),4,4)
-        layout.addWidget(QPushButton('12'),4,5)
-        layout.addWidget(QPushButton('10'),4,6)
-        layout.addWidget(QPushButton('11'),4,7)
-        layout.addWidget(QPushButton('12'),4,8)
+        layout.addWidget(QPushButton('1'),4,0)
+        layout.addWidget(QPushButton('2'),4,1)
+        layout.addWidget(QPushButton('3'),4,2)
+        layout.addWidget(QPushButton('4'),4,3)
+        layout.addWidget(QPushButton('5'),4,4)
+        layout.addWidget(QPushButton('6'),4,5)
+        layout.addWidget(QPushButton('7'),4,6)
+        layout.addWidget(QPushButton('8'),4,7)
+        layout.addWidget(QPushButton('9'),4,8)
         
         # 6th row:
-        layout.addWidget(QPushButton('10'),5,0)
-        layout.addWidget(QPushButton('11'),5,4)
-        layout.addWidget(QPushButton('12'),5,8)
+        layout.addWidget(QPushButton('1'),5,0)
+        layout.addWidget(QPushButton('2'),5,4)
+        layout.addWidget(QPushButton('3'),5,8)
         
         # 7th row:
-        layout.addWidget(QPushButton('7'),6,0)
+        layout.addWidget(QPushButton('1'),6,0)
         layout.addWidget(QPushButton('PLAYER_3\nEARNED BADGES'),6,2)
-        layout.addWidget(QPushButton('8'),6,4)
+        layout.addWidget(QPushButton('2'),6,4)
         layout.addWidget(QPushButton('PLAYER_4\nEARNED BADGES'),6,6)
-        layout.addWidget(QPushButton('9'),6,8)
+        layout.addWidget(QPushButton('3'),6,8)
         
         # 8th row:
-        layout.addWidget(QPushButton('10'),7,0)
-        layout.addWidget(QPushButton('11'),7,4)
-        layout.addWidget(QPushButton('12'),7,8)
+        layout.addWidget(QPushButton('1'),7,0)
+        layout.addWidget(QPushButton('2'),7,4)
+        layout.addWidget(QPushButton('3'),7,8)
         
         # 9th row:
         rollCell3 = QPushButton('Roll\nAgain')
         rollCell3.setStyleSheet("background-color:lightblue")
         layout.addWidget(rollCell3,8,0)
         
-        layout.addWidget(QPushButton('11'),8,1)
-        layout.addWidget(QPushButton('12'),8,2)
-        layout.addWidget(QPushButton('10'),8,3)
-        layout.addWidget(QPushButton('11'),8,4)
-        layout.addWidget(QPushButton('12'),8,5)
-        layout.addWidget(QPushButton('10'),8,6)
-        layout.addWidget(QPushButton('11'),8,7)
+        layout.addWidget(QPushButton('1'),8,1)
+        layout.addWidget(QPushButton('2'),8,2)
+        layout.addWidget(QPushButton('3'),8,3)
+        layout.addWidget(QPushButton('4'),8,4)
+        layout.addWidget(QPushButton('5'),8,5)
+        layout.addWidget(QPushButton('6'),8,6)
+        layout.addWidget(QPushButton('7'),8,7)
         
         rollCell4 = QPushButton('Roll\nAgain')
         rollCell4.setStyleSheet("background-color:lightblue")
