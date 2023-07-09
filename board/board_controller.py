@@ -26,12 +26,12 @@ class App(QDialog):
         
         self.show()
     
+    # CREATE INDIVIDUAL ROWS:
     def createGridLayout(self):
         self.horizontalGroupBox = QGroupBox("Trivial Compute Game")
         layout = QGridLayout()
         
-		# CREATE INDIVIDUAL ROWS
-		# 1st row:
+	# 1st row:
         rollCell1 = QPushButton('Roll\nAgain')
         rollCell1.setStyleSheet("background-color:lightblue")
         layout.addWidget(rollCell1,0,0)
