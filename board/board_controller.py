@@ -30,8 +30,8 @@ class App(QDialog):
         self.horizontalGroupBox = QGroupBox("Trivial Compute Game")
         layout = QGridLayout()
         
-		    # CREATE INDIVIDUAL ROWS
-		    # 1st row:
+		# CREATE INDIVIDUAL ROWS
+		# 1st row:
         rollCell1 = QPushButton('Roll\nAgain')
         rollCell1.setStyleSheet("background-color:lightblue")
         layout.addWidget(rollCell1,0,0)
@@ -73,17 +73,9 @@ class App(QDialog):
         cell8.setStyleSheet("background-color:red")
         layout.addWidget(cell8,1,0)
         
-        layout.addWidget(QPushButton('5'),1,1)
-        layout.addWidget(QPushButton('6'),1,2)
-        layout.addWidget(QPushButton('7'),1,3)
-        
         cell12 = QPushButton('Y')
         cell12.setStyleSheet("background-color:yellow")
         layout.addWidget(cell12,1,4)
-        
-        layout.addWidget(QPushButton('9'),1,5)
-        layout.addWidget(QPushButton('10'),1,6)
-        layout.addWidget(QPushButton('11'),1,7)
         
         cell16 = QPushButton('R')
         cell16.setStyleSheet("background-color:red")
@@ -94,17 +86,13 @@ class App(QDialog):
         cell17.setStyleSheet("background-color:green")
         layout.addWidget(cell17,2,0)
         
-        layout.addWidget(QPushButton('8'),2,1)
         layout.addWidget(QPushButton('PLAYER_1\nEARNED BADGES'),2,2)
-        layout.addWidget(QPushButton('10'),2,3)
         
         cell21 = QPushButton('B')
         cell21.setStyleSheet("background-color:blue")
         layout.addWidget(cell21,2,4)
         
-        layout.addWidget(QPushButton('12'),2,5)
         layout.addWidget(QPushButton('PLAYER_2\nEARNED BADGES'),2,6)
-        layout.addWidget(QPushButton('14'),2,7)
         
         cell25 = QPushButton('Y')
         cell25.setStyleSheet("background-color:yellow")
@@ -112,13 +100,7 @@ class App(QDialog):
         
         # 4th row:
         layout.addWidget(QPushButton('10'),3,0)
-        layout.addWidget(QPushButton('11'),3,1)
-        layout.addWidget(QPushButton('12'),3,2)
-        layout.addWidget(QPushButton('10'),3,3)
         layout.addWidget(QPushButton('11'),3,4)
-        layout.addWidget(QPushButton('12'),3,5)
-        layout.addWidget(QPushButton('10'),3,6)
-        layout.addWidget(QPushButton('11'),3,7)
         layout.addWidget(QPushButton('12'),3,8)
         
         # 5th row:
@@ -134,35 +116,19 @@ class App(QDialog):
         
         # 6th row:
         layout.addWidget(QPushButton('10'),5,0)
-        layout.addWidget(QPushButton('11'),5,1)
-        layout.addWidget(QPushButton('12'),5,2)
-        layout.addWidget(QPushButton('10'),5,3)
         layout.addWidget(QPushButton('11'),5,4)
-        layout.addWidget(QPushButton('12'),5,5)
-        layout.addWidget(QPushButton('10'),5,6)
-        layout.addWidget(QPushButton('11'),5,7)
         layout.addWidget(QPushButton('12'),5,8)
         
         # 7th row:
         layout.addWidget(QPushButton('7'),6,0)
-        layout.addWidget(QPushButton('8'),6,1)
-        layout.addWidget(QPushButton('9'),6,2)
-        layout.addWidget(QPushButton('7'),6,3)
+        layout.addWidget(QPushButton('PLAYER_3\nEARNED BADGES'),6,2)
         layout.addWidget(QPushButton('8'),6,4)
-        layout.addWidget(QPushButton('9'),6,5)
-        layout.addWidget(QPushButton('7'),6,6)
-        layout.addWidget(QPushButton('8'),6,7)
+        layout.addWidget(QPushButton('PLAYER_4\nEARNED BADGES'),6,6)
         layout.addWidget(QPushButton('9'),6,8)
         
         # 8th row:
         layout.addWidget(QPushButton('10'),7,0)
-        layout.addWidget(QPushButton('11'),7,1)
-        layout.addWidget(QPushButton('12'),7,2)
-        layout.addWidget(QPushButton('10'),7,3)
         layout.addWidget(QPushButton('11'),7,4)
-        layout.addWidget(QPushButton('12'),7,5)
-        layout.addWidget(QPushButton('10'),7,6)
-        layout.addWidget(QPushButton('11'),7,7)
         layout.addWidget(QPushButton('12'),7,8)
         
         # 9th row:
