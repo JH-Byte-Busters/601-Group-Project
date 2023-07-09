@@ -48,7 +48,7 @@ class App(QDialog):
         cell3.setStyleSheet("background-color:green")
         layout.addWidget(cell3,0,3)
         
-        cell4 = QPushButton('R')
+        cell4 = QPushButton('HQ')
         cell4.setStyleSheet("background-color:red")
         layout.addWidget(cell4,0,4)
         
@@ -99,50 +99,60 @@ class App(QDialog):
         layout.addWidget(cell25,2,8)
         
         # 4th row:
-        layout.addWidget(QPushButton('1'),3,0)
-        layout.addWidget(QPushButton('2'),3,4)
-        layout.addWidget(QPushButton('3'),3,8)
+        layout.addWidget(QPushButton('26'),3,0)
+        layout.addWidget(QPushButton('30'),3,4)
+        layout.addWidget(QPushButton('34'),3,8)
         
         # 5th row:
-        layout.addWidget(QPushButton('1'),4,0)
-        layout.addWidget(QPushButton('2'),4,1)
-        layout.addWidget(QPushButton('3'),4,2)
-        layout.addWidget(QPushButton('4'),4,3)
-        layout.addWidget(QPushButton('5'),4,4)
-        layout.addWidget(QPushButton('6'),4,5)
-        layout.addWidget(QPushButton('7'),4,6)
-        layout.addWidget(QPushButton('8'),4,7)
-        layout.addWidget(QPushButton('9'),4,8)
+        cell35 = QPushButton('HQ')
+        cell35.setStyleSheet("background-color:yellow")
+        layout.addWidget(cell35,4,0)
+        
+        layout.addWidget(QPushButton('36'),4,1)
+        layout.addWidget(QPushButton('37'),4,2)
+        layout.addWidget(QPushButton('38'),4,3)
+        layout.addWidget(QPushButton('39'),4,4)
+        layout.addWidget(QPushButton('40'),4,5)
+        layout.addWidget(QPushButton('41'),4,6)
+        layout.addWidget(QPushButton('42'),4,7)
+        
+        cell43 = QPushButton('HQ')
+        cell43.setStyleSheet("background-color:green")
+        layout.addWidget(cell43,4,8)
         
         # 6th row:
-        layout.addWidget(QPushButton('1'),5,0)
-        layout.addWidget(QPushButton('2'),5,4)
-        layout.addWidget(QPushButton('3'),5,8)
+        layout.addWidget(QPushButton('44'),5,0)
+        layout.addWidget(QPushButton('48'),5,4)
+        layout.addWidget(QPushButton('52'),5,8)
         
         # 7th row:
-        layout.addWidget(QPushButton('1'),6,0)
+        layout.addWidget(QPushButton('53'),6,0)
         layout.addWidget(QPushButton('PLAYER_3\nEARNED BADGES'),6,2)
-        layout.addWidget(QPushButton('2'),6,4)
+        layout.addWidget(QPushButton('57'),6,4)
         layout.addWidget(QPushButton('PLAYER_4\nEARNED BADGES'),6,6)
-        layout.addWidget(QPushButton('3'),6,8)
+        layout.addWidget(QPushButton('61'),6,8)
         
         # 8th row:
-        layout.addWidget(QPushButton('1'),7,0)
-        layout.addWidget(QPushButton('2'),7,4)
-        layout.addWidget(QPushButton('3'),7,8)
+        layout.addWidget(QPushButton('51'),7,0)
+        layout.addWidget(QPushButton('55'),7,4)
+        layout.addWidget(QPushButton('59'),7,8)
         
         # 9th row:
         rollCell3 = QPushButton('Roll\nAgain')
         rollCell3.setStyleSheet("background-color:lightblue")
         layout.addWidget(rollCell3,8,0)
         
-        layout.addWidget(QPushButton('1'),8,1)
-        layout.addWidget(QPushButton('2'),8,2)
-        layout.addWidget(QPushButton('3'),8,3)
-        layout.addWidget(QPushButton('4'),8,4)
-        layout.addWidget(QPushButton('5'),8,5)
-        layout.addWidget(QPushButton('6'),8,6)
-        layout.addWidget(QPushButton('7'),8,7)
+        layout.addWidget(QPushButton('61'),8,1)
+        layout.addWidget(QPushButton('62'),8,2)
+        layout.addWidget(QPushButton('63'),8,3)
+        
+        cell64 = QPushButton('HQ')
+        cell64.setStyleSheet("background-color:blue")
+        layout.addWidget(cell64,8,4)
+        
+        layout.addWidget(QPushButton('65'),8,5)
+        layout.addWidget(QPushButton('66'),8,6)
+        layout.addWidget(QPushButton('67'),8,7)
         
         rollCell4 = QPushButton('Roll\nAgain')
         rollCell4.setStyleSheet("background-color:lightblue")
