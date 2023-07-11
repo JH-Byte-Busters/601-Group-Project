@@ -90,6 +90,8 @@ class PlayerMenu(QDialog):
         # the database
         board=Board()
         board.setNames()
+        widget.setFixedHeight(980)
+        widget.setFixedWidth(1890)
         widget.addWidget(board)
         # Update the widget menu to point to board
         widget.setCurrentIndex(widget.currentIndex()+1)
@@ -136,7 +138,9 @@ class Board(QDialog):
     
     # Create the widget to go to back to the player menu
     def gotoPlayerMenu(self):
-        widget.setCurrentIndex(widget.currentIndex()-1)
+        widget.setFixedHeight(900)
+        widget.setFixedWidth(880)
+        widget.setCurrentIndex(widget.currentIndex()-4)
 
     # In the board make sure to load up the player names
     # properly to set each text box
