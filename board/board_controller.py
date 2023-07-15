@@ -19,7 +19,6 @@ class BoardWindow(QDialog):
         self.cells = []
         self.pointer = 41
         self.category = "NONE"
-        self.cur_positions = []
         
         self.initUI() # Execute GUI window.
         
