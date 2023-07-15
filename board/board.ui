@@ -28,23 +28,7 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 127);</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>0</y>
-     <width>821</width>
-     <height>821</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-image: url(Trivial_Compute_Board.png);</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="btn_backToMenu">
    <property name="geometry">
     <rect>
      <x>750</x>
@@ -83,7 +67,7 @@ border-color: rgb(0, 0, 0);</string>
     <string>Back to Menu</string>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser_3">
+  <widget class="QTextBrowser" name="txt_playerName3">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -114,7 +98,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;TEST3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser_1">
+  <widget class="QTextBrowser" name="txt_playerName1">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -145,7 +129,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;TEST1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser_2">
+  <widget class="QTextBrowser" name="txt_playerName2">
    <property name="geometry">
     <rect>
      <x>550</x>
@@ -176,7 +160,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;TEST2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser_4">
+  <widget class="QTextBrowser" name="txt_playerName4">
    <property name="geometry">
     <rect>
      <x>550</x>
@@ -212,7 +196,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>40</x>
      <y>10</y>
-     <width>871</width>
+     <width>877</width>
      <height>881</height>
     </rect>
    </property>
@@ -1442,8 +1426,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>570</x>
      <y>190</y>
-     <width>190</width>
-     <height>190</height>
+     <width>191</width>
+     <height>191</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_3">
@@ -1562,8 +1546,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>180</x>
      <y>580</y>
-     <width>190</width>
-     <height>190</height>
+     <width>191</width>
+     <height>191</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_4">
@@ -1682,8 +1666,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>570</x>
      <y>580</y>
-     <width>190</width>
-     <height>190</height>
+     <width>191</width>
+     <height>191</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_7">
@@ -1802,8 +1786,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>180</x>
      <y>190</y>
-     <width>190</width>
-     <height>190</height>
+     <width>191</width>
+     <height>191</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
@@ -1998,7 +1982,7 @@ background-color: rgb(255, 236, 39);</string>
 background-color: rgb(0, 228, 54);</string>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser_5">
+  <widget class="QTextBrowser" name="txt_currentPlayer">
    <property name="geometry">
     <rect>
      <x>1430</x>
@@ -2180,7 +2164,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_51">
+     <widget class="QPushButton" name="btn_rollDie">
       <property name="font">
        <font>
         <pointsize>28</pointsize>
@@ -2202,12 +2186,12 @@ p, li { white-space: pre-wrap; }
      <x>1440</x>
      <y>781</y>
      <width>326</width>
-     <height>114</height>
+     <height>115</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QPushButton" name="pushButton_56">
+     <widget class="QPushButton" name="btn_correctAnsw">
       <property name="maximumSize">
        <size>
         <width>324</width>
@@ -2228,7 +2212,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_57">
+     <widget class="QPushButton" name="btn_incorrectAnsw">
       <property name="maximumSize">
        <size>
         <width>324</width>
@@ -2250,18 +2234,18 @@ p, li { white-space: pre-wrap; }
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>980</x>
      <y>480</y>
-     <width>287</width>
-     <height>287</height>
+     <width>289</width>
+     <height>289</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_5">
     <item row="0" column="1">
-     <widget class="QToolButton" name="toolButton">
+     <widget class="QToolButton" name="btn_up">
       <property name="minimumSize">
        <size>
         <width>91</width>
@@ -2286,7 +2270,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QToolButton" name="toolButton_4">
+     <widget class="QToolButton" name="btn_left">
       <property name="minimumSize">
        <size>
         <width>91</width>
@@ -2311,7 +2295,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="1" column="2">
-     <widget class="QToolButton" name="toolButton_2">
+     <widget class="QToolButton" name="btn_right">
       <property name="minimumSize">
        <size>
         <width>91</width>
@@ -2336,7 +2320,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QToolButton" name="toolButton_3">
+     <widget class="QToolButton" name="btn_down">
       <property name="minimumSize">
        <size>
         <width>91</width>
@@ -2364,13 +2348,13 @@ p, li { white-space: pre-wrap; }
   </widget>
   <zorder>layoutWidget</zorder>
   <zorder>layoutWidget</zorder>
-  <zorder>label</zorder>
-  <zorder>pushButton</zorder>
   <zorder>layoutWidget</zorder>
-  <zorder>textBrowser_4</zorder>
-  <zorder>textBrowser_1</zorder>
-  <zorder>textBrowser_2</zorder>
-  <zorder>textBrowser_3</zorder>
+  <zorder>btn_backToMenu</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>txt_playerName4</zorder>
+  <zorder>txt_playerName1</zorder>
+  <zorder>txt_playerName2</zorder>
+  <zorder>txt_playerName3</zorder>
   <zorder>layoutWidget_3</zorder>
   <zorder>layoutWidget_4</zorder>
   <zorder>layoutWidget_5</zorder>
@@ -2382,23 +2366,17 @@ p, li { white-space: pre-wrap; }
   <zorder>dial_4</zorder>
   <zorder>label_5</zorder>
   <zorder>label_6</zorder>
-  <zorder>textBrowser_5</zorder>
+  <zorder>txt_currentPlayer</zorder>
   <zorder>label_4</zorder>
   <zorder>label_7</zorder>
-  <zorder>toolButton</zorder>
-  <zorder>toolButton_2</zorder>
-  <zorder>toolButton_3</zorder>
-  <zorder>toolButton_4</zorder>
  </widget>
  <tabstops>
-  <tabstop>textBrowser_1</tabstop>
-  <tabstop>textBrowser_2</tabstop>
-  <tabstop>textBrowser_3</tabstop>
-  <tabstop>textBrowser_4</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>txt_playerName1</tabstop>
+  <tabstop>txt_playerName2</tabstop>
+  <tabstop>txt_playerName3</tabstop>
+  <tabstop>txt_playerName4</tabstop>
+  <tabstop>btn_backToMenu</tabstop>
  </tabstops>
- <resources>
-  <include location="board.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
