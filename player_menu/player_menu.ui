@@ -27,7 +27,7 @@
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="1">
-     <widget class="QLineEdit" name="lineEdit_2">
+     <widget class="QLineEdit" name="line_playerName2">
       <property name="minimumSize">
        <size>
         <width>301</width>
@@ -54,7 +54,7 @@
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QLineEdit" name="lineEdit_3">
+     <widget class="QLineEdit" name="line_playerName3">
       <property name="minimumSize">
        <size>
         <width>301</width>
@@ -81,7 +81,7 @@
      </widget>
     </item>
     <item row="3" column="1">
-     <widget class="QLineEdit" name="lineEdit_4">
+     <widget class="QLineEdit" name="line_playerName4">
       <property name="minimumSize">
        <size>
         <width>301</width>
@@ -108,7 +108,7 @@
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="line_playerName1">
       <property name="minimumSize">
        <size>
         <width>301</width>
@@ -190,14 +190,14 @@
      <x>260</x>
      <y>500</y>
      <width>351</width>
-     <height>101</height>
+     <height>105</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_14">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_12">
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="btn_playGame">
         <property name="font">
          <font>
           <family>Segoe UI Black</family>
@@ -213,7 +213,7 @@ font: 87 16pt &quot;Segoe UI Black&quot;;
 border-color: rgb(0, 0, 0);</string>
         </property>
         <property name="text">
-         <string>Enter Data</string>
+         <string>Time to Play!</string>
         </property>
        </widget>
       </item>
@@ -222,7 +222,7 @@ border-color: rgb(0, 0, 0);</string>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_13">
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="btn_backToMenu">
         <property name="font">
          <font>
           <family>Segoe UI Black</family>
@@ -248,12 +248,12 @@ border-color: rgb(0, 0, 0);</string>
   </widget>
  </widget>
  <tabstops>
-  <tabstop>lineEdit</tabstop>
-  <tabstop>lineEdit_2</tabstop>
-  <tabstop>lineEdit_3</tabstop>
-  <tabstop>lineEdit_4</tabstop>
-  <tabstop>pushButton</tabstop>
-  <tabstop>pushButton_2</tabstop>
+  <tabstop>line_playerName1</tabstop>
+  <tabstop>line_playerName2</tabstop>
+  <tabstop>line_playerName3</tabstop>
+  <tabstop>line_playerName4</tabstop>
+  <tabstop>btn_playGame</tabstop>
+  <tabstop>btn_backToMenu</tabstop>
  </tabstops>
  <resources>
   <include location="../main_window/main_window.qrc"/>

@@ -12,7 +12,7 @@ class MainWindow(QDialog):
         super(MainWindow, self).__init__()
         loadUi("main_window/main_window.ui", self)
         # Push Button (Start Game) will go to the user login menu
-        self.pushButton.clicked.connect(self.gotoPlayerMenu)
+        self.btn_startGame.clicked.connect(self.gotoPlayerMenu)
     
     # Create the widget to go to the Player Menu
     def gotoPlayerMenu(self):
@@ -25,9 +25,9 @@ class UserLogin(QDialog):
         super(UserLogin, self).__init__()
         loadUi("login/user_login.ui", self)
         # Go to Main Menu
-        self.pushButton.clicked.connect(self.gotoMenu)
+        self.btn_login.clicked.connect(self.gotoMenu)
         # Push Button (Create Account) will go to the account creation menu
-        self.pushButton_2.clicked.connect(self.gotoCreateAccount)
+        self.btn_createAct.clicked.connect(self.gotoCreateAccount)
 
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
@@ -45,9 +45,9 @@ class CreateAccount(QDialog):
         super(CreateAccount, self).__init__()
         loadUi("login/user_create.ui", self)
         # Push Button (Start Game) will go to the player menu
-        self.pushButton.clicked.connect(self.gotoPlayerMenu)
+        self.btn_playGame.clicked.connect(self.gotoPlayerMenu)
         # Go back to Main Menu
-        self.pushButton_2.clicked.connect(self.gotoUserLogin)
+        self.btn_backToMenu.clicked.connect(self.gotoUserLogin)
     
     # Create the widget to go to the Player Menu
     def gotoPlayerMenu(self):
@@ -67,10 +67,10 @@ class PlayerMenu(QDialog):
         loadUi("player_menu/player_menu.ui", self)
         # Based on the button push perform certain action
         # Load the data and move to the game board
-        self.pushButton.clicked.connect(self.insertData)
-        self.pushButton.clicked.connect(self.gotoBoard)
+        self.btn_playGame.clicked.connect(self.insertData)
+        self.btn_playGame.clicked.connect(self.gotoBoard)
         # Go back to the menu if requested by user
-        self.pushButton_2.clicked.connect(self.gotoMenu)
+        self.btn_backToMenu.clicked.connect(self.gotoMenu)
 
     # Create the widget to go to forward to the board
     def gotoBoard(self):
@@ -104,13 +104,13 @@ class PlayerMenu(QDialog):
         query = QSqlQuery("SELECT * FROM Player")
         query.prepare("INSERT INTO Player (player_name) "
               "VALUES (:player_name)")
-        query.bindValue(":player_name", self.lineEdit.text())
+        query.bindValue(":player_name", self.line_playerName1.text())
         query.exec_()
-        query.bindValue(":player_name", self.lineEdit_2.text())
+        query.bindValue(":player_name", self.line_playerName2.text())
         query.exec_()
-        query.bindValue(":player_name", self.lineEdit_3.text())
+        query.bindValue(":player_name", self.line_playerName3.text())
         query.exec_()
-        query.bindValue(":player_name", self.lineEdit_4.text())
+        query.bindValue(":player_name", self.line_playerName4.text())
         query.exec_()
 
         # Complete the query and close database
@@ -123,7 +123,7 @@ class Board(QDialog):
         super(Board, self).__init__()
         loadUi("board/board.ui", self)
         # Go back to the main menu if requested by user
-        self.pushButton.clicked.connect(self.gotoMainMenu)
+        self.btn_backToMenu.clicked.connect(self.gotoMainMenu)
     
     # Create the widget to go to back to the main menu
     def gotoMainMenu(self):
@@ -148,13 +148,13 @@ class Board(QDialog):
         query = QSqlQuery("SELECT * FROM Player")
 
         query.first()
-        self.textBrowser_1.setText(query.value(1))
+        self.txt_playerName1.setText(query.value(1))
         query.next()
-        self.textBrowser_2.setText(query.value(1))
+        self.txt_playerName2.setText(query.value(1))
         query.next()
-        self.textBrowser_3.setText(query.value(1))
+        self.txt_playerName3.setText(query.value(1))
         query.next()
-        self.textBrowser_4.setText(query.value(1))
+        self.txt_playerName4.setText(query.value(1))
         
         query.finish()
         create_db.close_database(database)
