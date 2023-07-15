@@ -12,41 +12,32 @@ class MainWindow(QDialog):
         super(MainWindow, self).__init__()
         loadUi("main_window/main_window.ui", self)
         # Push Button (Start Game) will go to the user login menu
-        self.pushButton.clicked.connect(self.gotoUserLogin)
+        self.pushButton.clicked.connect(self.gotoPlayerMenu)
     
-    # Create the widget to go to the User Login Menu
-    def gotoUserLogin(self):
-        # Update the widget menu to point to the userlogin menu
-        widget.setCurrentIndex(widget.currentIndex()+1)
+    # Create the widget to go to the Player Menu
+    def gotoPlayerMenu(self):
+        # Update the widget menu to point to the Player menu
+        widget.setCurrentIndex(widget.currentIndex()+2)
 
 class UserLogin(QDialog):
     # Initialize the main window
     def __init__(self):
         super(UserLogin, self).__init__()
         loadUi("login/user_login.ui", self)
-        # Push Button (Start Game) will go to the player menu
-        self.pushButton.clicked.connect(self.gotoPlayerMenu)
+        # Go to Main Menu
+        self.pushButton.clicked.connect(self.gotoMenu)
         # Push Button (Create Account) will go to the account creation menu
         self.pushButton_2.clicked.connect(self.gotoCreateAccount)
-        # Go back to Main Menu
-        self.pushButton_1.clicked.connect(self.gotoMenu)
-    
-    # Create the widget to go to the Player Menu
-    def gotoPlayerMenu(self):
-        # Update the widget menu to point to the player menu
-        widget.setCurrentIndex(widget.currentIndex()+2)
-
-    # Create the widget to go to the Player Menu
-    def gotoCreateAccount(self):
-        # Update the widget menu to point to the player menu
-        widget.setCurrentIndex(widget.currentIndex()+1)
 
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
-        main_app=MainWindow()
-        widget.addWidget(main_app)
-        # Update the widget menu to point to the player menu
-        widget.setCurrentIndex(widget.currentIndex()-1)
+        # Update the widget menu to point to the main menu
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    # Create the widget to go to the Create account Menu
+    def gotoCreateAccount(self):
+        # Update the widget menu to point to the Create account menu
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
 class CreateAccount(QDialog):
     # Initialize the main window
@@ -56,7 +47,7 @@ class CreateAccount(QDialog):
         # Push Button (Start Game) will go to the player menu
         self.pushButton.clicked.connect(self.gotoPlayerMenu)
         # Go back to Main Menu
-        self.pushButton_2.clicked.connect(self.gotoMenu)
+        self.pushButton_2.clicked.connect(self.gotoUserLogin)
     
     # Create the widget to go to the Player Menu
     def gotoPlayerMenu(self):
@@ -64,11 +55,9 @@ class CreateAccount(QDialog):
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     # Create the widget to go to back to the main menu
-    def gotoMenu(self):
-        main_app=MainWindow()
-        widget.addWidget(main_app)
+    def gotoUserLogin(self):
         # Update the widget menu to point to the player menu
-        widget.setCurrentIndex(widget.currentIndex()-2)
+        widget.setCurrentIndex(widget.currentIndex()-1)
 
 # Player Menu
 class PlayerMenu(QDialog):
@@ -99,7 +88,7 @@ class PlayerMenu(QDialog):
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
         # Update the widget menu to point to the main menu
-        widget.setCurrentIndex(widget.currentIndex()-3)
+        widget.setCurrentIndex(widget.currentIndex()-2)
 
     # Work with the database to add in the written data
     # once the button "Insert Data" is pressed
@@ -133,14 +122,14 @@ class Board(QDialog):
     def __init__(self):
         super(Board, self).__init__()
         loadUi("board/board.ui", self)
-        # Go back to the player menu if requested by user
-        self.pushButton.clicked.connect(self.gotoPlayerMenu)
+        # Go back to the main menu if requested by user
+        self.pushButton.clicked.connect(self.gotoMainMenu)
     
-    # Create the widget to go to back to the player menu
-    def gotoPlayerMenu(self):
+    # Create the widget to go to back to the main menu
+    def gotoMainMenu(self):
         widget.setFixedHeight(900)
         widget.setFixedWidth(880)
-        widget.setCurrentIndex(widget.currentIndex()-4)
+        widget.setCurrentIndex(widget.currentIndex()-3)
 
     # In the board make sure to load up the player names
     # properly to set each text box
@@ -173,13 +162,13 @@ class Board(QDialog):
 # main
 app = QApplication(sys.argv)
 widget=QtWidgets.QStackedWidget()
-main_app=MainWindow()
 user_login=UserLogin()
 create_acct=CreateAccount()
+main_app=MainWindow()
 player_menu=PlayerMenu()
 widget.setWindowTitle("TrivialCompute")
-widget.addWidget(main_app)
 widget.addWidget(user_login)
+widget.addWidget(main_app)
 widget.addWidget(create_acct)
 widget.addWidget(player_menu)
 widget.setFixedHeight(900)
