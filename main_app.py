@@ -39,7 +39,7 @@ class UserLogin(QDialog):
     # Create the widget to go to the Create account Menu
     def gotoCreateAccount(self):
         # Update the widget menu to point to the Create account menu
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        widget.setCurrentIndex(widget.currentIndex()+2)
 
 class CreateAccount(QDialog):
     # Initialize the main window
@@ -54,12 +54,12 @@ class CreateAccount(QDialog):
     # Create the widget to go to the Player Menu
     def gotoPlayerMenu(self):
         # Update the widget menu to point to the player menu
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        widget.setCurrentIndex(widget.currentIndex()-1)
 
     # Create the widget to go to back to the main menu
     def gotoUserLogin(self):
         # Update the widget menu to point to the player menu
-        widget.setCurrentIndex(widget.currentIndex()-1)
+        widget.setCurrentIndex(widget.currentIndex()-2)
 
 # Player Menu
 class PlayerMenu(QDialog):
