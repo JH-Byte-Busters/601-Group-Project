@@ -305,22 +305,19 @@ class Board(QDialog):
         return False     
     
 # main
-app = QApplication(sys.argv)
-widget=QtWidgets.QStackedWidget()
-user_login=UserLogin()
-create_acct=CreateAccount()
-main_app=MainWindow()
-player_menu=PlayerMenu()
-widget.setWindowTitle("TrivialCompute")
-widget.addWidget(user_login)
-widget.addWidget(main_app)
-widget.addWidget(create_acct)
-widget.addWidget(player_menu)
-widget.setFixedHeight(900)
-widget.setFixedWidth(880)
-widget.show()
-
-try:
-    sys.exit(app.exec_())
-except:
-    print("Exiting")
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    widget=QtWidgets.QStackedWidget()
+    user_login=UserLogin()
+    create_acct=CreateAccount()
+    main_app=MainWindow()
+    player_menu=PlayerMenu()
+    widget.setWindowTitle("TrivialCompute")
+    widget.addWidget(user_login)
+    widget.addWidget(main_app)
+    widget.addWidget(create_acct)
+    widget.addWidget(player_menu)
+    widget.setFixedHeight(900)
+    widget.setFixedWidth(880)
+    widget.show()
+    app.exec_()
