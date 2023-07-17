@@ -65,7 +65,7 @@ class UserLogin(QDialog):
     # Create the widget to go to the Create account Menu
     def gotoCreateAccount(self):
         # Update the widget menu to point to the Create account menu
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        widget.setCurrentIndex(widget.currentIndex()+2)
 
 class CreateAccount(QDialog):
     # Initialize the main window
@@ -79,13 +79,37 @@ class CreateAccount(QDialog):
 
     # Create the widget to go to the Player Menu
     def gotoPlayerMenu(self):
-        # Update the widget menu to point to the player menu
-        widget.setCurrentIndex(widget.currentIndex()+1)
+            # Update the widget menu to point to the player menu
+            database.setDatabaseName("trivial_pursuit.db")
+
+            if not database.open():
+                print("Could not open the database!")
+                return False
+
+            query = QSqlQuery()
+            query.prepare("INSERT INTO Users (user_id, username, password, email, created_at, position) "
+                            "VALUES (NULL, :username, :password, :email, CURRENT_TIMESTAMP, :position)")
+            query.bindValue(":username",  self.line_username.text())
+            # Should Probably change this name in the UI tool to not conflict with login
+            query.bindValue(":password", self.line_password.text())
+            query.bindValue(":email", self.line_email.text())
+            query.bindValue(":position", "pushButton_46")  # Default position
+
+            if query.exec():
+                message_box = QMessageBox()
+                message_box.setIcon(QMessageBox.Information)
+                message_box.setWindowTitle("User Create")
+                message_box.setText("User sucessfully created. Please Login")
+                message_box.exec_()
+            else:
+                print("Error occurred while inserting user data.")
+
+            widget.setCurrentIndex(widget.currentIndex()-2)
 
     # Create the widget to go to back to the main menu
     def gotoUserLogin(self):
         # Update the widget menu to point to the player menu
-        widget.setCurrentIndex(widget.currentIndex()-1)
+        widget.setCurrentIndex(widget.currentIndex()-2)
 
 # Player Menu
 class PlayerMenu(QDialog):
