@@ -1,9 +1,11 @@
 import sys
+import os
 from PyQt5.uic import loadUi
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QWidget, QMessageBox
 import create_db
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
+from PyQt5.QtGui import QIcon
 
 # Main Window Menu
 class MainWindow(QDialog):
@@ -177,6 +179,72 @@ class Board(QDialog):
         # Go back to the main menu if requested by user
         self.btn_backToMenu.clicked.connect(self.gotoMainMenu)
 
+        # Directional button connects
+        self.btn_up.clicked.connect(self.move_up)
+        self.btn_right.clicked.connect(self.move_right)
+        self.btn_down.clicked.connect(self.move_down)
+        self.btn_left.clicked.connect(self.move_left)
+
+        # Navigation global variables:
+        self.cells = []
+        self.pointer = 41
+        self.category = "NONE"
+
+        # top row
+        self.cells.append(self.btn_1)
+        self.cells.append(self.btn_2)
+        self.cells.append(self.btn_3)
+        self.cells.append(self.btn_4)
+        self.cells.append(self.btn_5)
+        self.cells.append(self.btn_6)
+        self.cells.append(self.btn_7)
+        self.cells.append(self.btn_8)
+        self.cells.append(self.btn_9)
+
+        # top middle
+        self.cells.append(self.btn_10)
+        self.cells.append(self.btn_14)
+        self.cells.append(self.btn_18)
+        self.cells.append(self.btn_19)
+        self.cells.append(self.btn_23)
+        self.cells.append(self.btn_27)
+        self.cells.append(self.btn_28)
+        self.cells.append(self.btn_32)
+        self.cells.append(self.btn_36)
+
+        # middle rows
+        self.cells.append(self.btn_37)
+        self.cells.append(self.btn_38)
+        self.cells.append(self.btn_39)
+        self.cells.append(self.btn_40)
+        self.cells.append(self.btn_41)
+        self.cells.append(self.btn_42)
+        self.cells.append(self.btn_43)
+        self.cells.append(self.btn_44)
+        self.cells.append(self.btn_45)
+
+        # bottom middle
+        self.cells.append(self.btn_46)
+        self.cells.append(self.btn_50)
+        self.cells.append(self.btn_54)
+        self.cells.append(self.btn_55)
+        self.cells.append(self.btn_59)
+        self.cells.append(self.btn_63)
+        self.cells.append(self.btn_64)
+        self.cells.append(self.btn_68)
+        self.cells.append(self.btn_72)
+
+        # bottom row
+        self.cells.append(self.btn_73)
+        self.cells.append(self.btn_74)
+        self.cells.append(self.btn_75)
+        self.cells.append(self.btn_76)
+        self.cells.append(self.btn_77)
+        self.cells.append(self.btn_78)
+        self.cells.append(self.btn_79)
+        self.cells.append(self.btn_80)
+        self.cells.append(self.btn_81)
+
     # Create the widget to go to back to the main menu
     def gotoMainMenu(self):
         widget.setFixedHeight(900)
@@ -211,24 +279,97 @@ class Board(QDialog):
         query.finish()
         create_db.close_database(database)
 
-# main
-database = QSqlDatabase.addDatabase("QSQLITE")
-app = QApplication(sys.argv)
-widget=QtWidgets.QStackedWidget()
-user_login=UserLogin()
-create_acct=CreateAccount()
-main_app=MainWindow()
-player_menu=PlayerMenu()
-widget.setWindowTitle("TrivialCompute")
-widget.addWidget(user_login)
-widget.addWidget(main_app)
-widget.addWidget(create_acct)
-widget.addWidget(player_menu)
-widget.setFixedHeight(900)
-widget.setFixedWidth(880)
-widget.show()
+    ######################
+    # Navigation methods:
+    ######################
+    def move_left(self):
+        left_border = [0, 9, 18, 27, 36, 45, 54, 63, 72] # Board left border cells
+        self.pointer = self.pointer - 1
+        self.dial_player1.move(self.dial_player1.x() - 95, self.dial_player1.y())
+        allowed = True
+        # Enforce border limit:
+        for cell in left_border:
+            if self.pointer == cell:
+                allowed = False
+                break
+        if allowed and not self.getCellObject():
+            allowed = False
 
-try:
-    sys.exit(app.exec_())
-except:
-    print("Exiting")
+        if not allowed:
+            self.pointer = self.pointer + 1
+            self.dial_player1.move(self.dial_player1.x() + 95, self.dial_player1.y())
+        print(self.pointer)
+
+    def move_right(self):
+        left_border = [10, 19, 28, 37, 46, 55, 64, 73, 82] # Board right border cells
+        self.pointer = self.pointer + 1
+        self.dial_player1.move(self.dial_player1.x() + 95, self.dial_player1.y())
+        allowed = True
+        # Enforce border limit:
+        for cell in left_border:
+            if self.pointer == cell:
+                allowed = False
+                break
+        if allowed and not self.getCellObject():
+            allowed = False
+
+        if not allowed:
+            self.pointer = self.pointer - 1
+            self.dial_player1.move(self.dial_player1.x() - 95, self.dial_player1.y())
+        print(self.pointer)
+
+    def move_up(self):
+        self.pointer = self.pointer - 9
+        self.dial_player1.move(self.dial_player1.x(), self.dial_player1.y() - 100)
+        allowed = True
+        # Enforce border limit:
+        if self.pointer < 0:
+            allowed = False
+        else:
+            if not self.getCellObject():
+                allowed = False
+
+        if not allowed:
+            self.pointer = self.pointer + 9
+            self.dial_player1.move(self.dial_player1.x(), self.dial_player1.y() + 100)
+        print(self.pointer)
+
+    def move_down(self):
+        self.pointer = self.pointer + 9
+        self.dial_player1.move(self.dial_player1.x(), self.dial_player1.y() + 100)
+        allowed = True
+        # Enforce border limit:
+        if self.pointer < 0:
+            allowed = False
+        else:
+            if not self.getCellObject():
+                allowed = False
+
+        if not allowed:
+            self.pointer = self.pointer - 9
+            self.dial_player1.move(self.dial_player1.x(), self.dial_player1.y() - 100)
+        print(self.pointer)
+
+    def getCellObject(self):
+        for obj in self.cells:
+            if str(self.pointer) == (obj.objectName().split("_")[1]):
+                return True
+        return False
+
+# main
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    widget=QtWidgets.QStackedWidget()
+    user_login=UserLogin()
+    create_acct=CreateAccount()
+    main_app=MainWindow()
+    player_menu=PlayerMenu()
+    widget.setWindowTitle("TrivialCompute")
+    widget.addWidget(user_login)
+    widget.addWidget(main_app)
+    widget.addWidget(create_acct)
+    widget.addWidget(player_menu)
+    widget.setFixedHeight(900)
+    widget.setFixedWidth(880)
+    widget.show()
+    app.exec_()
