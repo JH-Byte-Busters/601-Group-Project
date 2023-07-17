@@ -1,7 +1,7 @@
 import sys
 from PyQt5.uic import loadUi
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QWidget
+from PyQt5.QtWidgets import QDialog, QApplication, QWidget, QMessageBox
 import create_db
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
 
@@ -13,7 +13,7 @@ class MainWindow(QDialog):
         loadUi("main_window/main_window.ui", self)
         # Push Button (Start Game) will go to the user login menu
         self.btn_startGame.clicked.connect(self.gotoPlayerMenu)
-    
+
     # Create the widget to go to the Player Menu
     def gotoPlayerMenu(self):
         # Update the widget menu to point to the Player menu
@@ -32,7 +32,35 @@ class UserLogin(QDialog):
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
         # Update the widget menu to point to the main menu
-        widget.setCurrentIndex(widget.currentIndex()+1)
+
+        # Setting username and password to the input from the user
+        username = self.line_username.text()
+        password = self.line_password.text()
+
+        # Attach to the correct database by decalring vars
+        database.setDatabaseName("trivial_pursuit.db")
+
+        if not database.open():
+            print("Could not open the database!")
+            return False
+
+        query = QSqlQuery()
+        query.prepare("SELECT * FROM Users WHERE username = ? AND password = ?")
+        query.addBindValue(username)
+        query.addBindValue(password)
+
+        if query.exec():
+            if query.next():
+                widget.setCurrentIndex(widget.currentIndex()+1)
+            else:
+                message_box = QMessageBox()
+                message_box.setIcon(QMessageBox.Warning)
+                message_box.setWindowTitle("Authentication Failed")
+                message_box.setText("Invalid username or password.")
+                message_box.exec_()
+
+        else:
+            print("Error occurred during authentication.")
 
     # Create the widget to go to the Create account Menu
     def gotoCreateAccount(self):
@@ -48,7 +76,7 @@ class CreateAccount(QDialog):
         self.btn_playGame.clicked.connect(self.gotoPlayerMenu)
         # Go back to Main Menu
         self.btn_backToMenu.clicked.connect(self.gotoUserLogin)
-    
+
     # Create the widget to go to the Player Menu
     def gotoPlayerMenu(self):
         # Update the widget menu to point to the player menu
@@ -74,7 +102,7 @@ class PlayerMenu(QDialog):
 
     # Create the widget to go to forward to the board
     def gotoBoard(self):
-        # Initialization of board widget must be done here 
+        # Initialization of board widget must be done here
         # to ensure that the board names are properly pulled from
         # the database
         board=Board()
@@ -84,7 +112,7 @@ class PlayerMenu(QDialog):
         widget.addWidget(board)
         # Update the widget menu to point to board
         widget.setCurrentIndex(widget.currentIndex()+1)
-    
+
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
         # Update the widget menu to point to the main menu
@@ -93,12 +121,12 @@ class PlayerMenu(QDialog):
     # Work with the database to add in the written data
     # once the button "Insert Data" is pressed
     def insertData(self):
-        # Create the database 
+        # Create the database
         database = create_db.create_database()
-    
+
         if not database.isOpen():
             print('Connection error occurred.')
-        
+
         # Query the database to load in the text
         # within the user text boxes
         query = QSqlQuery("SELECT * FROM Player")
@@ -124,7 +152,7 @@ class Board(QDialog):
         loadUi("board/board.ui", self)
         # Go back to the main menu if requested by user
         self.btn_backToMenu.clicked.connect(self.gotoMainMenu)
-    
+
     # Create the widget to go to back to the main menu
     def gotoMainMenu(self):
         widget.setFixedHeight(900)
@@ -135,15 +163,15 @@ class Board(QDialog):
     # properly to set each text box
     def setNames(self):
         # TODO: Find a way to properly open/close database
-        # currently running into some errors with this 
+        # currently running into some errors with this
         # as a double connection
         database = QSqlDatabase.addDatabase('QSQLITE')
         database.setDatabaseName('trivial_pursuit.db')
         database.open()
-    
+
         if not database.isOpen():
             print('Connection error occurred.')
-        
+
         # Query the database to set the text fields
         query = QSqlQuery("SELECT * FROM Player")
 
@@ -155,11 +183,12 @@ class Board(QDialog):
         self.txt_playerName3.setText(query.value(1))
         query.next()
         self.txt_playerName4.setText(query.value(1))
-        
+
         query.finish()
         create_db.close_database(database)
 
 # main
+database = QSqlDatabase.addDatabase("QSQLITE")
 app = QApplication(sys.argv)
 widget=QtWidgets.QStackedWidget()
 user_login=UserLogin()
