@@ -196,26 +196,26 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>40</x>
      <y>10</y>
-     <width>877</width>
-     <height>881</height>
+     <width>868</width>
+     <height>868</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <property name="sizeConstraint">
-     <enum>QLayout::SetMaximumSize</enum>
+     <enum>QLayout::SetFixedSize</enum>
     </property>
     <item row="2" column="4">
-     <widget class="QPushButton" name="pushButton_41">
+     <widget class="QPushButton" name="btn_14">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -232,17 +232,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="0" column="0">
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="btn_1">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -259,17 +259,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="12" column="7">
-     <widget class="QPushButton" name="pushButton_19">
+     <widget class="QPushButton" name="btn_80">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -286,17 +286,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="0" column="6">
-     <widget class="QPushButton" name="pushButton_7">
+     <widget class="QPushButton" name="btn_7">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -313,17 +313,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="10" column="0">
-     <widget class="QPushButton" name="pushButton_27">
+     <widget class="QPushButton" name="btn_64">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -340,17 +340,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="8" column="4">
-     <widget class="QPushButton" name="pushButton_43">
+     <widget class="QPushButton" name="btn_59">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -367,17 +367,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="7" column="4">
-     <widget class="QPushButton" name="pushButton_40">
+     <widget class="QPushButton" name="btn_50">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -394,17 +394,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="8" column="0">
-     <widget class="QPushButton" name="pushButton_29">
+     <widget class="QPushButton" name="btn_55">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -421,17 +421,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="12" column="4">
-     <widget class="QPushButton" name="pushButton_22">
+     <widget class="QPushButton" name="btn_77">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -448,17 +448,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="12" column="2">
-     <widget class="QPushButton" name="pushButton_23">
+     <widget class="QPushButton" name="btn_75">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -475,17 +475,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="10" column="4">
-     <widget class="QPushButton" name="pushButton_44">
+     <widget class="QPushButton" name="btn_68">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -502,17 +502,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="8" column="8">
-     <widget class="QPushButton" name="pushButton_15">
+     <widget class="QPushButton" name="btn_63">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -529,17 +529,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="10" column="8">
-     <widget class="QPushButton" name="pushButton_17">
+     <widget class="QPushButton" name="btn_72">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -556,17 +556,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="12" column="0">
-     <widget class="QPushButton" name="pushButton_26">
+     <widget class="QPushButton" name="btn_73">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -583,17 +583,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="4" column="0">
-     <widget class="QPushButton" name="pushButton_32">
+     <widget class="QPushButton" name="btn_19">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -610,17 +610,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="7" column="8">
-     <widget class="QPushButton" name="pushButton_16">
+     <widget class="QPushButton" name="btn_54">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -637,17 +637,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="5" column="0">
-     <widget class="QPushButton" name="pushButton_30">
+     <widget class="QPushButton" name="btn_28">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -664,17 +664,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="4" column="4">
-     <widget class="QPushButton" name="pushButton_37">
+     <widget class="QPushButton" name="btn_23">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -691,17 +691,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="5" column="4">
-     <widget class="QPushButton" name="pushButton_36">
+     <widget class="QPushButton" name="btn_32">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -718,17 +718,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="5" column="8">
-     <widget class="QPushButton" name="pushButton_13">
+     <widget class="QPushButton" name="btn_36">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -745,17 +745,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="0" column="3">
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="btn_4">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -772,17 +772,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="0" column="2">
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="btn_3">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -799,17 +799,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="btn_2">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -826,17 +826,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="0" column="4">
-     <widget class="QPushButton" name="pushButton_6">
+     <widget class="QPushButton" name="btn_5">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -853,17 +853,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="0" column="5">
-     <widget class="QPushButton" name="pushButton_9">
+     <widget class="QPushButton" name="btn_6">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -880,17 +880,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="12" column="6">
-     <widget class="QPushButton" name="pushButton_21">
+     <widget class="QPushButton" name="btn_79">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -907,17 +907,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="2" column="8">
-     <widget class="QPushButton" name="pushButton_10">
+     <widget class="QPushButton" name="btn_18">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -934,17 +934,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="12" column="5">
-     <widget class="QPushButton" name="pushButton_20">
+     <widget class="QPushButton" name="btn_78">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -961,17 +961,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="12" column="3">
-     <widget class="QPushButton" name="pushButton_25">
+     <widget class="QPushButton" name="btn_76">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -988,17 +988,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="6" column="6">
-     <widget class="QPushButton" name="pushButton_39">
+     <widget class="QPushButton" name="btn_43">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1015,17 +1015,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="6" column="8">
-     <widget class="QPushButton" name="pushButton_14">
+     <widget class="QPushButton" name="btn_45">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1042,17 +1042,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="6" column="7">
-     <widget class="QPushButton" name="pushButton_45">
+     <widget class="QPushButton" name="btn_44">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1069,17 +1069,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="0" column="7">
-     <widget class="QPushButton" name="pushButton_8">
+     <widget class="QPushButton" name="btn_8">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1096,17 +1096,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="12" column="8">
-     <widget class="QPushButton" name="pushButton_18">
+     <widget class="QPushButton" name="btn_81">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1123,17 +1123,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="6" column="0">
-     <widget class="QPushButton" name="pushButton_33">
+     <widget class="QPushButton" name="btn_37">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1150,17 +1150,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="6" column="2">
-     <widget class="QPushButton" name="pushButton_34">
+     <widget class="QPushButton" name="btn_39">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1177,17 +1177,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="6" column="5">
-     <widget class="QPushButton" name="pushButton_38">
+     <widget class="QPushButton" name="btn_42">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1204,17 +1204,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="6" column="3">
-     <widget class="QPushButton" name="pushButton_42">
+     <widget class="QPushButton" name="btn_40">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1231,17 +1231,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="6" column="1">
-     <widget class="QPushButton" name="pushButton_35">
+     <widget class="QPushButton" name="btn_38">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1258,17 +1258,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="0" column="8">
-     <widget class="QPushButton" name="pushButton_11">
+     <widget class="QPushButton" name="btn_9">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1285,17 +1285,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="6" column="4">
-     <widget class="QPushButton" name="pushButton_46">
+     <widget class="QPushButton" name="btn_41">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1312,17 +1312,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="2" column="0">
-     <widget class="QPushButton" name="pushButton_31">
+     <widget class="QPushButton" name="btn_10">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1339,17 +1339,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="4" column="8">
-     <widget class="QPushButton" name="pushButton_12">
+     <widget class="QPushButton" name="btn_27">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1366,17 +1366,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="12" column="1">
-     <widget class="QPushButton" name="pushButton_24">
+     <widget class="QPushButton" name="btn_74">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1393,17 +1393,17 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="7" column="0">
-     <widget class="QPushButton" name="pushButton_28">
+     <widget class="QPushButton" name="btn_46">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1435,14 +1435,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_59">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1462,14 +1462,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_60">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1489,14 +1489,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_61">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1516,14 +1516,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_62">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1555,14 +1555,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_63">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1582,14 +1582,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_64">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1609,14 +1609,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_65">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1636,14 +1636,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_66">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1675,14 +1675,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_67">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1702,14 +1702,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_68">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1729,14 +1729,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_69">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1756,14 +1756,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_70">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1795,14 +1795,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_47">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1822,14 +1822,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_48">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1849,14 +1849,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_49">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1876,14 +1876,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="pushButton_50">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="font">
@@ -1905,7 +1905,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>410</y>
+     <y>400</y>
      <width>91</width>
      <height>81</height>
     </rect>
@@ -1913,7 +1913,7 @@ p, li { white-space: pre-wrap; }
    <property name="font">
     <font>
      <family>Segoe UI Black</family>
-     <pointsize>14</pointsize>
+     <pointsize>12</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
@@ -1926,7 +1926,7 @@ p, li { white-space: pre-wrap; }
 Compute</string>
    </property>
   </widget>
-  <widget class="QDial" name="dial">
+  <widget class="QDial" name="dial_player1">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -1940,7 +1940,7 @@ Compute</string>
 background-color: rgb(255, 0, 77);</string>
    </property>
   </widget>
-  <widget class="QDial" name="dial_2">
+  <widget class="QDial" name="dial_player2">
    <property name="geometry">
     <rect>
      <x>470</x>
@@ -1954,7 +1954,7 @@ background-color: rgb(255, 0, 77);</string>
 background-color: rgb(41, 173, 255);</string>
    </property>
   </widget>
-  <widget class="QDial" name="dial_3">
+  <widget class="QDial" name="dial_player3">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -1968,7 +1968,7 @@ background-color: rgb(41, 173, 255);</string>
 background-color: rgb(255, 236, 39);</string>
    </property>
   </widget>
-  <widget class="QDial" name="dial_4">
+  <widget class="QDial" name="dial_player4">
    <property name="geometry">
     <rect>
      <x>470</x>
@@ -2248,14 +2248,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QToolButton" name="btn_up">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -2273,14 +2273,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QToolButton" name="btn_left">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -2298,14 +2298,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QToolButton" name="btn_right">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -2323,14 +2323,14 @@ p, li { white-space: pre-wrap; }
      <widget class="QToolButton" name="btn_down">
       <property name="minimumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>91</width>
-        <height>91</height>
+        <width>90</width>
+        <height>90</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -2359,16 +2359,16 @@ p, li { white-space: pre-wrap; }
   <zorder>layoutWidget_4</zorder>
   <zorder>layoutWidget_5</zorder>
   <zorder>layoutWidget_2</zorder>
-  <zorder>label_2</zorder>
-  <zorder>dial</zorder>
-  <zorder>dial_2</zorder>
-  <zorder>dial_3</zorder>
-  <zorder>dial_4</zorder>
   <zorder>label_5</zorder>
   <zorder>label_6</zorder>
   <zorder>txt_currentPlayer</zorder>
   <zorder>label_4</zorder>
   <zorder>label_7</zorder>
+  <zorder>label_2</zorder>
+  <zorder>dial_player4</zorder>
+  <zorder>dial_player2</zorder>
+  <zorder>dial_player1</zorder>
+  <zorder>dial_player3</zorder>
  </widget>
  <tabstops>
   <tabstop>txt_playerName1</tabstop>
