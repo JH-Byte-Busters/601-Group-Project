@@ -20,6 +20,12 @@ def create_database():
             "user_id INTEGER PRIMARY KEY AUTOINCREMENT,"
             "player_name TEXT NOT NULL)")
     
+    # Create the "Categories" table
+    query = QSqlQuery()
+    query.exec("CREATE TABLE IF NOT EXISTS Category ("
+            "user_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            "category_name TEXT NOT NULL)")
+    
     # Create the "Users" table
     query = QSqlQuery()
     query.exec("CREATE TABLE IF NOT EXISTS Users ("

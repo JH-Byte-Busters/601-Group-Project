@@ -15,11 +15,17 @@ class MainWindow(QDialog):
         loadUi("main_window/main_window.ui", self)
         # Push Button (Start Game) will go to the user login menu
         self.btn_startGame.clicked.connect(self.gotoPlayerMenu)
-
-    # Create the widget to go to the Player Menu
+        self.btn_catQSetup.clicked.connect(self.gotoCategoryMenu)
+    
+    # Go to the widget to go to the Player Menu
     def gotoPlayerMenu(self):
         # Update the widget menu to point to the Player menu
         widget.setCurrentIndex(widget.currentIndex()+2)
+    
+    # Go to the widget to go to the Player Menu
+    def gotoCategoryMenu(self):
+        # Update the widget menu to point to the Player menu
+        widget.setCurrentIndex(widget.currentIndex()+3)
 
 class UserLogin(QDialog):
     # Initialize the main window
@@ -156,6 +162,64 @@ class PlayerMenu(QDialog):
             self.line_playerName4.text()
         ]
 
+# Category Menu
+class CategoryMenu(QDialog):
+    # Initialize the player menu window
+    def __init__(self):
+        super(CategoryMenu, self).__init__()
+        loadUi("category_question/category_question.ui", self)
+        # Based on the button push perform certain action
+        # Load the data and move to the question menu
+        self.btn_playGame.clicked.connect(self.insertData)
+        # self.btn_playGame.clicked.connect(self.gotoBoard)
+        # Go back to the menu if requested by user
+        self.btn_backToMenu.clicked.connect(self.gotoMenu)
+
+    # Create the widget to go to forward to the board
+    '''def gotoBoard(self):
+        # Initialization of board widget must be done here 
+        # to ensure that the board names are properly pulled from
+        # the database
+        board=Board()
+        board.setNames()
+        widget.setFixedHeight(980)
+        widget.setFixedWidth(1890)
+        widget.addWidget(board)
+        # Update the widget menu to point to board
+        widget.setCurrentIndex(widget.currentIndex()+1)'''
+    
+    # Create the widget to go to back to the main menu
+    def gotoMenu(self):
+        # Update the widget menu to point to the main menu
+        widget.setCurrentIndex(widget.currentIndex()-3)
+
+    # Work with the database to add in the written data
+    # once the button "Insert Data" is pressed
+    def insertData(self):
+        # Create the database 
+        database = create_db.create_database()
+    
+        if not database.isOpen():
+            print('Connection error occurred.')
+        
+        # Query the database to load in the text
+        # within the user text boxes
+        query = QSqlQuery("SELECT * FROM Category")
+        query.prepare("INSERT INTO Category (category_name) "
+              "VALUES (:category_name)")
+        query.bindValue(":category_name", self.line_catHead1.text())
+        query.exec_()
+        query.bindValue(":category_name", self.line_catHead2.text())
+        query.exec_()
+        query.bindValue(":category_name", self.line_catHead3.text())
+        query.exec_()
+        query.bindValue(":category_name", self.line_catHead4.text())
+        query.exec_()
+
+        # Complete the query and close database
+        query.finish()
+        create_db.close_database(database)
+
 # Board Menu
 class Board(QDialog):
     def __init__(self):
@@ -175,61 +239,18 @@ class Board(QDialog):
         self.pointer = 41
         self.category = "NONE"
 
-        # top row
-        self.cells.append(self.btn_1)
-        self.cells.append(self.btn_2)
-        self.cells.append(self.btn_3)
-        self.cells.append(self.btn_4)
-        self.cells.append(self.btn_5)
-        self.cells.append(self.btn_6)
-        self.cells.append(self.btn_7)
-        self.cells.append(self.btn_8)
-        self.cells.append(self.btn_9)
+        # Create a 2D list to store the button objects
+        buttons = [
+            [self.btn_1,  self.btn_2,  self.btn_3,  self.btn_4,  self.btn_5,  self.btn_6,  self.btn_7,  self.btn_8,  self.btn_9],
+            [self.btn_10, self.btn_14, self.btn_18, self.btn_19, self.btn_23, self.btn_27, self.btn_28, self.btn_32, self.btn_36],
+            [self.btn_37, self.btn_38, self.btn_39, self.btn_40, self.btn_41, self.btn_42, self.btn_43, self.btn_44, self.btn_45],
+            [self.btn_46, self.btn_50, self.btn_54, self.btn_55, self.btn_59, self.btn_63, self.btn_64, self.btn_68, self.btn_72],
+            [self.btn_73, self.btn_74, self.btn_75, self.btn_76, self.btn_77, self.btn_78, self.btn_79, self.btn_80, self.btn_81]
+        ]
 
-        # top middle
-        self.cells.append(self.btn_10)
-        self.cells.append(self.btn_14)
-        self.cells.append(self.btn_18)
-        self.cells.append(self.btn_19)
-        self.cells.append(self.btn_23)
-        self.cells.append(self.btn_27)
-        self.cells.append(self.btn_28)
-        self.cells.append(self.btn_32)
-        self.cells.append(self.btn_36)
-
-        # middle rows
-        self.cells.append(self.btn_37)
-        self.cells.append(self.btn_38)
-        self.cells.append(self.btn_39)
-        self.cells.append(self.btn_40)
-        self.cells.append(self.btn_41)
-        self.cells.append(self.btn_42)
-        self.cells.append(self.btn_43)
-        self.cells.append(self.btn_44)
-        self.cells.append(self.btn_45)
-
-        # bottom middle
-        self.cells.append(self.btn_46)
-        self.cells.append(self.btn_50)
-        self.cells.append(self.btn_54)
-        self.cells.append(self.btn_55)
-        self.cells.append(self.btn_59)
-        self.cells.append(self.btn_63)
-        self.cells.append(self.btn_64)
-        self.cells.append(self.btn_68)
-        self.cells.append(self.btn_72)
-
-        # bottom row
-        self.cells.append(self.btn_73)
-        self.cells.append(self.btn_74)
-        self.cells.append(self.btn_75)
-        self.cells.append(self.btn_76)
-        self.cells.append(self.btn_77)
-        self.cells.append(self.btn_78)
-        self.cells.append(self.btn_79)
-        self.cells.append(self.btn_80)
-        self.cells.append(self.btn_81)
-
+        # Flatten the 2D list and append the button objects to the cells list
+        self.cells = [button for row in buttons for button in row]
+    
     # Create the widget to go to back to the main menu
     def gotoMainMenu(self):
         widget.setFixedHeight(900)
@@ -334,11 +355,13 @@ if __name__ == '__main__':
     create_acct=CreateAccount()
     main_app=MainWindow()
     player_menu=PlayerMenu()
+    category_menu=CategoryMenu()
     widget.setWindowTitle("TrivialCompute")
     widget.addWidget(user_login)
     widget.addWidget(main_app)
     widget.addWidget(create_acct)
     widget.addWidget(player_menu)
+#    widget.addWidget(category_menu)
     widget.setFixedHeight(900)
     widget.setFixedWidth(880)
     widget.show()
