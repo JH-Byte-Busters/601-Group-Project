@@ -148,29 +148,13 @@ class PlayerMenu(QDialog):
     # Work with the database to add in the written data
     # once the button "Insert Data" is pressed
     def insertData(self):
-        # Create the database
-        database = create_db.create_database()
-
-        if not database.isOpen():
-            print('Connection error occurred.')
-
-        # Query the database to load in the text
-        # within the user text boxes
-        query = QSqlQuery("SELECT * FROM Player")
-        query.prepare("INSERT INTO Player (player_name) "
-              "VALUES (:player_name)")
-        query.bindValue(":player_name", self.line_playerName1.text())
-        query.exec_()
-        query.bindValue(":player_name", self.line_playerName2.text())
-        query.exec_()
-        query.bindValue(":player_name", self.line_playerName3.text())
-        query.exec_()
-        query.bindValue(":player_name", self.line_playerName4.text())
-        query.exec_()
-
-        # Complete the query and close database
-        query.finish()
-        create_db.close_database(database)
+        global player_names
+        player_names = [
+            self.line_playerName1.text(),
+            self.line_playerName2.text(),
+            self.line_playerName3.text(),
+            self.line_playerName4.text()
+        ]
 
 # Board Menu
 class Board(QDialog):
@@ -258,27 +242,11 @@ class Board(QDialog):
         # TODO: Find a way to properly open/close database
         # currently running into some errors with this
         # as a double connection
-        database = QSqlDatabase.addDatabase('QSQLITE')
-        database.setDatabaseName('trivial_pursuit.db')
-        database.open()
 
-        if not database.isOpen():
-            print('Connection error occurred.')
-
-        # Query the database to set the text fields
-        query = QSqlQuery("SELECT * FROM Player")
-
-        query.first()
-        self.txt_playerName1.setText(query.value(1))
-        query.next()
-        self.txt_playerName2.setText(query.value(1))
-        query.next()
-        self.txt_playerName3.setText(query.value(1))
-        query.next()
-        self.txt_playerName4.setText(query.value(1))
-
-        query.finish()
-        create_db.close_database(database)
+        self.txt_playerName1.setText(player_names[0])
+        self.txt_playerName2.setText(player_names[1])
+        self.txt_playerName3.setText(player_names[2])
+        self.txt_playerName4.setText(player_names[3])
 
     ######################
     # Navigation methods:
