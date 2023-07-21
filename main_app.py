@@ -82,6 +82,7 @@ class CreateAccount(QDialog):
     # Create the widget to go to the Player Menu
     def gotoPlayerMenu(self):
             # Update the widget menu to point to the player menu
+
             database.setDatabaseName("trivial_pursuit.db")
 
             if not database.open():
@@ -358,6 +359,7 @@ class Board(QDialog):
 
 # main
 if __name__ == '__main__':
+    database = QSqlDatabase.addDatabase("QSQLITE")
     app = QApplication(sys.argv)
     widget=QtWidgets.QStackedWidget()
     user_login=UserLogin()
