@@ -20,12 +20,12 @@ class MainWindow(QDialog):
     # Go to the widget to go to the Player Menu
     def gotoPlayerMenu(self):
         # Update the widget menu to point to the Player menu
-        widget.setCurrentIndex(widget.currentIndex()+2)
+        widget.setCurrentIndex(3)
     
     # Go to the widget to go to the Player Menu
     def gotoCategoryMenu(self):
         # Update the widget menu to point to the Player menu
-        widget.setCurrentIndex(widget.currentIndex()+3)
+        widget.setCurrentIndex(4)
 
 class UserLogin(QDialog):
     # Initialize the main window
@@ -45,7 +45,7 @@ class UserLogin(QDialog):
         username = self.line_username.text()
         password = self.line_password.text()
 
-        # Attach to the correct database by decalring vars
+        # Attach to the correct database by declaring vars
         database.setDatabaseName("trivial_pursuit.db")
 
         if not database.open():
@@ -59,7 +59,7 @@ class UserLogin(QDialog):
 
         if query.exec():
             if query.next():
-                widget.setCurrentIndex(widget.currentIndex()+1)
+                widget.setCurrentIndex(1)
             else:
                 message_box = QMessageBox()
                 message_box.setIcon(QMessageBox.Warning)
@@ -73,7 +73,7 @@ class UserLogin(QDialog):
     # Create the widget to go to the Create account Menu
     def gotoCreateAccount(self):
         # Update the widget menu to point to the Create account menu
-        widget.setCurrentIndex(widget.currentIndex()+2)
+        widget.setCurrentIndex(2)
 
 class CreateAccount(QDialog):
     # Initialize the main window
@@ -81,44 +81,44 @@ class CreateAccount(QDialog):
         super(CreateAccount, self).__init__()
         loadUi("login/user_create.ui", self)
         # Push Button (Start Game) will go to the player menu
-        self.btn_playGame.clicked.connect(self.gotoPlayerMenu)
-        # Go back to Main Menu
+        self.btn_playGame.clicked.connect(self.loginVerif)
+        # Go back to Main User Login Menu
         self.btn_backToMenu.clicked.connect(self.gotoUserLogin)
 
     # Create the widget to go to the Player Menu
-    def gotoPlayerMenu(self):
-            # Update the widget menu to point to the player menu
-
-            database.setDatabaseName("trivial_pursuit.db")
-
-            if not database.open():
-                print("Could not open the database!")
-                return False
-
-            query = QSqlQuery()
-            query.prepare("INSERT INTO Users (user_id, username, password, email, created_at, position) "
-                            "VALUES (NULL, :username, :password, :email, CURRENT_TIMESTAMP, :position)")
-            query.bindValue(":username",  self.line_username.text())
-            # Should Probably change this name in the UI tool to not conflict with login
-            query.bindValue(":password", self.line_password.text())
-            query.bindValue(":email", self.line_email.text())
-            query.bindValue(":position", "pushButton_46")  # Default position
-
-            if query.exec():
-                message_box = QMessageBox()
-                message_box.setIcon(QMessageBox.Information)
-                message_box.setWindowTitle("User Create")
-                message_box.setText("User sucessfully created. Please Login")
-                message_box.exec_()
-            else:
-                print("Error occurred while inserting user data.")
-
-            widget.setCurrentIndex(widget.currentIndex()-2)
-
-    # Create the widget to go to back to the main menu
-    def gotoUserLogin(self):
+    def loginVerif(self):
         # Update the widget menu to point to the player menu
-        widget.setCurrentIndex(widget.currentIndex()-2)
+
+        database.setDatabaseName("trivial_pursuit.db")
+
+        if not database.open():
+            print("Could not open the database!")
+            return False
+
+        query = QSqlQuery()
+        query.prepare("INSERT INTO Users (user_id, username, password, email, created_at, position) "
+                        "VALUES (NULL, :username, :password, :email, CURRENT_TIMESTAMP, :position)")
+        query.bindValue(":username",  self.line_username.text())
+        # Should Probably change this name in the UI tool to not conflict with login
+        query.bindValue(":password", self.line_password.text())
+        query.bindValue(":email", self.line_email.text())
+        query.bindValue(":position", "pushButton_46")  # Default position
+
+        if query.exec():
+            message_box = QMessageBox()
+            message_box.setIcon(QMessageBox.Information)
+            message_box.setWindowTitle("User Create")
+            message_box.setText("User successfully created. Please Login")
+            message_box.exec_()
+        else:
+            print("Error occurred while inserting user data.")
+
+        widget.setCurrentIndex(0)
+
+    # Create the widget to go to back to the user login
+    def gotoUserLogin(self):
+        # Update the widget menu to point to the user login
+        widget.setCurrentIndex(0)
 
 # Player Menu
 class PlayerMenu(QDialog):
@@ -138,18 +138,16 @@ class PlayerMenu(QDialog):
         # Initialization of board widget must be done here
         # to ensure that the board names are properly pulled from
         # the database
-        board=Board()
         board.setNames()
         widget.setFixedHeight(980)
         widget.setFixedWidth(1890)
-        widget.addWidget(board)
         # Update the widget menu to point to board
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        widget.setCurrentIndex(5)
 
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
         # Update the widget menu to point to the main menu
-        widget.setCurrentIndex(widget.currentIndex()-2)
+        widget.setCurrentIndex(1)
 
     # Work with the database to add in the written data
     # once the button "Insert Data" is pressed
@@ -164,44 +162,40 @@ class PlayerMenu(QDialog):
 
 # Category Menu
 class CategoryMenu(QDialog):
-    # Initialize the player menu window
+    # Initialize the category menu window
     def __init__(self):
         super(CategoryMenu, self).__init__()
         loadUi("category_question/category_question.ui", self)
         # Based on the button push perform certain action
         # Load the data and move to the question menu
-        self.btn_playGame.clicked.connect(self.insertData)
-        # self.btn_playGame.clicked.connect(self.gotoBoard)
+        self.btn_questionSetup.clicked.connect(self.insertData)
+        self.btn_questionSetup.clicked.connect(self.gotoQuestions)
         # Go back to the menu if requested by user
         self.btn_backToMenu.clicked.connect(self.gotoMenu)
 
-    # Create the widget to go to forward to the board
-    '''def gotoBoard(self):
-        # Initialization of board widget must be done here 
-        # to ensure that the board names are properly pulled from
-        # the database
-        board=Board()
-        board.setNames()
-        widget.setFixedHeight(980)
-        widget.setFixedWidth(1890)
-        widget.addWidget(board)
-        # Update the widget menu to point to board
-        widget.setCurrentIndex(widget.currentIndex()+1)'''
+    # Create the widget to go to forward to the question menu
+    def gotoQuestions(self):
+        question_menu=QuestionMenu()
+        question_menu.setCategories()
+        widget.addWidget(question_menu)
+        # Update the widget menu to point to question menu
+        widget.setCurrentIndex(widget.currentIndex()+2)
     
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
         # Update the widget menu to point to the main menu
-        widget.setCurrentIndex(widget.currentIndex()-3)
+        widget.setCurrentIndex(1)
 
     # Work with the database to add in the written data
     # once the button "Insert Data" is pressed
     def insertData(self):
-        # Create the database 
-        database = create_db.create_database()
-    
-        if not database.isOpen():
-            print('Connection error occurred.')
-        
+        # Attach to the correct database by declaring vars
+        database.setDatabaseName("trivial_pursuit.db")
+
+        if not database.open():
+            print("Could not open the database!")
+            return False
+
         # Query the database to load in the text
         # within the user text boxes
         query = QSqlQuery("SELECT * FROM Category")
@@ -219,6 +213,112 @@ class CategoryMenu(QDialog):
         # Complete the query and close database
         query.finish()
         create_db.close_database(database)
+
+# Question Menu
+class QuestionMenu(QDialog):
+    # Initialize the question menu window
+    def __init__(self):
+        super(QuestionMenu, self).__init__()
+        loadUi("category_question/question_menu.ui", self)
+        # Based on the button push perform certain action
+        # Load the data 
+        self.btn_loadQuestions.clicked.connect(self.insertData)
+        # Go back to the menu if requested by user
+        self.btn_backToMenu.clicked.connect(self.gotoMenu)
+        self.comboBox_category.currentIndexChanged.connect(self.clearQandA)
+      
+    def setCategories(self):
+        # TODO: Find a way to properly open/close database
+        # currently running into some errors with this
+        # as a double connection
+        database = QSqlDatabase.addDatabase('QSQLITE')
+        database.setDatabaseName('trivial_pursuit.db')
+        database.open()
+
+        if not database.isOpen():
+            print('Connection error occurred.')
+
+        # Query the database to set the text fields
+        query = QSqlQuery("SELECT * FROM Category")
+        query.first()
+        self.comboBox_category.setItemText(0,query.value(1))
+        query.next()
+        self.comboBox_category.setItemText(1,query.value(1))
+        query.next()
+        self.comboBox_category.setItemText(2,query.value(1))
+        query.next()
+        self.comboBox_category.setItemText(3,query.value(1))
+
+        # Complete the query and close database
+        query.finish()
+        create_db.close_database(database)
+
+    def clearQandA(self):
+        for i in range(1, 10):
+            line_edit_question_name = f"self.line_ques{i}"
+            line_edit_answer_name = f"self.line_answ{i}"
+
+            # Using exec() with precaution
+            try:
+                exec(f"{line_edit_question_name}.clear()")
+                exec(f"{line_edit_answer_name}.clear()")
+            except AttributeError:
+                print("Line edit box not found:", line_edit_question_name, line_edit_answer_name)
+    
+    # Create the widget to go to back to the main menu
+    def gotoMenu(self):
+        # Update the widget menu to point to the main menu
+        widget.setCurrentIndex(1)
+
+    def insertData(self):
+        # Sample data for multiple questions
+        questions_data = [
+            # ("Category", "Question Text", "Correct Answer", "Incorrect Answers (comma-separated)", "Difficulty"),
+            # Ex. ("Geography", "What is the capital of France?", "Paris", "London, Berlin, Rome", "Easy"),
+            (self.comboBox_category.currentText(), self.line_ques1.text(), self.line_answ1.text()),
+            (self.comboBox_category.currentText(), self.line_ques2.text(), self.line_answ2.text()),
+            (self.comboBox_category.currentText(), self.line_ques3.text(), self.line_answ3.text()),
+            (self.comboBox_category.currentText(), self.line_ques4.text(), self.line_answ4.text()),
+            (self.comboBox_category.currentText(), self.line_ques5.text(), self.line_answ5.text()),
+            (self.comboBox_category.currentText(), self.line_ques6.text(), self.line_answ6.text()),
+            (self.comboBox_category.currentText(), self.line_ques7.text(), self.line_answ7.text()),
+            (self.comboBox_category.currentText(), self.line_ques8.text(), self.line_answ8.text()),
+            (self.comboBox_category.currentText(), self.line_ques9.text(), self.line_answ9.text()),
+        ]
+
+        # Loop through the questions data and add each question to the database
+        for question_data in questions_data:
+            self.add_question_to_database(*question_data)
+
+    # Work with the database to add in the written data
+    # once the button "Insert Data" is pressed
+    def add_question_to_database(self, category, question_text, correct_answer):
+        database = QSqlDatabase.addDatabase("QSQLITE")
+        # Attach to the correct database by declaring vars
+        database.setDatabaseName("trivial_pursuit.db")
+
+        if not database.open():
+            print("Could not open the database!")
+            return False
+
+        # Prepare the SQL query to insert the question into the table
+        query = QSqlQuery()
+        query.prepare("INSERT INTO Questions (category, question_text, correct_answer) "
+                    "VALUES (?, ?, ?)")
+                    
+        # Bind the values to the placeholders in the query
+        query.addBindValue(category)
+        query.addBindValue(question_text)
+        query.addBindValue(correct_answer)
+        
+        # Execute the query
+        if not query.exec_():
+            print("Error:", query.lastError().text())
+        else:
+            print("Question added successfully.")
+
+        # Close the database connection
+        database.close()
 
 # Board Menu
 class Board(QDialog):
@@ -255,7 +355,7 @@ class Board(QDialog):
     def gotoMainMenu(self):
         widget.setFixedHeight(900)
         widget.setFixedWidth(880)
-        widget.setCurrentIndex(widget.currentIndex()-3)
+        widget.setCurrentIndex(1)
 
     # In the board make sure to load up the player names
     # properly to set each text box
@@ -356,12 +456,14 @@ if __name__ == '__main__':
     main_app=MainWindow()
     player_menu=PlayerMenu()
     category_menu=CategoryMenu()
+    board=Board()
     widget.setWindowTitle("TrivialCompute")
     widget.addWidget(user_login)
     widget.addWidget(main_app)
     widget.addWidget(create_acct)
     widget.addWidget(player_menu)
-#    widget.addWidget(category_menu)
+    widget.addWidget(category_menu)
+    widget.addWidget(board)
     widget.setFixedHeight(900)
     widget.setFixedWidth(880)
     widget.show()

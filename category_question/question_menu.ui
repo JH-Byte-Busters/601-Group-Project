@@ -34,83 +34,6 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 127);</string>
   </property>
-  <widget class="QPushButton" name="btn_addQuestion">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>90</y>
-     <width>349</width>
-     <height>46</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>349</width>
-     <height>46</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>349</width>
-     <height>46</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>Segoe UI Black</family>
-     <pointsize>16</pointsize>
-     <weight>10</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(0, 255, 0);
-font: 87 16pt &quot;Segoe UI Black&quot;;
-border-color: rgb(0, 0, 0);</string>
-   </property>
-   <property name="text">
-    <string>Add Question</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>10</y>
-     <width>349</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>16</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
-   </property>
-   <item>
-    <property name="text">
-     <string>Category 1</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Category 2</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Category 3</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Category 4</string>
-    </property>
-   </item>
-  </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
@@ -128,9 +51,9 @@ border-color: rgb(0, 0, 0);</string>
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>140</y>
+     <y>90</y>
      <width>811</width>
-     <height>731</height>
+     <height>671</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -147,8 +70,8 @@ border-color: rgb(0, 0, 0);</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>809</width>
-      <height>729</height>
+      <width>788</width>
+      <height>717</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -285,7 +208,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="line_ques1_2">
+        <widget class="QLineEdit" name="line_ques2">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -336,7 +259,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="line_answ1_2">
+        <widget class="QLineEdit" name="line_answ2">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -391,7 +314,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="line_ques1_3">
+        <widget class="QLineEdit" name="line_ques3">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -442,7 +365,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="line_answ1_3">
+        <widget class="QLineEdit" name="line_answ3">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -497,7 +420,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="line_ques1_4">
+        <widget class="QLineEdit" name="line_ques4">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -548,7 +471,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="line_answ1_4">
+        <widget class="QLineEdit" name="line_answ4">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -603,7 +526,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="line_ques1_10">
+        <widget class="QLineEdit" name="line_ques5">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -654,7 +577,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="line_answ1_10">
+        <widget class="QLineEdit" name="line_answ5">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -709,7 +632,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="line_ques1_13">
+        <widget class="QLineEdit" name="line_ques6">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -760,7 +683,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="line_answ1_13">
+        <widget class="QLineEdit" name="line_answ6">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -815,7 +738,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="line_ques1_11">
+        <widget class="QLineEdit" name="line_ques7">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -866,7 +789,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="line_answ1_11">
+        <widget class="QLineEdit" name="line_answ7">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -921,7 +844,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="line_ques1_12">
+        <widget class="QLineEdit" name="line_ques8">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -972,7 +895,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="line_answ1_12">
+        <widget class="QLineEdit" name="line_answ8">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -1027,7 +950,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="line_ques1_14">
+        <widget class="QLineEdit" name="line_ques9">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -1078,7 +1001,7 @@ border-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="line_answ1_14">
+        <widget class="QLineEdit" name="line_answ9">
          <property name="minimumSize">
           <size>
            <width>650</width>
@@ -1108,6 +1031,148 @@ border-color: rgb(0, 0, 0);</string>
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>780</y>
+     <width>321</width>
+     <height>105</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_1">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QPushButton" name="btn_loadQuestions">
+        <property name="font">
+         <font>
+          <family>Segoe UI Black</family>
+          <pointsize>16</pointsize>
+          <weight>10</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(0, 255, 0);
+font: 87 16pt &quot;Segoe UI Black&quot;;
+border-color: rgb(0, 0, 0);</string>
+        </property>
+        <property name="text">
+         <string>Load Questions</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_13">
+      <item>
+       <widget class="QPushButton" name="btn_backToMenu">
+        <property name="font">
+         <font>
+          <family>Segoe UI Black</family>
+          <pointsize>16</pointsize>
+          <weight>10</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 0, 0);
+font: 87 16pt &quot;Segoe UI Black&quot;;
+border-color: rgb(0, 0, 0);</string>
+        </property>
+        <property name="text">
+         <string>Back to Menu</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>10</y>
+     <width>459</width>
+     <height>63</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QLabel" name="label_10">
+      <property name="minimumSize">
+       <size>
+        <width>101</width>
+        <height>61</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>101</width>
+        <height>61</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Category:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="comboBox_category">
+      <property name="minimumSize">
+       <size>
+        <width>349</width>
+        <height>51</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>349</width>
+        <height>51</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>Category 1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Category 2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Category 3</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Category 4</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources>

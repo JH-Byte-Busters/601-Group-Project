@@ -42,8 +42,8 @@ def create_database():
                "category TEXT NOT NULL,"
                "question_text TEXT NOT NULL,"
                "correct_answer TEXT NOT NULL,"
-               "incorrect_answers TEXT NOT NULL,"
-               "difficulty TEXT NOT NULL)")
+               "incorrect_answers TEXT,"
+               "difficulty TEXT)")
 
     print("Database and table created successfully!")
     

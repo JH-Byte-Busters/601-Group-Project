@@ -209,7 +209,7 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_12">
       <item>
-       <widget class="QPushButton" name="btn_playGame">
+       <widget class="QPushButton" name="btn_questionSetup">
         <property name="font">
          <font>
           <family>Segoe UI Black</family>
@@ -264,7 +264,7 @@ border-color: rgb(0, 0, 0);</string>
   <tabstop>line_catHead2</tabstop>
   <tabstop>line_catHead3</tabstop>
   <tabstop>line_catHead4</tabstop>
-  <tabstop>btn_playGame</tabstop>
+  <tabstop>btn_questionSetup</tabstop>
   <tabstop>btn_backToMenu</tabstop>
  </tabstops>
  <resources>
