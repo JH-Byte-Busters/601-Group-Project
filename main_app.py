@@ -88,7 +88,6 @@ class CreateAccount(QDialog):
     # Create the widget to go to the Player Menu
     def loginVerif(self):
         # Update the widget menu to point to the player menu
-
         database.setDatabaseName("trivial_pursuit.db")
 
         if not database.open():
@@ -210,10 +209,6 @@ class CategoryMenu(QDialog):
         query.bindValue(":category_name", self.line_catHead4.text())
         query.exec_()
 
-        # Complete the query and close database
-        query.finish()
-        create_db.close_database(database)
-
 # Question Menu
 class QuestionMenu(QDialog):
     # Initialize the question menu window
@@ -231,12 +226,11 @@ class QuestionMenu(QDialog):
         # TODO: Find a way to properly open/close database
         # currently running into some errors with this
         # as a double connection
-        database = QSqlDatabase.addDatabase('QSQLITE')
         database.setDatabaseName('trivial_pursuit.db')
-        database.open()
-
-        if not database.isOpen():
-            print('Connection error occurred.')
+        
+        if not database.open():
+            print("Could not open the database!")
+            return False
 
         # Query the database to set the text fields
         query = QSqlQuery("SELECT * FROM Category")
@@ -248,10 +242,6 @@ class QuestionMenu(QDialog):
         self.comboBox_category.setItemText(2,query.value(1))
         query.next()
         self.comboBox_category.setItemText(3,query.value(1))
-
-        # Complete the query and close database
-        query.finish()
-        create_db.close_database(database)
 
     def clearQandA(self):
         for i in range(1, 10):
@@ -293,7 +283,6 @@ class QuestionMenu(QDialog):
     # Work with the database to add in the written data
     # once the button "Insert Data" is pressed
     def add_question_to_database(self, category, question_text, correct_answer):
-        database = QSqlDatabase.addDatabase("QSQLITE")
         # Attach to the correct database by declaring vars
         database.setDatabaseName("trivial_pursuit.db")
 
