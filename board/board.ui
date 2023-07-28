@@ -2155,6 +2155,18 @@ p, li { white-space: pre-wrap; }
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLabel" name="label_3">
+      <property name="minimumSize">
+       <size>
+        <width>279</width>
+        <height>216</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>279</width>
+        <height>216</height>
+       </size>
+      </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(210, 234, 255);</string>
       </property>

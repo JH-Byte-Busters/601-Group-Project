@@ -165,7 +165,6 @@ border-color: rgb(0, 0, 0);</string>
   </widget>
  </widget>
  <resources>
-  <include location="main_window.qrc"/>
  </resources>
  <connections/>
 </ui>
