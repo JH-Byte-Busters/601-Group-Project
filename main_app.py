@@ -206,11 +206,9 @@ class CategoryMenu(QDialog):
         query = QSqlQuery("SELECT COUNT(*) FROM Category")
         query.first()
         row_count = query.value(0)
-        print(row_count)
 
         # Use the appropriate SQL statement based on the number of existing rows
         if row_count >= 4:
-            print("HERE 1")
             # If there are four or more rows, update the first four rows with new data
             for i, value in enumerate(values, start=1):
                 print(i)
@@ -219,7 +217,6 @@ class CategoryMenu(QDialog):
                 query.bindValue(":user_id", i)
                 query.exec_()
         else:
-            print("HERE 2")
             # If there are less than four rows, insert new rows
             query.prepare("INSERT INTO Category (category_name) VALUES (:category_name)")
             for value in values:
@@ -355,12 +352,18 @@ class Board(QDialog):
     def __init__(self):
         super(Board, self).__init__()
         loadUi("board/board.ui", self)
+
+        # current player
+        self.current_player = "player1"
+
         # Go back to the main menu if requested by user
         self.btn_backToMenu.clicked.connect(self.gotoMainMenu)
 
         # Die image on load-up
         image = QPixmap("dice-1.png")
         self.label_3.setPixmap(image)
+        # Switch turns when incorrect answers
+        self.btn_incorrectAnsw.clicked.connect(self.changePlayer)
 
         # Directional button connects
         self.btn_up.clicked.connect(self.move_up)
@@ -373,7 +376,12 @@ class Board(QDialog):
 
         # Navigation global variables:
         self.cells = []
-        self.pointer = 41
+
+        self.pointer_player1 = 41
+        self.pointer_player2 = 41
+        self.pointer_player3 = 41
+        self.pointer_player4 = 41
+
         self.category = "NONE"
 
         # Create a 2D list to store the button objects
@@ -411,75 +419,94 @@ class Board(QDialog):
     ######################
     def move_left(self):
         left_border = [0, 9, 18, 27, 36, 45, 54, 63, 72] # Board left border cells
-        self.pointer = self.pointer - 1
-        self.dial_player1.move(self.dial_player1.x() - 95, self.dial_player1.y())
+        
+        player_pointer = getattr(self, f"pointer_{self.current_player}")
+        player_pointer = player_pointer - 1
+        setattr(self, f"pointer_{self.current_player}", player_pointer)
+        exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() - 95, self.dial_{self.current_player}.y())")
         allowed = True
         # Enforce border limit:
         for cell in left_border:
-            if self.pointer == cell:
+            if player_pointer == cell:
                 allowed = False
                 break
         if allowed and not self.getCellObject():
             allowed = False
 
         if not allowed:
-            self.pointer = self.pointer + 1
-            self.dial_player1.move(self.dial_player1.x() + 95, self.dial_player1.y())
-        print(self.pointer)
+            player_pointer = player_pointer + 1
+            setattr(self, f"pointer_{self.current_player}", player_pointer)
+            exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() + 95, self.dial_{self.current_player}.y())")
+        
+        print(player_pointer)
 
     def move_right(self):
-        left_border = [10, 19, 28, 37, 46, 55, 64, 73, 82] # Board right border cells
-        self.pointer = self.pointer + 1
-        self.dial_player1.move(self.dial_player1.x() + 95, self.dial_player1.y())
+        right_border = [10, 19, 28, 37, 46, 55, 64, 73, 82] # Board right border cells
+        
+        player_pointer = getattr(self, f"pointer_{self.current_player}")
+        player_pointer = player_pointer + 1
+        setattr(self, f"pointer_{self.current_player}", player_pointer)
+        exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() + 95, self.dial_{self.current_player}.y())")
         allowed = True
         # Enforce border limit:
-        for cell in left_border:
-            if self.pointer == cell:
+        for cell in right_border:
+            if player_pointer == cell:
                 allowed = False
                 break
         if allowed and not self.getCellObject():
             allowed = False
 
         if not allowed:
-            self.pointer = self.pointer - 1
-            self.dial_player1.move(self.dial_player1.x() - 95, self.dial_player1.y())
-        print(self.pointer)
+            player_pointer = player_pointer - 1
+            setattr(self, f"pointer_{self.current_player}", player_pointer)
+            exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() - 95, self.dial_{self.current_player}.y())")
+
+        print(player_pointer)
 
     def move_up(self):
-        self.pointer = self.pointer - 9
-        self.dial_player1.move(self.dial_player1.x(), self.dial_player1.y() - 100)
+        player_pointer = getattr(self, f"pointer_{self.current_player}")
+        player_pointer = player_pointer - 9
+        setattr(self, f"pointer_{self.current_player}", player_pointer)
+        exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() - 100)")
         allowed = True
         # Enforce border limit:
-        if self.pointer < 0:
+        if player_pointer < 0:
             allowed = False
         else:
             if not self.getCellObject():
                 allowed = False
 
         if not allowed:
-            self.pointer = self.pointer + 9
-            self.dial_player1.move(self.dial_player1.x(), self.dial_player1.y() + 100)
-        print(self.pointer)
+            player_pointer = player_pointer + 9
+            setattr(self, f"pointer_{self.current_player}", player_pointer)
+            exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() + 100)")
 
+        print(player_pointer)
+        
     def move_down(self):
-        self.pointer = self.pointer + 9
-        self.dial_player1.move(self.dial_player1.x(), self.dial_player1.y() + 100)
+        player_pointer = getattr(self, f"pointer_{self.current_player}")
+        player_pointer = player_pointer + 9
+        setattr(self, f"pointer_{self.current_player}", player_pointer)
+        exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() + 100)")
         allowed = True
         # Enforce border limit:
-        if self.pointer < 0:
+        if player_pointer < 0:
             allowed = False
         else:
             if not self.getCellObject():
                 allowed = False
 
         if not allowed:
-            self.pointer = self.pointer - 9
-            self.dial_player1.move(self.dial_player1.x(), self.dial_player1.y() - 100)
-        print(self.pointer)
+            player_pointer = player_pointer - 9
+            setattr(self, f"pointer_{self.current_player}", player_pointer)
+            exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() - 100)")
+
+        print(player_pointer)
 
     def getCellObject(self):
         for obj in self.cells:
-            if str(self.pointer) == (obj.objectName().split("_")[1]):
+            player_pointer = getattr(self, f"pointer_{self.current_player}")
+            if player_pointer == int(obj.objectName().split("_")[1]):
                 return True
         return False
 
@@ -491,6 +518,11 @@ class Board(QDialog):
         die = random.randint (1,6)  
         image2 = QPixmap("dice-"+str(die)+".png")
         self.label_3.setPixmap(image2)
+        
+    def changePlayer(self):
+        players = ["player1", "player2", "player3", "player4"]
+        current_index = players.index(self.current_player)
+        self.current_player = players[(current_index + 1) % len(players)]
 
 # main
 if __name__ == '__main__':
