@@ -198,19 +198,33 @@ class CategoryMenu(QDialog):
             print("Could not open the database!")
             return False
 
-        # Query the database to load in the text
-        # within the user text boxes
-        query = QSqlQuery("SELECT * FROM Category")
-        query.prepare("INSERT INTO Category (category_name) "
-              "VALUES (:category_name)")
-        query.bindValue(":category_name", self.line_catHead1.text())
-        query.exec_()
-        query.bindValue(":category_name", self.line_catHead2.text())
-        query.exec_()
-        query.bindValue(":category_name", self.line_catHead3.text())
-        query.exec_()
-        query.bindValue(":category_name", self.line_catHead4.text())
-        query.exec_()
+        # Prepare the values to be written
+        values = [self.line_catHead1.text(), self.line_catHead2.text(), 
+                  self.line_catHead3.text(), self.line_catHead4.text()]
+
+        # Check if there are at least four rows in the table
+        query = QSqlQuery("SELECT COUNT(*) FROM Category")
+        query.first()
+        row_count = query.value(0)
+        print(row_count)
+
+        # Use the appropriate SQL statement based on the number of existing rows
+        if row_count >= 4:
+            print("HERE 1")
+            # If there are four or more rows, update the first four rows with new data
+            for i, value in enumerate(values, start=1):
+                print(i)
+                query.prepare("UPDATE Category SET category_name = :category_name WHERE user_id = :user_id")
+                query.bindValue(":category_name", value)
+                query.bindValue(":user_id", i)
+                query.exec_()
+        else:
+            print("HERE 2")
+            # If there are less than four rows, insert new rows
+            query.prepare("INSERT INTO Category (category_name) VALUES (:category_name)")
+            for value in values:
+                query.bindValue(":category_name", value)
+                query.exec_()
 
 # Question Menu
 class QuestionMenu(QDialog):
@@ -261,16 +275,14 @@ class QuestionMenu(QDialog):
             print("Could not open the database!")
             return False
 
-        # Query the database to set the text fields
-        query = QSqlQuery("SELECT * FROM Category")
-        query.first()
-        self.comboBox_category.setItemText(0,query.value(1))
-        query.next()
-        self.comboBox_category.setItemText(1,query.value(1))
-        query.next()
-        self.comboBox_category.setItemText(2,query.value(1))
-        query.next()
-        self.comboBox_category.setItemText(3,query.value(1))
+        # Query the database to retrieve the first four rows from the "Category" table
+        query = QSqlQuery("SELECT * FROM Category LIMIT 4")
+
+        # Set the text fields for the combobox
+        row_index = 0
+        while query.next():
+            self.comboBox_category.setItemText(row_index, query.value(1))
+            row_index += 1
 
     def clearQandA(self):
         for i in range(1, 10):
