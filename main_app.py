@@ -476,8 +476,8 @@ class Board(QDialog):
         image = QPixmap("dice-1.png")
         self.label_3.setPixmap(image)
 
-        die2 = random.randint (1,6)  
-        image2 = QPixmap("dice-"+str(die2)+".png")
+        die = random.randint (1,6)  
+        image2 = QPixmap("dice-"+str(die)+".png")
         self.label_3.setPixmap(image2)
 
 # main
