@@ -2,7 +2,7 @@ import sys
 import os
 from PyQt5.uic import loadUi
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QWidget, QMessageBox
+from PyQt5.QtWidgets import QDialog, QApplication, QWidget, QMessageBox, QFileDialog
 import create_db
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
 from PyQt5.QtGui import QIcon
@@ -81,12 +81,12 @@ class CreateAccount(QDialog):
         super(CreateAccount, self).__init__()
         loadUi("login/user_create.ui", self)
         # Push Button (Start Game) will go to the player menu
-        self.btn_playGame.clicked.connect(self.loginVerif)
+        self.btn_playGame.clicked.connect(self.createUser)
         # Go back to Main User Login Menu
         self.btn_backToMenu.clicked.connect(self.gotoUserLogin)
 
     # Create the widget to go to the Player Menu
-    def loginVerif(self):
+    def createUser(self):
         # Update the widget menu to point to the player menu
         database.setDatabaseName("trivial_pursuit.db")
 
@@ -220,8 +220,34 @@ class QuestionMenu(QDialog):
         self.btn_loadQuestions.clicked.connect(self.insertData)
         # Go back to the menu if requested by user
         self.btn_backToMenu.clicked.connect(self.gotoMenu)
+        # When the combo box changes clear all the question fields
         self.comboBox_category.currentIndexChanged.connect(self.clearQandA)
-      
+        
+        # Link all load file buttons for questions
+        self.buttons = []
+        for i in range(1, 10):
+            exec(f"self.btn_load{i}.clicked.connect(self.openFile)")           
+            self.buttons.append(f"self.btn_load{i}")
+
+    def openFile(self):
+        # Get the sender (button) that triggered the signal
+        sender_btn = self.sender()
+        sender_btn_name = "self." + sender_btn.objectName()
+        
+        # Open File Dialog
+        fname = QFileDialog.getOpenFileName(self, "Open File", "", "JPEG (*.jpg;*.jpeg;*.jpe;*.jiff);;PNG (*.png);;MP4 (*.mp4);;MOV (*.mov)")
+
+        # Output filename to line edit field
+        if fname:
+            line_edits = [self.line_ques1, self.line_ques2, self.line_ques3, self.line_ques4, self.line_ques5, 
+                          self.line_ques6, self.line_ques7, self.line_ques8, self.line_ques9]
+
+            for i, btn_name in enumerate(["self.btn_load1", "self.btn_load2", "self.btn_load3", "self.btn_load4", "self.btn_load5", 
+                                          "self.btn_load6", "self.btn_load7", "self.btn_load8", "self.btn_load9"]):
+                if sender_btn_name == btn_name:
+                    line_edits[i].setText(fname[0])
+                    break
+        
     def setCategories(self):
         # TODO: Find a way to properly open/close database
         # currently running into some errors with this

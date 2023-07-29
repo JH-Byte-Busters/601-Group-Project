@@ -50,10 +50,10 @@
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>30</x>
      <y>90</y>
-     <width>811</width>
-     <height>671</height>
+     <width>841</width>
+     <height>681</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -70,7 +70,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>788</width>
+      <width>890</width>
       <height>717</height>
      </rect>
     </property>
@@ -179,10 +179,80 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="btn_load1">
+         <property name="minimumSize">
+          <size>
+           <width>101</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>101</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Load File</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
       <layout class="QGridLayout" name="gridLayout_2">
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="minimumSize">
+          <size>
+           <width>91</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>91</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Answer 2:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="line_answ2">
+         <property name="minimumSize">
+          <size>
+           <width>650</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>650</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-color: rgb(0, 0, 0);</string>
+         </property>
+         <property name="placeholderText">
+          <string/>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="0">
         <widget class="QLabel" name="label_4">
          <property name="minimumSize">
@@ -234,54 +304,22 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_5">
+       <item row="0" column="2">
+        <widget class="QPushButton" name="btn_load2">
          <property name="minimumSize">
           <size>
-           <width>91</width>
-           <height>21</height>
+           <width>101</width>
+           <height>28</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>91</width>
-           <height>21</height>
+           <width>101</width>
+           <height>28</height>
           </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
          </property>
          <property name="text">
-          <string>Answer 2:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="line_answ2">
-         <property name="minimumSize">
-          <size>
-           <width>650</width>
-           <height>31</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>650</width>
-           <height>31</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">border-color: rgb(0, 0, 0);</string>
-         </property>
-         <property name="placeholderText">
-          <string/>
+          <string>Load File</string>
          </property>
         </widget>
        </item>
@@ -391,6 +429,25 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="btn_load3">
+         <property name="minimumSize">
+          <size>
+           <width>101</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>101</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Load File</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
@@ -416,6 +473,33 @@
          </property>
          <property name="text">
           <string>Question 4:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="line_answ4">
+         <property name="minimumSize">
+          <size>
+           <width>650</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>650</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-color: rgb(0, 0, 0);</string>
+         </property>
+         <property name="placeholderText">
+          <string/>
          </property>
         </widget>
        </item>
@@ -470,30 +554,22 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="line_answ4">
+       <item row="0" column="2">
+        <widget class="QPushButton" name="btn_load4">
          <property name="minimumSize">
           <size>
-           <width>650</width>
-           <height>31</height>
+           <width>101</width>
+           <height>28</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>650</width>
-           <height>31</height>
+           <width>101</width>
+           <height>28</height>
           </size>
          </property>
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">border-color: rgb(0, 0, 0);</string>
-         </property>
-         <property name="placeholderText">
-          <string/>
+         <property name="text">
+          <string>Load File</string>
          </property>
         </widget>
        </item>
@@ -603,6 +679,25 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="btn_load5">
+         <property name="minimumSize">
+          <size>
+           <width>101</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>101</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Load File</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
@@ -658,30 +753,6 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_27">
-         <property name="minimumSize">
-          <size>
-           <width>91</width>
-           <height>21</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>91</width>
-           <height>21</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Answer 6:</string>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="1">
         <widget class="QLineEdit" name="line_answ6">
          <property name="minimumSize">
@@ -706,6 +777,49 @@
          </property>
          <property name="placeholderText">
           <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_27">
+         <property name="minimumSize">
+          <size>
+           <width>91</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>91</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Answer 6:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="btn_load6">
+         <property name="minimumSize">
+          <size>
+           <width>101</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>101</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Load File</string>
          </property>
         </widget>
        </item>
@@ -815,6 +929,25 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="btn_load7">
+         <property name="minimumSize">
+          <size>
+           <width>101</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>101</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Load File</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
@@ -921,6 +1054,25 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="btn_load8">
+         <property name="minimumSize">
+          <size>
+           <width>101</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>101</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Load File</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
@@ -1024,6 +1176,25 @@
          </property>
          <property name="placeholderText">
           <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="btn_load9">
+         <property name="minimumSize">
+          <size>
+           <width>101</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>101</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Load File</string>
          </property>
         </widget>
        </item>
@@ -1175,8 +1346,6 @@ border-color: rgb(0, 0, 0);</string>
    </layout>
   </widget>
  </widget>
- <resources>
-  <include location="../main_window/main_window.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
