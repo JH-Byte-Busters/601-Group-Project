@@ -395,8 +395,8 @@ class Board(QDialog):
         self.btn_backToMenu.clicked.connect(self.gotoMainMenu)
 
         # Die image on load-up
-        image = QPixmap("dice-1.png")
-        self.label_3.setPixmap(image)
+        image = QPixmap("board/dice-1.png")
+        self.die_image.setPixmap(image)
         # Switch turns when incorrect answers
         self.btn_incorrectAnsw.clicked.connect(self.changePlayer)
 
@@ -547,12 +547,12 @@ class Board(QDialog):
 
     def rolltheDice(self):
         global image
-        image = QPixmap("dice-1.png")
-        self.label_3.setPixmap(image)
+        image = QPixmap("board/dice-1.png")
+        self.die_image.setPixmap(image)
 
         die = random.randint (1,6)  
-        image2 = QPixmap("dice-"+str(die)+".png")
-        self.label_3.setPixmap(image2)
+        image2 = QPixmap("board/dice-"+str(die)+".png")
+        self.die_image.setPixmap(image2)
         
     def changePlayer(self):
         players = ["player1", "player2", "player3", "player4"]
