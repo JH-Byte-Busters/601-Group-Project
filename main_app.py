@@ -140,11 +140,13 @@ class PlayerMenu(QDialog):
         # Initialization of board widget must be done here
         # to ensure that the board names are properly pulled from
         # the database
+        board=Board()
         board.setNames()
         widget.setFixedHeight(980)
         widget.setFixedWidth(1890)
+        widget.addWidget(board)
         # Update the widget menu to point to board
-        widget.setCurrentIndex(5)
+        widget.setCurrentIndex(widget.currentIndex()+2)
 
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
@@ -153,14 +155,39 @@ class PlayerMenu(QDialog):
 
     # Work with the database to add in the written data
     # once the button "Insert Data" is pressed
-    def insertData(self):
-        global player_names
-        player_names = [
-            self.line_playerName1.text(),
-            self.line_playerName2.text(),
-            self.line_playerName3.text(),
-            self.line_playerName4.text()
-        ]
+    def insertData(self):        
+        # TODO: Find a way to properly open/close database
+        # currently running into some errors with this
+        # as a double connection
+        database.setDatabaseName('trivial_pursuit.db')
+        
+        if not database.open():
+            print("Could not open the database!")
+            return False
+        
+        # Prepare the values to be written
+        values = [self.line_playerName1.text(), self.line_playerName2.text(), 
+                  self.line_playerName3.text(), self.line_playerName4.text()]
+        
+        # Check if there are at least four rows in the table
+        query = QSqlQuery("SELECT COUNT(*) FROM Player")
+        query.first()
+        row_count = query.value(0)
+
+        # Use the appropriate SQL statement based on the number of existing rows
+        if row_count >= 4:
+            # If there are four or more rows, update the first four rows with new data
+            for i, value in enumerate(values, start=1):
+                query.prepare("UPDATE Player SET player_name = :player_name WHERE user_id = :user_id")
+                query.bindValue(":player_name", value)
+                query.bindValue(":user_id", i)
+                query.exec_()
+        else:
+            # If there are less than four rows, insert new rows
+            query.prepare("INSERT INTO Player (player_name) VALUES (:player_name)")
+            for value in values:
+                query.bindValue(":player_name", value)
+                query.exec_()
 
 # Category Menu
 class CategoryMenu(QDialog):
@@ -181,7 +208,7 @@ class CategoryMenu(QDialog):
         question_menu.setCategories()
         widget.addWidget(question_menu)
         # Update the widget menu to point to question menu
-        widget.setCurrentIndex(widget.currentIndex()+2)
+        widget.setCurrentIndex(widget.currentIndex()+1)
     
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
@@ -356,6 +383,20 @@ class Board(QDialog):
         # current player
         self.current_player = "player1"
 
+        # TODO: Find a way to properly open/close database
+        # currently running into some errors with this
+        # as a double connection
+        database.setDatabaseName('trivial_pursuit.db')
+        
+        if not database.open():
+            print("Could not open the database!")
+            return False
+        
+        # Query the database to retrieve the first row from the "Player" table
+        query = QSqlQuery("SELECT * FROM Player LIMIT 1")
+        query.next()
+        self.txt_currentPlayer.setText(query.value(1))
+
         # Go back to the main menu if requested by user
         self.btn_backToMenu.clicked.connect(self.gotoMainMenu)
 
@@ -405,14 +446,14 @@ class Board(QDialog):
     # In the board make sure to load up the player names
     # properly to set each text box
     def setNames(self):
-        # TODO: Find a way to properly open/close database
-        # currently running into some errors with this
-        # as a double connection
+        # Query the database to retrieve the first four rows from the "Player" table
+        query = QSqlQuery("SELECT * FROM Player LIMIT 4")
 
-        self.txt_playerName1.setText(player_names[0])
-        self.txt_playerName2.setText(player_names[1])
-        self.txt_playerName3.setText(player_names[2])
-        self.txt_playerName4.setText(player_names[3])
+        # Set the text fields for the player names
+        player_num = 1
+        while query.next():
+            exec(f"self.txt_playerName{player_num}.setText('{str(query.value(1))}')")
+            player_num += 1
 
     ######################
     # Navigation methods:
@@ -524,6 +565,16 @@ class Board(QDialog):
         current_index = players.index(self.current_player)
         self.current_player = players[(current_index + 1) % len(players)]
 
+        # Query the database to retrieve the first four rows from the "Player" table
+        query = QSqlQuery("SELECT * FROM Player LIMIT 4")
+
+        # Set the text fields for current player box
+        player_names = []
+        while query.next():
+            player_names.append(query.value(1))
+            
+        self.txt_currentPlayer.setText(player_names[(current_index + 1) % len(players)])
+
 # main
 if __name__ == '__main__':
     database = QSqlDatabase.addDatabase("QSQLITE")
@@ -534,14 +585,12 @@ if __name__ == '__main__':
     main_app=MainWindow()
     player_menu=PlayerMenu()
     category_menu=CategoryMenu()
-    board=Board()
     widget.setWindowTitle("TrivialCompute")
     widget.addWidget(user_login)
     widget.addWidget(main_app)
     widget.addWidget(create_acct)
     widget.addWidget(player_menu)
     widget.addWidget(category_menu)
-    widget.addWidget(board)
     widget.setFixedHeight(900)
     widget.setFixedWidth(880)
     widget.show()
