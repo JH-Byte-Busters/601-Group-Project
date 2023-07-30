@@ -16,7 +16,7 @@ class MainWindow(QDialog):
     def __init__(self):
         super(MainWindow, self).__init__()
         loadUi("main_window/main_window.ui", self)
-        # Push Button (Start Game) will go to the user login menu
+        # Push Button (Start Game) will go to the player menu
         self.btn_startGame.clicked.connect(self.gotoPlayerMenu)
         self.btn_catQSetup.clicked.connect(self.gotoCategoryMenu)
     
@@ -25,9 +25,9 @@ class MainWindow(QDialog):
         # Update the widget menu to point to the Player menu
         widget.setCurrentIndex(3)
     
-    # Go to the widget to go to the Player Menu
+    # Go to the widget to go to the Category Menu
     def gotoCategoryMenu(self):
-        # Update the widget menu to point to the Player menu
+        # Update the widget menu to point to the Category menu
         widget.setCurrentIndex(4)
 
 class UserLogin(QDialog):
@@ -42,8 +42,6 @@ class UserLogin(QDialog):
 
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
-        # Update the widget menu to point to the main menu
-
         # Setting username and password to the input from the user
         username = self.line_username.text()
         password = self.line_password.text()
@@ -62,8 +60,10 @@ class UserLogin(QDialog):
 
         if query.exec():
             if query.next():
+                # Update the widget menu to point to the main menu
                 widget.setCurrentIndex(1)
             else:
+                # If error during login post warning message
                 message_box = QMessageBox()
                 message_box.setIcon(QMessageBox.Warning)
                 message_box.setWindowTitle("Authentication Failed")
@@ -83,7 +83,7 @@ class CreateAccount(QDialog):
     def __init__(self):
         super(CreateAccount, self).__init__()
         loadUi("login/user_create.ui", self)
-        # Push Button (Start Game) will go to the player menu
+        # Create user will create a user and go back to login menu
         self.btn_playGame.clicked.connect(self.createUser)
         # Go back to Main User Login Menu
         self.btn_backToMenu.clicked.connect(self.gotoUserLogin)
@@ -104,7 +104,7 @@ class CreateAccount(QDialog):
         # Should Probably change this name in the UI tool to not conflict with login
         query.bindValue(":password", self.line_password.text())
         query.bindValue(":email", self.line_email.text())
-        query.bindValue(":position", "pushButton_46")  # Default position
+        query.bindValue(":position", "pushButton_41")  # Default position
 
         if query.exec():
             message_box = QMessageBox()
@@ -155,10 +155,8 @@ class PlayerMenu(QDialog):
 
     # Work with the database to add in the written data
     # once the button "Insert Data" is pressed
-    def insertData(self):        
-        # TODO: Find a way to properly open/close database
-        # currently running into some errors with this
-        # as a double connection
+    def insertData(self):
+        # Open database to load player names 
         database.setDatabaseName('trivial_pursuit.db')
         
         if not database.open():
@@ -290,9 +288,7 @@ class QuestionMenu(QDialog):
                     break
         
     def setCategories(self):
-        # TODO: Find a way to properly open/close database
-        # currently running into some errors with this
-        # as a double connection
+        # Open database
         database.setDatabaseName('trivial_pursuit.db')
         
         if not database.open():
@@ -383,9 +379,7 @@ class Board(QDialog):
         # current player
         self.current_player = "player1"
 
-        # TODO: Find a way to properly open/close database
-        # currently running into some errors with this
-        # as a double connection
+        # Open database
         database.setDatabaseName('trivial_pursuit.db')
         
         if not database.open():
@@ -572,7 +566,8 @@ class Board(QDialog):
         player_names = []
         while query.next():
             player_names.append(query.value(1))
-            
+        
+        # Set current player name in text box
         self.txt_currentPlayer.setText(player_names[(current_index + 1) % len(players)])
 
 # main
