@@ -23,12 +23,12 @@ class MainWindow(QDialog):
     # Go to the widget to go to the Player Menu
     def gotoPlayerMenu(self):
         # Update the widget menu to point to the Player menu
-        widget.setCurrentIndex(3)
+        widget.setCurrentWidget(player_menu)
     
     # Go to the widget to go to the Category Menu
     def gotoCategoryMenu(self):
         # Update the widget menu to point to the Category menu
-        widget.setCurrentIndex(4)
+        widget.setCurrentWidget(category_menu)
 
 class UserLogin(QDialog):
     # Initialize the main window
@@ -61,7 +61,7 @@ class UserLogin(QDialog):
         if query.exec():
             if query.next():
                 # Update the widget menu to point to the main menu
-                widget.setCurrentIndex(1)
+                widget.setCurrentWidget(main_app)
             else:
                 # If error during login post warning message
                 message_box = QMessageBox()
@@ -76,7 +76,7 @@ class UserLogin(QDialog):
     # Create the widget to go to the Create account Menu
     def gotoCreateAccount(self):
         # Update the widget menu to point to the Create account menu
-        widget.setCurrentIndex(2)
+        widget.setCurrentWidget(create_acct)
 
 class CreateAccount(QDialog):
     # Initialize the main window
@@ -115,12 +115,12 @@ class CreateAccount(QDialog):
         else:
             print("Error occurred while inserting user data.")
 
-        widget.setCurrentIndex(0)
+        widget.setCurrentWidget(user_login)
 
     # Create the widget to go to back to the user login
     def gotoUserLogin(self):
         # Update the widget menu to point to the user login
-        widget.setCurrentIndex(0)
+        widget.setCurrentWidget(user_login)
 
 # Player Menu
 class PlayerMenu(QDialog):
@@ -146,12 +146,12 @@ class PlayerMenu(QDialog):
         widget.setFixedWidth(1890)
         widget.addWidget(board)
         # Update the widget menu to point to board
-        widget.setCurrentIndex(widget.currentIndex()+2)
+        widget.setCurrentWidget(board)
 
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
         # Update the widget menu to point to the main menu
-        widget.setCurrentIndex(1)
+        widget.setCurrentWidget(main_app)
 
     # Work with the database to add in the written data
     # once the button "Insert Data" is pressed
@@ -206,12 +206,12 @@ class CategoryMenu(QDialog):
         question_menu.setCategories()
         widget.addWidget(question_menu)
         # Update the widget menu to point to question menu
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        widget.setCurrentWidget(question_menu)
     
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
         # Update the widget menu to point to the main menu
-        widget.setCurrentIndex(1)
+        widget.setCurrentWidget(main_app)
 
     # Work with the database to add in the written data
     # once the button "Insert Data" is pressed
@@ -319,7 +319,7 @@ class QuestionMenu(QDialog):
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
         # Update the widget menu to point to the main menu
-        widget.setCurrentIndex(1)
+        widget.setCurrentWidget(main_app)
 
     def insertData(self):
         # Sample data for multiple questions
@@ -435,7 +435,7 @@ class Board(QDialog):
     def gotoMainMenu(self):
         widget.setFixedHeight(900)
         widget.setFixedWidth(880)
-        widget.setCurrentIndex(1)
+        widget.setCurrentWidget(main_app)
 
     # In the board make sure to load up the player names
     # properly to set each text box
