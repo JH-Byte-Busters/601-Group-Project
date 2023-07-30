@@ -1,5 +1,8 @@
 import sys
 import os
+import random
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
 from PyQt5.uic import loadUi
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QWidget, QMessageBox, QFileDialog
@@ -343,11 +346,18 @@ class Board(QDialog):
         # Go back to the main menu if requested by user
         self.btn_backToMenu.clicked.connect(self.gotoMainMenu)
 
+        # Die image on load-up
+        image = QPixmap("dice-1.png")
+        self.label_3.setPixmap(image)
+
         # Directional button connects
         self.btn_up.clicked.connect(self.move_up)
         self.btn_right.clicked.connect(self.move_right)
         self.btn_down.clicked.connect(self.move_down)
         self.btn_left.clicked.connect(self.move_left)
+
+        #roll dice connnect
+        self.btn_rollDie.clicked.connect(self.rolltheDice)
 
         # Navigation global variables:
         self.cells = []
@@ -460,6 +470,15 @@ class Board(QDialog):
             if str(self.pointer) == (obj.objectName().split("_")[1]):
                 return True
         return False
+
+    def rolltheDice(self):
+        global image
+        image = QPixmap("dice-1.png")
+        self.label_3.setPixmap(image)
+
+        die = random.randint (1,6)  
+        image2 = QPixmap("dice-"+str(die)+".png")
+        self.label_3.setPixmap(image2)
 
 # main
 if __name__ == '__main__':
