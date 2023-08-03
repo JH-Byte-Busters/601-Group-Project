@@ -399,6 +399,8 @@ class Board(QDialog):
         self.die_image.setPixmap(image)
         # Switch turns when incorrect answers
         self.btn_incorrectAnsw.clicked.connect(self.changePlayer)
+        # Check location when correct
+        self.btn_correctAnsw.clicked.connect(self.checkHQButton)
 
         # Directional button connects
         self.btn_up.clicked.connect(self.move_up)
@@ -570,6 +572,21 @@ class Board(QDialog):
         # Set current player name in text box
         self.txt_currentPlayer.setText(player_names[(current_index + 1) % len(players)])
 
+    def checkHQButton(self):
+        hq_positions = [5, 37, 45, 77]
+        player_pointer = getattr(self, f"pointer_{self.current_player}")
+        
+        if player_pointer in hq_positions:
+            print("on hq block")
+            if player_pointer == 5:
+                print("red")
+            elif player_pointer == 37:
+                print("yellow")
+            elif player_pointer == 45:
+                print("green")
+            elif player_pointer == 77:
+                print("blue")
+        
 # main
 if __name__ == '__main__':
     database = QSqlDatabase.addDatabase("QSQLITE")
