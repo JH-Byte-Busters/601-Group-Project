@@ -16,19 +16,19 @@ class MainWindow(QDialog):
     def __init__(self):
         super(MainWindow, self).__init__()
         loadUi("main_window/main_window.ui", self)
-        # Push Button (Start Game) will go to the user login menu
+        # Push Button (Start Game) will go to the player menu
         self.btn_startGame.clicked.connect(self.gotoPlayerMenu)
         self.btn_catQSetup.clicked.connect(self.gotoCategoryMenu)
     
     # Go to the widget to go to the Player Menu
     def gotoPlayerMenu(self):
         # Update the widget menu to point to the Player menu
-        widget.setCurrentIndex(3)
+        widget.setCurrentWidget(player_menu)
     
-    # Go to the widget to go to the Player Menu
+    # Go to the widget to go to the Category Menu
     def gotoCategoryMenu(self):
-        # Update the widget menu to point to the Player menu
-        widget.setCurrentIndex(4)
+        # Update the widget menu to point to the Category menu
+        widget.setCurrentWidget(category_menu)
 
 class UserLogin(QDialog):
     # Initialize the main window
@@ -42,8 +42,6 @@ class UserLogin(QDialog):
 
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
-        # Update the widget menu to point to the main menu
-
         # Setting username and password to the input from the user
         username = self.line_username.text()
         password = self.line_password.text()
@@ -62,8 +60,10 @@ class UserLogin(QDialog):
 
         if query.exec():
             if query.next():
-                widget.setCurrentIndex(1)
+                # Update the widget menu to point to the main menu
+                widget.setCurrentWidget(main_app)
             else:
+                # If error during login post warning message
                 message_box = QMessageBox()
                 message_box.setIcon(QMessageBox.Warning)
                 message_box.setWindowTitle("Authentication Failed")
@@ -76,14 +76,14 @@ class UserLogin(QDialog):
     # Create the widget to go to the Create account Menu
     def gotoCreateAccount(self):
         # Update the widget menu to point to the Create account menu
-        widget.setCurrentIndex(2)
+        widget.setCurrentWidget(create_acct)
 
 class CreateAccount(QDialog):
     # Initialize the main window
     def __init__(self):
         super(CreateAccount, self).__init__()
         loadUi("login/user_create.ui", self)
-        # Push Button (Start Game) will go to the player menu
+        # Create user will create a user and go back to login menu
         self.btn_playGame.clicked.connect(self.createUser)
         # Go back to Main User Login Menu
         self.btn_backToMenu.clicked.connect(self.gotoUserLogin)
@@ -104,7 +104,7 @@ class CreateAccount(QDialog):
         # Should Probably change this name in the UI tool to not conflict with login
         query.bindValue(":password", self.line_password.text())
         query.bindValue(":email", self.line_email.text())
-        query.bindValue(":position", "pushButton_46")  # Default position
+        query.bindValue(":position", "pushButton_41")  # Default position
 
         if query.exec():
             message_box = QMessageBox()
@@ -115,12 +115,12 @@ class CreateAccount(QDialog):
         else:
             print("Error occurred while inserting user data.")
 
-        widget.setCurrentIndex(0)
+        widget.setCurrentWidget(user_login)
 
     # Create the widget to go to back to the user login
     def gotoUserLogin(self):
         # Update the widget menu to point to the user login
-        widget.setCurrentIndex(0)
+        widget.setCurrentWidget(user_login)
 
 # Player Menu
 class PlayerMenu(QDialog):
@@ -140,27 +140,52 @@ class PlayerMenu(QDialog):
         # Initialization of board widget must be done here
         # to ensure that the board names are properly pulled from
         # the database
+        board=Board()
         board.setNames()
         widget.setFixedHeight(980)
         widget.setFixedWidth(1890)
+        widget.addWidget(board)
         # Update the widget menu to point to board
-        widget.setCurrentIndex(5)
+        widget.setCurrentWidget(board)
 
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
         # Update the widget menu to point to the main menu
-        widget.setCurrentIndex(1)
+        widget.setCurrentWidget(main_app)
 
     # Work with the database to add in the written data
     # once the button "Insert Data" is pressed
     def insertData(self):
-        global player_names
-        player_names = [
-            self.line_playerName1.text(),
-            self.line_playerName2.text(),
-            self.line_playerName3.text(),
-            self.line_playerName4.text()
-        ]
+        # Open database to load player names 
+        database.setDatabaseName('trivial_pursuit.db')
+        
+        if not database.open():
+            print("Could not open the database!")
+            return False
+        
+        # Prepare the values to be written
+        values = [self.line_playerName1.text(), self.line_playerName2.text(), 
+                  self.line_playerName3.text(), self.line_playerName4.text()]
+        
+        # Check if there are at least four rows in the table
+        query = QSqlQuery("SELECT COUNT(*) FROM Player")
+        query.first()
+        row_count = query.value(0)
+
+        # Use the appropriate SQL statement based on the number of existing rows
+        if row_count >= 4:
+            # If there are four or more rows, update the first four rows with new data
+            for i, value in enumerate(values, start=1):
+                query.prepare("UPDATE Player SET player_name = :player_name WHERE user_id = :user_id")
+                query.bindValue(":player_name", value)
+                query.bindValue(":user_id", i)
+                query.exec_()
+        else:
+            # If there are less than four rows, insert new rows
+            query.prepare("INSERT INTO Player (player_name) VALUES (:player_name)")
+            for value in values:
+                query.bindValue(":player_name", value)
+                query.exec_()
 
 # Category Menu
 class CategoryMenu(QDialog):
@@ -181,12 +206,12 @@ class CategoryMenu(QDialog):
         question_menu.setCategories()
         widget.addWidget(question_menu)
         # Update the widget menu to point to question menu
-        widget.setCurrentIndex(widget.currentIndex()+2)
+        widget.setCurrentWidget(question_menu)
     
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
         # Update the widget menu to point to the main menu
-        widget.setCurrentIndex(1)
+        widget.setCurrentWidget(main_app)
 
     # Work with the database to add in the written data
     # once the button "Insert Data" is pressed
@@ -198,19 +223,30 @@ class CategoryMenu(QDialog):
             print("Could not open the database!")
             return False
 
-        # Query the database to load in the text
-        # within the user text boxes
-        query = QSqlQuery("SELECT * FROM Category")
-        query.prepare("INSERT INTO Category (category_name) "
-              "VALUES (:category_name)")
-        query.bindValue(":category_name", self.line_catHead1.text())
-        query.exec_()
-        query.bindValue(":category_name", self.line_catHead2.text())
-        query.exec_()
-        query.bindValue(":category_name", self.line_catHead3.text())
-        query.exec_()
-        query.bindValue(":category_name", self.line_catHead4.text())
-        query.exec_()
+        # Prepare the values to be written
+        values = [self.line_catHead1.text(), self.line_catHead2.text(), 
+                  self.line_catHead3.text(), self.line_catHead4.text()]
+
+        # Check if there are at least four rows in the table
+        query = QSqlQuery("SELECT COUNT(*) FROM Category")
+        query.first()
+        row_count = query.value(0)
+
+        # Use the appropriate SQL statement based on the number of existing rows
+        if row_count >= 4:
+            # If there are four or more rows, update the first four rows with new data
+            for i, value in enumerate(values, start=1):
+                print(i)
+                query.prepare("UPDATE Category SET category_name = :category_name WHERE user_id = :user_id")
+                query.bindValue(":category_name", value)
+                query.bindValue(":user_id", i)
+                query.exec_()
+        else:
+            # If there are less than four rows, insert new rows
+            query.prepare("INSERT INTO Category (category_name) VALUES (:category_name)")
+            for value in values:
+                query.bindValue(":category_name", value)
+                query.exec_()
 
 # Question Menu
 class QuestionMenu(QDialog):
@@ -252,25 +288,21 @@ class QuestionMenu(QDialog):
                     break
         
     def setCategories(self):
-        # TODO: Find a way to properly open/close database
-        # currently running into some errors with this
-        # as a double connection
+        # Open database
         database.setDatabaseName('trivial_pursuit.db')
         
         if not database.open():
             print("Could not open the database!")
             return False
 
-        # Query the database to set the text fields
-        query = QSqlQuery("SELECT * FROM Category")
-        query.first()
-        self.comboBox_category.setItemText(0,query.value(1))
-        query.next()
-        self.comboBox_category.setItemText(1,query.value(1))
-        query.next()
-        self.comboBox_category.setItemText(2,query.value(1))
-        query.next()
-        self.comboBox_category.setItemText(3,query.value(1))
+        # Query the database to retrieve the first four rows from the "Category" table
+        query = QSqlQuery("SELECT * FROM Category LIMIT 4")
+
+        # Set the text fields for the combobox
+        row_index = 0
+        while query.next():
+            self.comboBox_category.setItemText(row_index, query.value(1))
+            row_index += 1
 
     def clearQandA(self):
         for i in range(1, 10):
@@ -287,7 +319,7 @@ class QuestionMenu(QDialog):
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
         # Update the widget menu to point to the main menu
-        widget.setCurrentIndex(1)
+        widget.setCurrentWidget(main_app)
 
     def insertData(self):
         # Sample data for multiple questions
@@ -343,12 +375,30 @@ class Board(QDialog):
     def __init__(self):
         super(Board, self).__init__()
         loadUi("board/board.ui", self)
+
+        # current player
+        self.current_player = "player1"
+
+        # Open database
+        database.setDatabaseName('trivial_pursuit.db')
+        
+        if not database.open():
+            print("Could not open the database!")
+            return False
+        
+        # Query the database to retrieve the first row from the "Player" table
+        query = QSqlQuery("SELECT * FROM Player LIMIT 1")
+        query.next()
+        self.txt_currentPlayer.setText(query.value(1))
+
         # Go back to the main menu if requested by user
         self.btn_backToMenu.clicked.connect(self.gotoMainMenu)
 
         # Die image on load-up
-        image = QPixmap("dice-1.png")
-        self.label_3.setPixmap(image)
+        image = QPixmap("board/dice-1.png")
+        self.die_image.setPixmap(image)
+        # Switch turns when incorrect answers
+        self.btn_incorrectAnsw.clicked.connect(self.changePlayer)
 
         # Directional button connects
         self.btn_up.clicked.connect(self.move_up)
@@ -361,7 +411,12 @@ class Board(QDialog):
 
         # Navigation global variables:
         self.cells = []
-        self.pointer = 41
+
+        self.pointer_player1 = 41
+        self.pointer_player2 = 41
+        self.pointer_player3 = 41
+        self.pointer_player4 = 41
+
         self.category = "NONE"
 
         # Create a 2D list to store the button objects
@@ -380,105 +435,140 @@ class Board(QDialog):
     def gotoMainMenu(self):
         widget.setFixedHeight(900)
         widget.setFixedWidth(880)
-        widget.setCurrentIndex(1)
+        widget.setCurrentWidget(main_app)
 
     # In the board make sure to load up the player names
     # properly to set each text box
     def setNames(self):
-        # TODO: Find a way to properly open/close database
-        # currently running into some errors with this
-        # as a double connection
+        # Query the database to retrieve the first four rows from the "Player" table
+        query = QSqlQuery("SELECT * FROM Player LIMIT 4")
 
-        self.txt_playerName1.setText(player_names[0])
-        self.txt_playerName2.setText(player_names[1])
-        self.txt_playerName3.setText(player_names[2])
-        self.txt_playerName4.setText(player_names[3])
+        # Set the text fields for the player names
+        player_num = 1
+        while query.next():
+            exec(f"self.txt_playerName{player_num}.setText('{str(query.value(1))}')")
+            player_num += 1
 
     ######################
     # Navigation methods:
     ######################
     def move_left(self):
         left_border = [0, 9, 18, 27, 36, 45, 54, 63, 72] # Board left border cells
-        self.pointer = self.pointer - 1
-        self.dial_player1.move(self.dial_player1.x() - 95, self.dial_player1.y())
+        
+        player_pointer = getattr(self, f"pointer_{self.current_player}")
+        player_pointer = player_pointer - 1
+        setattr(self, f"pointer_{self.current_player}", player_pointer)
+        exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() - 95, self.dial_{self.current_player}.y())")
         allowed = True
         # Enforce border limit:
         for cell in left_border:
-            if self.pointer == cell:
+            if player_pointer == cell:
                 allowed = False
                 break
         if allowed and not self.getCellObject():
             allowed = False
 
         if not allowed:
-            self.pointer = self.pointer + 1
-            self.dial_player1.move(self.dial_player1.x() + 95, self.dial_player1.y())
-        print(self.pointer)
+            player_pointer = player_pointer + 1
+            setattr(self, f"pointer_{self.current_player}", player_pointer)
+            exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() + 95, self.dial_{self.current_player}.y())")
+        
+        print(player_pointer)
 
     def move_right(self):
-        left_border = [10, 19, 28, 37, 46, 55, 64, 73, 82] # Board right border cells
-        self.pointer = self.pointer + 1
-        self.dial_player1.move(self.dial_player1.x() + 95, self.dial_player1.y())
+        right_border = [10, 19, 28, 37, 46, 55, 64, 73, 82] # Board right border cells
+        
+        player_pointer = getattr(self, f"pointer_{self.current_player}")
+        player_pointer = player_pointer + 1
+        setattr(self, f"pointer_{self.current_player}", player_pointer)
+        exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() + 95, self.dial_{self.current_player}.y())")
         allowed = True
         # Enforce border limit:
-        for cell in left_border:
-            if self.pointer == cell:
+        for cell in right_border:
+            if player_pointer == cell:
                 allowed = False
                 break
         if allowed and not self.getCellObject():
             allowed = False
 
         if not allowed:
-            self.pointer = self.pointer - 1
-            self.dial_player1.move(self.dial_player1.x() - 95, self.dial_player1.y())
-        print(self.pointer)
+            player_pointer = player_pointer - 1
+            setattr(self, f"pointer_{self.current_player}", player_pointer)
+            exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() - 95, self.dial_{self.current_player}.y())")
+
+        print(player_pointer)
 
     def move_up(self):
-        self.pointer = self.pointer - 9
-        self.dial_player1.move(self.dial_player1.x(), self.dial_player1.y() - 100)
+        player_pointer = getattr(self, f"pointer_{self.current_player}")
+        player_pointer = player_pointer - 9
+        setattr(self, f"pointer_{self.current_player}", player_pointer)
+        exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() - 100)")
         allowed = True
         # Enforce border limit:
-        if self.pointer < 0:
+        if player_pointer < 0:
             allowed = False
         else:
             if not self.getCellObject():
                 allowed = False
 
         if not allowed:
-            self.pointer = self.pointer + 9
-            self.dial_player1.move(self.dial_player1.x(), self.dial_player1.y() + 100)
-        print(self.pointer)
+            player_pointer = player_pointer + 9
+            setattr(self, f"pointer_{self.current_player}", player_pointer)
+            exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() + 100)")
 
+        print(player_pointer)
+        
     def move_down(self):
-        self.pointer = self.pointer + 9
-        self.dial_player1.move(self.dial_player1.x(), self.dial_player1.y() + 100)
+        player_pointer = getattr(self, f"pointer_{self.current_player}")
+        player_pointer = player_pointer + 9
+        setattr(self, f"pointer_{self.current_player}", player_pointer)
+        exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() + 100)")
         allowed = True
         # Enforce border limit:
-        if self.pointer < 0:
+        if player_pointer < 0:
             allowed = False
         else:
             if not self.getCellObject():
                 allowed = False
 
         if not allowed:
-            self.pointer = self.pointer - 9
-            self.dial_player1.move(self.dial_player1.x(), self.dial_player1.y() - 100)
-        print(self.pointer)
+            player_pointer = player_pointer - 9
+            setattr(self, f"pointer_{self.current_player}", player_pointer)
+            exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() - 100)")
+
+        print(player_pointer)
 
     def getCellObject(self):
         for obj in self.cells:
-            if str(self.pointer) == (obj.objectName().split("_")[1]):
+            player_pointer = getattr(self, f"pointer_{self.current_player}")
+            if player_pointer == int(obj.objectName().split("_")[1]):
                 return True
         return False
 
     def rolltheDice(self):
         global image
-        image = QPixmap("dice-1.png")
-        self.label_3.setPixmap(image)
+        image = QPixmap("board/dice-1.png")
+        self.die_image.setPixmap(image)
 
         die = random.randint (1,6)  
-        image2 = QPixmap("dice-"+str(die)+".png")
-        self.label_3.setPixmap(image2)
+        image2 = QPixmap("board/dice-"+str(die)+".png")
+        self.die_image.setPixmap(image2)
+        
+    def changePlayer(self):
+        players = ["player1", "player2", "player3", "player4"]
+        current_index = players.index(self.current_player)
+        self.current_player = players[(current_index + 1) % len(players)]
+
+        # Query the database to retrieve the first four rows from the "Player" table
+        query = QSqlQuery("SELECT * FROM Player LIMIT 4")
+
+        # Set the text fields for current player box
+        player_names = []
+        while query.next():
+            player_names.append(query.value(1))
+        
+        # Set current player name in text box
+        self.txt_currentPlayer.setText(player_names[(current_index + 1) % len(players)])
 
 # main
 if __name__ == '__main__':
@@ -490,14 +580,12 @@ if __name__ == '__main__':
     main_app=MainWindow()
     player_menu=PlayerMenu()
     category_menu=CategoryMenu()
-    board=Board()
     widget.setWindowTitle("TrivialCompute")
     widget.addWidget(user_login)
     widget.addWidget(main_app)
     widget.addWidget(create_acct)
     widget.addWidget(player_menu)
     widget.addWidget(category_menu)
-    widget.addWidget(board)
     widget.setFixedHeight(900)
     widget.setFixedWidth(880)
     widget.show()

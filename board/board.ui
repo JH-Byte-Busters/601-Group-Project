@@ -2148,13 +2148,13 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>990</x>
      <y>30</y>
-     <width>281</width>
+     <width>211</width>
      <height>291</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="die_image">
       <property name="minimumSize">
        <size>
         <width>211</width>
@@ -2171,7 +2171,7 @@ p, li { white-space: pre-wrap; }
        <string notr="true">background-color: rgb(210, 234, 255);</string>
       </property>
       <property name="text">
-       <string>                                 DIE IMAGE HERE</string>
+       <string>                DIE IMAGE HERE</string>
       </property>
      </widget>
     </item>
