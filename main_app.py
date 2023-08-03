@@ -573,19 +573,22 @@ class Board(QDialog):
         self.txt_currentPlayer.setText(player_names[(current_index + 1) % len(players)])
 
     def checkHQButton(self):
-        hq_positions = [5, 37, 45, 77]
+        hq_positions = [5, 37, 45, 77, 41]
         player_pointer = getattr(self, f"pointer_{self.current_player}")
         
         if player_pointer in hq_positions:
-            print("on hq block")
+            # Category 1 (Red)
             if player_pointer == 5:
-                print("red")
+                exec(f"self.btn_HQ_{self.current_player}_cat1.setStyleSheet('background-color: rgb(255, 0, 77)')")
+            # Category 2 (Yellow)
             elif player_pointer == 37:
-                print("yellow")
+                exec(f"self.btn_HQ_{self.current_player}_cat2.setStyleSheet('background-color: rgb(255, 236, 39)')")
+            # Category 3 (Green)
             elif player_pointer == 45:
-                print("green")
+                exec(f"self.btn_HQ_{self.current_player}_cat3.setStyleSheet('background-color: rgb(0, 228, 54)')")
+            # Category 4 (Blue)
             elif player_pointer == 77:
-                print("blue")
+                exec(f"self.btn_HQ_{self.current_player}_cat4.setStyleSheet('background-color: rgb(41, 173, 255)')")
         
 # main
 if __name__ == '__main__':
