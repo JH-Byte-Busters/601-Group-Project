@@ -30,8 +30,8 @@ def create_database():
                "category TEXT CHECK(category IN ('Category1', 'Category2', 'Category3', 'Category4')) NOT NULL,"
                "question_text TEXT NOT NULL,"
                "correct_answer TEXT NOT NULL,"
-               "incorrect_answers TEXT NOT NULL,"
-               "difficulty TEXT NOT NULL)")
+               "incorrect_answers TEXT,"
+               "difficulty TEXT)")
 
     query.exec("CREATE TABLE IF NOT EXISTS Categories ("
                 "category_id INTEGER PRIMARY KEY AUTOINCREMENT,"
