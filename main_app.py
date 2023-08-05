@@ -19,12 +19,12 @@ class MainWindow(QDialog):
         # Push Button (Start Game) will go to the player menu
         self.btn_startGame.clicked.connect(self.gotoPlayerMenu)
         self.btn_catQSetup.clicked.connect(self.gotoCategoryMenu)
-    
+
     # Go to the widget to go to the Player Menu
     def gotoPlayerMenu(self):
         # Update the widget menu to point to the Player menu
         widget.setCurrentWidget(player_menu)
-    
+
     # Go to the widget to go to the Category Menu
     def gotoCategoryMenu(self):
         # Update the widget menu to point to the Category menu
@@ -156,17 +156,17 @@ class PlayerMenu(QDialog):
     # Work with the database to add in the written data
     # once the button "Insert Data" is pressed
     def insertData(self):
-        # Open database to load player names 
+        # Open database to load player names
         database.setDatabaseName('trivial_pursuit.db')
-        
+
         if not database.open():
             print("Could not open the database!")
             return False
-        
+
         # Prepare the values to be written
-        values = [self.line_playerName1.text(), self.line_playerName2.text(), 
+        values = [self.line_playerName1.text(), self.line_playerName2.text(),
                   self.line_playerName3.text(), self.line_playerName4.text()]
-        
+
         # Check if there are at least four rows in the table
         query = QSqlQuery("SELECT COUNT(*) FROM Player")
         query.first()
@@ -207,7 +207,7 @@ class CategoryMenu(QDialog):
         widget.addWidget(question_menu)
         # Update the widget menu to point to question menu
         widget.setCurrentWidget(question_menu)
-    
+
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
         # Update the widget menu to point to the main menu
@@ -224,7 +224,7 @@ class CategoryMenu(QDialog):
             return False
 
         # Prepare the values to be written
-        values = [self.line_catHead1.text(), self.line_catHead2.text(), 
+        values = [self.line_catHead1.text(), self.line_catHead2.text(),
                   self.line_catHead3.text(), self.line_catHead4.text()]
 
         # Check if there are at least four rows in the table
@@ -255,42 +255,42 @@ class QuestionMenu(QDialog):
         super(QuestionMenu, self).__init__()
         loadUi("category_question/question_menu.ui", self)
         # Based on the button push perform certain action
-        # Load the data 
+        # Load the data
         self.btn_loadQuestions.clicked.connect(self.insertData)
         # Go back to the menu if requested by user
         self.btn_backToMenu.clicked.connect(self.gotoMenu)
         # When the combo box changes clear all the question fields
         self.comboBox_category.currentIndexChanged.connect(self.clearQandA)
-        
+
         # Link all load file buttons for questions
         self.buttons = []
         for i in range(1, 10):
-            exec(f"self.btn_load{i}.clicked.connect(self.openFile)")           
+            exec(f"self.btn_load{i}.clicked.connect(self.openFile)")
             self.buttons.append(f"self.btn_load{i}")
 
     def openFile(self):
         # Get the sender (button) that triggered the signal
         sender_btn = self.sender()
         sender_btn_name = "self." + sender_btn.objectName()
-        
+
         # Open File Dialog
         fname = QFileDialog.getOpenFileName(self, "Open File", "", "JPEG (*.jpg;*.jpeg;*.jpe;*.jiff);;PNG (*.png);;MP4 (*.mp4);;MOV (*.mov)")
 
         # Output filename to line edit field
         if fname:
-            line_edits = [self.line_ques1, self.line_ques2, self.line_ques3, self.line_ques4, self.line_ques5, 
+            line_edits = [self.line_ques1, self.line_ques2, self.line_ques3, self.line_ques4, self.line_ques5,
                           self.line_ques6, self.line_ques7, self.line_ques8, self.line_ques9]
 
-            for i, btn_name in enumerate(["self.btn_load1", "self.btn_load2", "self.btn_load3", "self.btn_load4", "self.btn_load5", 
+            for i, btn_name in enumerate(["self.btn_load1", "self.btn_load2", "self.btn_load3", "self.btn_load4", "self.btn_load5",
                                           "self.btn_load6", "self.btn_load7", "self.btn_load8", "self.btn_load9"]):
                 if sender_btn_name == btn_name:
                     line_edits[i].setText(fname[0])
                     break
-        
+
     def setCategories(self):
         # Open database
         database.setDatabaseName('trivial_pursuit.db')
-        
+
         if not database.open():
             print("Could not open the database!")
             return False
@@ -315,7 +315,7 @@ class QuestionMenu(QDialog):
                 exec(f"{line_edit_answer_name}.clear()")
             except AttributeError:
                 print("Line edit box not found:", line_edit_question_name, line_edit_answer_name)
-    
+
     # Create the widget to go to back to the main menu
     def gotoMenu(self):
         # Update the widget menu to point to the main menu
@@ -355,12 +355,12 @@ class QuestionMenu(QDialog):
         query = QSqlQuery()
         query.prepare("INSERT INTO Questions (category, question_text, correct_answer) "
                     "VALUES (?, ?, ?)")
-                    
+
         # Bind the values to the placeholders in the query
         query.addBindValue(category)
         query.addBindValue(question_text)
         query.addBindValue(correct_answer)
-        
+
         # Execute the query
         if not query.exec_():
             print("Error:", query.lastError().text())
@@ -381,11 +381,11 @@ class Board(QDialog):
 
         # Open database
         database.setDatabaseName('trivial_pursuit.db')
-        
+
         if not database.open():
             print("Could not open the database!")
             return False
-        
+
         # Query the database to retrieve the first row from the "Player" table
         query = QSqlQuery("SELECT * FROM Player LIMIT 1")
         query.next()
@@ -401,6 +401,7 @@ class Board(QDialog):
         self.btn_incorrectAnsw.clicked.connect(self.changePlayer)
         # Check location when correct
         self.btn_correctAnsw.clicked.connect(self.checkHQButton)
+        self.btn_correctAnsw.clicked.connect(self.promptQuestion)
 
         # Directional button connects
         self.btn_up.clicked.connect(self.move_up)
@@ -432,7 +433,7 @@ class Board(QDialog):
 
         # Flatten the 2D list and append the button objects to the cells list
         self.cells = [button for row in buttons for button in row]
-    
+
     # Create the widget to go to back to the main menu
     def gotoMainMenu(self):
         widget.setFixedHeight(900)
@@ -456,7 +457,7 @@ class Board(QDialog):
     ######################
     def move_left(self):
         left_border = [0, 9, 18, 27, 36, 45, 54, 63, 72] # Board left border cells
-        
+
         player_pointer = getattr(self, f"pointer_{self.current_player}")
         player_pointer = player_pointer - 1
         setattr(self, f"pointer_{self.current_player}", player_pointer)
@@ -474,12 +475,12 @@ class Board(QDialog):
             player_pointer = player_pointer + 1
             setattr(self, f"pointer_{self.current_player}", player_pointer)
             exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() + 95, self.dial_{self.current_player}.y())")
-        
+
         print(player_pointer)
 
     def move_right(self):
         right_border = [10, 19, 28, 37, 46, 55, 64, 73, 82] # Board right border cells
-        
+
         player_pointer = getattr(self, f"pointer_{self.current_player}")
         player_pointer = player_pointer + 1
         setattr(self, f"pointer_{self.current_player}", player_pointer)
@@ -519,7 +520,7 @@ class Board(QDialog):
             exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() + 100)")
 
         print(player_pointer)
-        
+
     def move_down(self):
         player_pointer = getattr(self, f"pointer_{self.current_player}")
         player_pointer = player_pointer + 9
@@ -552,10 +553,10 @@ class Board(QDialog):
         image = QPixmap("board/dice-1.png")
         self.die_image.setPixmap(image)
 
-        die = random.randint (1,6)  
+        die = random.randint (1,6)
         image2 = QPixmap("board/dice-"+str(die)+".png")
         self.die_image.setPixmap(image2)
-        
+
     def changePlayer(self):
         players = ["player1", "player2", "player3", "player4"]
         current_index = players.index(self.current_player)
@@ -568,14 +569,97 @@ class Board(QDialog):
         player_names = []
         while query.next():
             player_names.append(query.value(1))
-        
+
         # Set current player name in text box
         self.txt_currentPlayer.setText(player_names[(current_index + 1) % len(players)])
+
+    def promptQuestion(self):
+        cat1_positions = [75, 59, 40, 44, 79, 54, 46, 18, 10,5 ]
+        cat2_positions = [64, 38, 28, 3, 23, 77, 72, 36, 7]
+        cat3_positions = [74, 37, 2, 50, 14, 6, 7, 63, 27]
+        cat4_positions = [55, 39, 19, 76, 4, 32, 68, 80, 45, 8]
+
+        player_pointer = getattr(self, f"pointer_{self.current_player}")
+
+        database.setDatabaseName("trivial_pursuit.db")
+
+        if not database.open():
+            print("Could not open the database!")
+            return False
+
+        query = QSqlQuery("SELECT category_name FROM Category LIMIT 4")
+
+        categories = []  # Create an empty list to store the category names
+
+        while query.next():
+            category_name = query.value(0)
+            categories.append(category_name)
+
+        string_catagories = [str(item) for item in categories]
+
+        # Now you have the first 4 category names in the "categories" list
+        # Access them using index like categories[0], categories[1], etc.
+
+        cat1 = string_catagories[0]
+        cat2 = string_catagories[1]
+        cat3 = string_catagories[2]
+        cat4 = string_catagories[3]
+        print(cat1)
+
+        if player_pointer in cat1_positions:
+            query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
+            query.addBindValue(cat1)
+            if query.exec():
+                if query.next():
+                    question_text = query.value(0)
+                    correct_answer_text = query.value(1)
+                    category = query.value(2)
+        elif player_pointer in cat2_positions:
+            query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
+            query.addBindValue(cat2)
+            if query.exec():
+                if query.next():
+                    question_text = query.value(0)
+                    correct_answer_text = query.value(1)
+                    category = query.value(2)
+        elif player_pointer in cat3_positions:
+            query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
+            query.addBindValue(cat3)
+            if query.exec():
+                if query.next():
+                    question_text = query.value(0)
+                    correct_answer_text = query.value(1)
+                    category = query.value(2)
+        elif player_pointer in cat4_positions:
+            query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
+            query.addBindValue(cat4)
+            if query.exec():
+                if query.next():
+                    question_text = query.value(0)
+                    correct_answer_text = query.value(1)
+                    category = query.value(2)
+        else:
+            print("No rows found for the specified category.")
+
+
+        message_box = QMessageBox()
+        message_box.setIcon(QMessageBox.Question)
+        message_box.setWindowTitle("Please Answer the Question")
+        message_box.setText(question_text)
+        message_box.setStandardButtons(QMessageBox.Open)
+        message_box.setInformativeText("Press 'Open' to reveal answer")
+        message_box.exec_()
+
+        message_box = QMessageBox()
+        message_box.setIcon(QMessageBox.Information)
+        message_box.setWindowTitle("Correct Answer")
+        message_box.setText(correct_answer_text)
+        message_box.exec_()
 
     def checkHQButton(self):
         hq_positions = [5, 37, 45, 77, 41]
         player_pointer = getattr(self, f"pointer_{self.current_player}")
-        
+
         if player_pointer in hq_positions:
             # Category 1 (Red)
             if player_pointer == 5:
@@ -606,7 +690,7 @@ class Board(QDialog):
                 if all(color == target_color for color, target_color in zip(colors, colors_to_check)):
                     message_box = QMessageBox()
                     message_box.setIcon(QMessageBox.Information)
-                    
+
                     players = ["player1", "player2", "player3", "player4"]
                     current_index = players.index(self.current_player)
 
@@ -617,14 +701,14 @@ class Board(QDialog):
                     player_names = []
                     while query.next():
                         player_names.append(query.value(1))
-                    
+
                     # Set current player name in text box
                     player_name = player_names[(current_index) % len(players)]
 
                     message_box.setWindowTitle("Winner")
                     message_box.setText(f"{player_name} Wins!")
                     message_box.exec_()
-    
+
     def checkColor(self, category):
         # Get the palette of the button
         button_palette = getattr(self, f"btn_HQ_{self.current_player}_{category}").palette()
@@ -635,7 +719,7 @@ class Board(QDialog):
         r, g, b, _ = button_color.getRgb()
 
         return r, g, b
-    
+
 # main
 if __name__ == '__main__':
     database = QSqlDatabase.addDatabase("QSQLITE")
