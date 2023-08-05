@@ -1432,7 +1432,7 @@ p, li { white-space: pre-wrap; }
    </property>
    <layout class="QGridLayout" name="gridLayout_3">
     <item row="0" column="0">
-     <widget class="QPushButton" name="pushButton_59">
+     <widget class="QPushButton" name="btn_HQ_player2_cat1">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1459,7 +1459,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QPushButton" name="pushButton_60">
+     <widget class="QPushButton" name="btn_HQ_player2_cat2">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1486,7 +1486,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QPushButton" name="pushButton_61">
+     <widget class="QPushButton" name="btn_HQ_player2_cat3">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1513,7 +1513,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QPushButton" name="pushButton_62">
+     <widget class="QPushButton" name="btn_HQ_player2_cat4">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1552,7 +1552,7 @@ p, li { white-space: pre-wrap; }
    </property>
    <layout class="QGridLayout" name="gridLayout_4">
     <item row="0" column="0">
-     <widget class="QPushButton" name="pushButton_63">
+     <widget class="QPushButton" name="btn_HQ_player3_cat1">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1579,7 +1579,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QPushButton" name="pushButton_64">
+     <widget class="QPushButton" name="btn_HQ_player3_cat2">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1606,7 +1606,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QPushButton" name="pushButton_65">
+     <widget class="QPushButton" name="btn_HQ_player3_cat3">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1633,7 +1633,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QPushButton" name="pushButton_66">
+     <widget class="QPushButton" name="btn_HQ_player3_cat4">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1672,7 +1672,7 @@ p, li { white-space: pre-wrap; }
    </property>
    <layout class="QGridLayout" name="gridLayout_7">
     <item row="0" column="0">
-     <widget class="QPushButton" name="pushButton_67">
+     <widget class="QPushButton" name="btn_HQ_player4_cat1">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1699,7 +1699,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QPushButton" name="pushButton_68">
+     <widget class="QPushButton" name="btn_HQ_player4_cat2">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1726,7 +1726,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QPushButton" name="pushButton_69">
+     <widget class="QPushButton" name="btn_HQ_player4_cat3">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1753,7 +1753,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QPushButton" name="pushButton_70">
+     <widget class="QPushButton" name="btn_HQ_player4_cat4">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1792,7 +1792,7 @@ p, li { white-space: pre-wrap; }
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
-     <widget class="QPushButton" name="pushButton_47">
+     <widget class="QPushButton" name="btn_HQ_player1_cat1">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1819,7 +1819,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QPushButton" name="pushButton_48">
+     <widget class="QPushButton" name="btn_HQ_player1_cat2">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1846,7 +1846,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QPushButton" name="pushButton_49">
+     <widget class="QPushButton" name="btn_HQ_player1_cat3">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -1873,7 +1873,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QPushButton" name="pushButton_50">
+     <widget class="QPushButton" name="btn_HQ_player1_cat4">
       <property name="minimumSize">
        <size>
         <width>90</width>
@@ -2148,7 +2148,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>990</x>
      <y>30</y>
-     <width>211</width>
+     <width>213</width>
      <height>291</height>
     </rect>
    </property>
