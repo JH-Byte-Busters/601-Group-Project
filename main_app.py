@@ -399,6 +399,8 @@ class Board(QDialog):
         self.die_image.setPixmap(image)
         # Switch turns when incorrect answers
         self.btn_incorrectAnsw.clicked.connect(self.changePlayer)
+        # Check location when correct
+        self.btn_correctAnsw.clicked.connect(self.checkHQButton)
 
         # Directional button connects
         self.btn_up.clicked.connect(self.move_up)
@@ -570,6 +572,70 @@ class Board(QDialog):
         # Set current player name in text box
         self.txt_currentPlayer.setText(player_names[(current_index + 1) % len(players)])
 
+    def checkHQButton(self):
+        hq_positions = [5, 37, 45, 77, 41]
+        player_pointer = getattr(self, f"pointer_{self.current_player}")
+        
+        if player_pointer in hq_positions:
+            # Category 1 (Red)
+            if player_pointer == 5:
+                exec(f"self.btn_HQ_{self.current_player}_cat1.setStyleSheet('background-color: rgb(255, 0, 77)')")
+            # Category 2 (Yellow)
+            elif player_pointer == 37:
+                exec(f"self.btn_HQ_{self.current_player}_cat2.setStyleSheet('background-color: rgb(255, 236, 39)')")
+            # Category 3 (Green)
+            elif player_pointer == 45:
+                exec(f"self.btn_HQ_{self.current_player}_cat3.setStyleSheet('background-color: rgb(0, 228, 54)')")
+            # Category 4 (Blue)
+            elif player_pointer == 77:
+                exec(f"self.btn_HQ_{self.current_player}_cat4.setStyleSheet('background-color: rgb(41, 173, 255)')")
+            # Center trivial compute button
+            elif player_pointer == 41:
+                # Define the colors as RGB tuples
+                colors_to_check = [
+                    (255, 0, 77),   # Color for 'cat1' - Red
+                    (255, 236, 39), # Color for 'cat2' - Yellow
+                    (0, 228, 54),   # Color for 'cat3' - Green
+                    (41, 173, 255)  # Color for 'cat4' - Blue
+                ]
+
+                # Get the colors for each category using checkColor method
+                colors = [self.checkColor(category) for category in ['cat1', 'cat2', 'cat3', 'cat4']]
+
+                # Check if all the colors match the desired colors and say winner
+                if all(color == target_color for color, target_color in zip(colors, colors_to_check)):
+                    message_box = QMessageBox()
+                    message_box.setIcon(QMessageBox.Information)
+                    
+                    players = ["player1", "player2", "player3", "player4"]
+                    current_index = players.index(self.current_player)
+
+                    # Query the database to retrieve the first four rows from the "Player" table
+                    query = QSqlQuery("SELECT * FROM Player LIMIT 4")
+
+                    # Set the text fields for current player box
+                    player_names = []
+                    while query.next():
+                        player_names.append(query.value(1))
+                    
+                    # Set current player name in text box
+                    player_name = player_names[(current_index) % len(players)]
+
+                    message_box.setWindowTitle("Winner")
+                    message_box.setText(f"{player_name} Wins!")
+                    message_box.exec_()
+    
+    def checkColor(self, category):
+        # Get the palette of the button
+        button_palette = getattr(self, f"btn_HQ_{self.current_player}_{category}").palette()
+        # Get the background color of the button
+        backgroundRole = getattr(self, f"btn_HQ_{self.current_player}_{category}").backgroundRole()
+        button_color = button_palette.color(backgroundRole)
+        # Print the color (in RGB format)
+        r, g, b, _ = button_color.getRgb()
+
+        return r, g, b
+    
 # main
 if __name__ == '__main__':
     database = QSqlDatabase.addDatabase("QSQLITE")
