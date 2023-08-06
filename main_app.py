@@ -401,7 +401,7 @@ class Board(QDialog):
         self.btn_incorrectAnsw.clicked.connect(self.changePlayer)
         # Check location when correct
         self.btn_correctAnsw.clicked.connect(self.checkHQButton)
-        self.btn_correctAnsw.clicked.connect(self.promptQuestion)
+        self.btn_ok.clicked.connect(self.promptQuestion)
 
         # Directional button connects
         self.btn_up.clicked.connect(self.move_up)
@@ -595,15 +595,15 @@ class Board(QDialog):
             category_name = query.value(0)
             categories.append(category_name)
 
-        string_catagories = [str(item) for item in categories]
+        string_categories = [str(item) for item in categories]
 
         # Now you have the first 4 category names in the "categories" list
         # Access them using index like categories[0], categories[1], etc.
 
-        cat1 = string_catagories[0]
-        cat2 = string_catagories[1]
-        cat3 = string_catagories[2]
-        cat4 = string_catagories[3]
+        cat1 = string_categories[0]
+        cat2 = string_categories[1]
+        cat3 = string_categories[2]
+        cat4 = string_categories[3]
         print(cat1)
 
         if player_pointer in cat1_positions:
