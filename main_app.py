@@ -390,6 +390,7 @@ class Board(QDialog):
         query = QSqlQuery("SELECT * FROM Player LIMIT 1")
         query.next()
         self.txt_currentPlayer.setText(query.value(1))
+        self.txt_currentPlayer.setAlignment(QtCore.Qt.AlignCenter)
 
         # Go back to the main menu if requested by user
         self.btn_backToMenu.clicked.connect(self.gotoMainMenu)
@@ -397,11 +398,13 @@ class Board(QDialog):
         # Die image on load-up
         image = QPixmap("board/dice-1.png")
         self.die_image.setPixmap(image)
+        # Prompt question upon "OK" move
+        self.btn_ok.clicked.connect(self.confirmMove)
+        self.btn_ok.clicked.connect(self.promptQuestion)
         # Switch turns when incorrect answers
         self.btn_incorrectAnsw.clicked.connect(self.changePlayer)
         # Check location when correct
         self.btn_correctAnsw.clicked.connect(self.checkHQButton)
-        self.btn_ok.clicked.connect(self.promptQuestion)
 
         # Directional button connects
         self.btn_up.clicked.connect(self.move_up)
@@ -434,6 +437,13 @@ class Board(QDialog):
         # Flatten the 2D list and append the button objects to the cells list
         self.cells = [button for row in buttons for button in row]
 
+        # Instructions
+        self.current_instr = 'Roll Die'
+
+        # Set current instruction name in text box
+        self.txt_currentInstruct.setText(self.current_instr)
+        self.txt_currentInstruct.setAlignment(QtCore.Qt.AlignCenter)
+
     # Create the widget to go to back to the main menu
     def gotoMainMenu(self):
         widget.setFixedHeight(900)
@@ -450,96 +460,101 @@ class Board(QDialog):
         player_num = 1
         while query.next():
             exec(f"self.txt_playerName{player_num}.setText('{str(query.value(1))}')")
+            exec(f"self.txt_playerName{player_num}.setAlignment(QtCore.Qt.AlignCenter)")
             player_num += 1
 
     ######################
     # Navigation methods:
     ######################
     def move_left(self):
-        left_border = [0, 9, 18, 27, 36, 45, 54, 63, 72] # Board left border cells
+        if self.current_instr == 'Move Chip':
+            left_border = [0, 9, 18, 27, 36, 45, 54, 63, 72] # Board left border cells
 
-        player_pointer = getattr(self, f"pointer_{self.current_player}")
-        player_pointer = player_pointer - 1
-        setattr(self, f"pointer_{self.current_player}", player_pointer)
-        exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() - 95, self.dial_{self.current_player}.y())")
-        allowed = True
-        # Enforce border limit:
-        for cell in left_border:
-            if player_pointer == cell:
-                allowed = False
-                break
-        if allowed and not self.getCellObject():
-            allowed = False
-
-        if not allowed:
-            player_pointer = player_pointer + 1
-            setattr(self, f"pointer_{self.current_player}", player_pointer)
-            exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() + 95, self.dial_{self.current_player}.y())")
-
-        print(player_pointer)
-
-    def move_right(self):
-        right_border = [10, 19, 28, 37, 46, 55, 64, 73, 82] # Board right border cells
-
-        player_pointer = getattr(self, f"pointer_{self.current_player}")
-        player_pointer = player_pointer + 1
-        setattr(self, f"pointer_{self.current_player}", player_pointer)
-        exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() + 95, self.dial_{self.current_player}.y())")
-        allowed = True
-        # Enforce border limit:
-        for cell in right_border:
-            if player_pointer == cell:
-                allowed = False
-                break
-        if allowed and not self.getCellObject():
-            allowed = False
-
-        if not allowed:
+            player_pointer = getattr(self, f"pointer_{self.current_player}")
             player_pointer = player_pointer - 1
             setattr(self, f"pointer_{self.current_player}", player_pointer)
             exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() - 95, self.dial_{self.current_player}.y())")
+            allowed = True
+            # Enforce border limit:
+            for cell in left_border:
+                if player_pointer == cell:
+                    allowed = False
+                    break
+            if allowed and not self.getCellObject():
+                allowed = False
 
-        print(player_pointer)
+            if not allowed:
+                player_pointer = player_pointer + 1
+                setattr(self, f"pointer_{self.current_player}", player_pointer)
+                exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() + 95, self.dial_{self.current_player}.y())")
+
+            print(player_pointer)
+
+    def move_right(self):
+        if self.current_instr == 'Move Chip':
+            right_border = [10, 19, 28, 37, 46, 55, 64, 73, 82] # Board right border cells
+
+            player_pointer = getattr(self, f"pointer_{self.current_player}")
+            player_pointer = player_pointer + 1
+            setattr(self, f"pointer_{self.current_player}", player_pointer)
+            exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() + 95, self.dial_{self.current_player}.y())")
+            allowed = True
+            # Enforce border limit:
+            for cell in right_border:
+                if player_pointer == cell:
+                    allowed = False
+                    break
+            if allowed and not self.getCellObject():
+                allowed = False
+
+            if not allowed:
+                player_pointer = player_pointer - 1
+                setattr(self, f"pointer_{self.current_player}", player_pointer)
+                exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() - 95, self.dial_{self.current_player}.y())")
+
+            print(player_pointer)
 
     def move_up(self):
-        player_pointer = getattr(self, f"pointer_{self.current_player}")
-        player_pointer = player_pointer - 9
-        setattr(self, f"pointer_{self.current_player}", player_pointer)
-        exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() - 100)")
-        allowed = True
-        # Enforce border limit:
-        if player_pointer < 0:
-            allowed = False
-        else:
-            if not self.getCellObject():
-                allowed = False
-
-        if not allowed:
-            player_pointer = player_pointer + 9
-            setattr(self, f"pointer_{self.current_player}", player_pointer)
-            exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() + 100)")
-
-        print(player_pointer)
-
-    def move_down(self):
-        player_pointer = getattr(self, f"pointer_{self.current_player}")
-        player_pointer = player_pointer + 9
-        setattr(self, f"pointer_{self.current_player}", player_pointer)
-        exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() + 100)")
-        allowed = True
-        # Enforce border limit:
-        if player_pointer < 0:
-            allowed = False
-        else:
-            if not self.getCellObject():
-                allowed = False
-
-        if not allowed:
+        if self.current_instr == 'Move Chip':
+            player_pointer = getattr(self, f"pointer_{self.current_player}")
             player_pointer = player_pointer - 9
             setattr(self, f"pointer_{self.current_player}", player_pointer)
             exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() - 100)")
+            allowed = True
+            # Enforce border limit:
+            if player_pointer < 0:
+                allowed = False
+            else:
+                if not self.getCellObject():
+                    allowed = False
 
-        print(player_pointer)
+            if not allowed:
+                player_pointer = player_pointer + 9
+                setattr(self, f"pointer_{self.current_player}", player_pointer)
+                exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() + 100)")
+
+            print(player_pointer)
+
+    def move_down(self):
+        if self.current_instr == 'Move Chip':
+            player_pointer = getattr(self, f"pointer_{self.current_player}")
+            player_pointer = player_pointer + 9
+            setattr(self, f"pointer_{self.current_player}", player_pointer)
+            exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() + 100)")
+            allowed = True
+            # Enforce border limit:
+            if player_pointer < 0:
+                allowed = False
+            else:
+                if not self.getCellObject():
+                    allowed = False
+
+            if not allowed:
+                player_pointer = player_pointer - 9
+                setattr(self, f"pointer_{self.current_player}", player_pointer)
+                exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() - 100)")
+
+            print(player_pointer)
 
     def getCellObject(self):
         for obj in self.cells:
@@ -549,165 +564,207 @@ class Board(QDialog):
         return False
 
     def rolltheDice(self):
-        global image
-        image = QPixmap("board/dice-1.png")
-        self.die_image.setPixmap(image)
+        if (self.current_instr == 'Roll Die') or (self.current_instr == 'Roll Again!'):
+            image = QPixmap("board/dice-1.png")
+            self.die_image.setPixmap(image)
 
-        die = random.randint (1,6)
-        image2 = QPixmap("board/dice-"+str(die)+".png")
-        self.die_image.setPixmap(image2)
+            die = random.randint (1,6)
+            image2 = QPixmap("board/dice-"+str(die)+".png")
+            self.die_image.setPixmap(image2)
+            
+            # Change State
+            self.current_instr = 'Move Chip'
+            # Set current instruction name in text box
+            self.txt_currentInstruct.setText(self.current_instr)
+            self.txt_currentInstruct.setAlignment(QtCore.Qt.AlignCenter)
 
     def changePlayer(self):
-        players = ["player1", "player2", "player3", "player4"]
-        current_index = players.index(self.current_player)
-        self.current_player = players[(current_index + 1) % len(players)]
+        if self.current_instr == 'Vote Answer':
+            players = ["player1", "player2", "player3", "player4"]
+            current_index = players.index(self.current_player)
+            self.current_player = players[(current_index + 1) % len(players)]
 
-        # Query the database to retrieve the first four rows from the "Player" table
-        query = QSqlQuery("SELECT * FROM Player LIMIT 4")
+            # Query the database to retrieve the first four rows from the "Player" table
+            query = QSqlQuery("SELECT * FROM Player LIMIT 4")
 
-        # Set the text fields for current player box
-        player_names = []
-        while query.next():
-            player_names.append(query.value(1))
+            # Set the text fields for current player box
+            player_names = []
+            while query.next():
+                player_names.append(query.value(1))
 
-        # Set current player name in text box
-        self.txt_currentPlayer.setText(player_names[(current_index + 1) % len(players)])
+            # Set current player name in text box
+            self.txt_currentPlayer.setText(player_names[(current_index + 1) % len(players)])
+            self.txt_currentPlayer.setAlignment(QtCore.Qt.AlignCenter)
+            
+            # Change State
+            self.current_instr = 'Roll Die'
+            # Set current instruction name in text box
+            self.txt_currentInstruct.setText(self.current_instr)
+            self.txt_currentInstruct.setAlignment(QtCore.Qt.AlignCenter)
+
+    def confirmMove(self):
+        rollAgain = [1, 9, 73, 81]
+        player_pointer = getattr(self, f"pointer_{self.current_player}")
+
+        if self.current_instr == 'Move Chip':
+            # Change State
+            if player_pointer in rollAgain:
+                self.current_instr = 'Roll Again!'
+            else:
+                self.current_instr = 'Answer Question'
+            # Set current instruction name in text box
+            self.txt_currentInstruct.setText(self.current_instr)
+            self.txt_currentInstruct.setAlignment(QtCore.Qt.AlignCenter)
 
     def promptQuestion(self):
-        cat1_positions = [75, 59, 40, 44, 79, 54, 46, 18, 10,5 ]
-        cat2_positions = [64, 38, 28, 3, 23, 77, 72, 36, 7]
-        cat3_positions = [74, 37, 2, 50, 14, 6, 7, 63, 27]
-        cat4_positions = [55, 39, 19, 76, 4, 32, 68, 80, 45, 8]
+        if self.current_instr == 'Answer Question':
+            cat1_positions = [75, 59, 40, 44, 79, 54, 46, 18, 10, 5]
+            cat2_positions = [64, 38, 28, 3, 23, 77, 72, 36, 7]
+            cat3_positions = [74, 37, 2, 50, 14, 6, 7, 63, 27]
+            cat4_positions = [55, 39, 19, 76, 4, 32, 68, 80, 45, 8]
 
-        player_pointer = getattr(self, f"pointer_{self.current_player}")
+            player_pointer = getattr(self, f"pointer_{self.current_player}")
 
-        database.setDatabaseName("trivial_pursuit.db")
+            database.setDatabaseName("trivial_pursuit.db")
 
-        if not database.open():
-            print("Could not open the database!")
-            return False
+            if not database.open():
+                print("Could not open the database!")
+                return False
 
-        query = QSqlQuery("SELECT category_name FROM Category LIMIT 4")
+            query = QSqlQuery("SELECT category_name FROM Category LIMIT 4")
 
-        categories = []  # Create an empty list to store the category names
+            categories = []  # Create an empty list to store the category names
 
-        while query.next():
-            category_name = query.value(0)
-            categories.append(category_name)
+            while query.next():
+                category_name = query.value(0)
+                categories.append(category_name)
 
-        string_categories = [str(item) for item in categories]
+            string_categories = [str(item) for item in categories]
 
-        # Now you have the first 4 category names in the "categories" list
-        # Access them using index like categories[0], categories[1], etc.
+            # Now you have the first 4 category names in the "categories" list
+            # Access them using index like categories[0], categories[1], etc.
 
-        cat1 = string_categories[0]
-        cat2 = string_categories[1]
-        cat3 = string_categories[2]
-        cat4 = string_categories[3]
-        print(cat1)
+            cat1 = string_categories[0]
+            cat2 = string_categories[1]
+            cat3 = string_categories[2]
+            cat4 = string_categories[3]
+            print(cat1)
 
-        if player_pointer in cat1_positions:
-            query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
-            query.addBindValue(cat1)
-            if query.exec():
-                if query.next():
-                    question_text = query.value(0)
-                    correct_answer_text = query.value(1)
-                    category = query.value(2)
-        elif player_pointer in cat2_positions:
-            query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
-            query.addBindValue(cat2)
-            if query.exec():
-                if query.next():
-                    question_text = query.value(0)
-                    correct_answer_text = query.value(1)
-                    category = query.value(2)
-        elif player_pointer in cat3_positions:
-            query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
-            query.addBindValue(cat3)
-            if query.exec():
-                if query.next():
-                    question_text = query.value(0)
-                    correct_answer_text = query.value(1)
-                    category = query.value(2)
-        elif player_pointer in cat4_positions:
-            query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
-            query.addBindValue(cat4)
-            if query.exec():
-                if query.next():
-                    question_text = query.value(0)
-                    correct_answer_text = query.value(1)
-                    category = query.value(2)
-        else:
-            print("No rows found for the specified category.")
+            if player_pointer in cat1_positions:
+                query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
+                query.addBindValue(cat1)
+                if query.exec():
+                    if query.next():
+                        question_text = query.value(0)
+                        correct_answer_text = query.value(1)
+                        category = query.value(2)
+            elif player_pointer in cat2_positions:
+                query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
+                query.addBindValue(cat2)
+                if query.exec():
+                    if query.next():
+                        question_text = query.value(0)
+                        correct_answer_text = query.value(1)
+                        category = query.value(2)
+            elif player_pointer in cat3_positions:
+                query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
+                query.addBindValue(cat3)
+                if query.exec():
+                    if query.next():
+                        question_text = query.value(0)
+                        correct_answer_text = query.value(1)
+                        category = query.value(2)
+            elif player_pointer in cat4_positions:
+                query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
+                query.addBindValue(cat4)
+                if query.exec():
+                    if query.next():
+                        question_text = query.value(0)
+                        correct_answer_text = query.value(1)
+                        category = query.value(2)
+            else:
+                print("No rows found for the specified category.")
 
 
-        message_box = QMessageBox()
-        message_box.setIcon(QMessageBox.Question)
-        message_box.setWindowTitle("Please Answer the Question")
-        message_box.setText(question_text)
-        message_box.setStandardButtons(QMessageBox.Open)
-        message_box.setInformativeText("Press 'Open' to reveal answer")
-        message_box.exec_()
+            message_box = QMessageBox()
+            message_box.setIcon(QMessageBox.Question)
+            message_box.setWindowTitle("Please Answer the Question")
+            message_box.setText(question_text)
+            message_box.setStandardButtons(QMessageBox.Open)
+            message_box.setInformativeText("Press 'Open' to reveal answer")
+            message_box.exec_()
 
-        message_box = QMessageBox()
-        message_box.setIcon(QMessageBox.Information)
-        message_box.setWindowTitle("Correct Answer")
-        message_box.setText(correct_answer_text)
-        message_box.exec_()
+            message_box = QMessageBox()
+            message_box.setIcon(QMessageBox.Information)
+            message_box.setWindowTitle("Correct Answer")
+            message_box.setText(correct_answer_text)
+            message_box.exec_()
+            
+            # Change State
+            self.current_instr = 'Vote Answer'
+            # Set current instruction name in text box
+            self.txt_currentInstruct.setText(self.current_instr)
+            self.txt_currentInstruct.setAlignment(QtCore.Qt.AlignCenter)
 
     def checkHQButton(self):
-        hq_positions = [5, 37, 45, 77, 41]
-        player_pointer = getattr(self, f"pointer_{self.current_player}")
+        if self.current_instr == 'Vote Answer':
+            hq_positions = [5, 37, 45, 77, 41]
+            player_pointer = getattr(self, f"pointer_{self.current_player}")
 
-        if player_pointer in hq_positions:
-            # Category 1 (Red)
-            if player_pointer == 5:
-                exec(f"self.btn_HQ_{self.current_player}_cat1.setStyleSheet('background-color: rgb(255, 0, 77)')")
-            # Category 2 (Yellow)
-            elif player_pointer == 37:
-                exec(f"self.btn_HQ_{self.current_player}_cat2.setStyleSheet('background-color: rgb(255, 236, 39)')")
-            # Category 3 (Green)
-            elif player_pointer == 45:
-                exec(f"self.btn_HQ_{self.current_player}_cat3.setStyleSheet('background-color: rgb(0, 228, 54)')")
-            # Category 4 (Blue)
-            elif player_pointer == 77:
-                exec(f"self.btn_HQ_{self.current_player}_cat4.setStyleSheet('background-color: rgb(41, 173, 255)')")
-            # Center trivial compute button
-            elif player_pointer == 41:
-                # Define the colors as RGB tuples
-                colors_to_check = [
-                    (255, 0, 77),   # Color for 'cat1' - Red
-                    (255, 236, 39), # Color for 'cat2' - Yellow
-                    (0, 228, 54),   # Color for 'cat3' - Green
-                    (41, 173, 255)  # Color for 'cat4' - Blue
-                ]
+            if player_pointer in hq_positions:
+                # Category 1 (Red)
+                if player_pointer == 5:
+                    exec(f"self.btn_HQ_{self.current_player}_cat1.setStyleSheet('background-color: rgb(255, 0, 77)')")
+                # Category 2 (Yellow)
+                elif player_pointer == 37:
+                    exec(f"self.btn_HQ_{self.current_player}_cat2.setStyleSheet('background-color: rgb(255, 236, 39)')")
+                # Category 3 (Green)
+                elif player_pointer == 45:
+                    exec(f"self.btn_HQ_{self.current_player}_cat3.setStyleSheet('background-color: rgb(0, 228, 54)')")
+                # Category 4 (Blue)
+                elif player_pointer == 77:
+                    exec(f"self.btn_HQ_{self.current_player}_cat4.setStyleSheet('background-color: rgb(41, 173, 255)')")
+                # Center trivial compute button
+                elif player_pointer == 41:
+                    # Define the colors as RGB tuples
+                    colors_to_check = [
+                        (255, 0, 77),   # Color for 'cat1' - Red
+                        (255, 236, 39), # Color for 'cat2' - Yellow
+                        (0, 228, 54),   # Color for 'cat3' - Green
+                        (41, 173, 255)  # Color for 'cat4' - Blue
+                    ]
 
-                # Get the colors for each category using checkColor method
-                colors = [self.checkColor(category) for category in ['cat1', 'cat2', 'cat3', 'cat4']]
+                    # Get the colors for each category using checkColor method
+                    colors = [self.checkColor(category) for category in ['cat1', 'cat2', 'cat3', 'cat4']]
 
-                # Check if all the colors match the desired colors and say winner
-                if all(color == target_color for color, target_color in zip(colors, colors_to_check)):
-                    message_box = QMessageBox()
-                    message_box.setIcon(QMessageBox.Information)
+                    # Check if all the colors match the desired colors and say winner
+                    if all(color == target_color for color, target_color in zip(colors, colors_to_check)):
+                        message_box = QMessageBox()
+                        message_box.setIcon(QMessageBox.Information)
 
-                    players = ["player1", "player2", "player3", "player4"]
-                    current_index = players.index(self.current_player)
+                        players = ["player1", "player2", "player3", "player4"]
+                        current_index = players.index(self.current_player)
 
-                    # Query the database to retrieve the first four rows from the "Player" table
-                    query = QSqlQuery("SELECT * FROM Player LIMIT 4")
+                        # Query the database to retrieve the first four rows from the "Player" table
+                        query = QSqlQuery("SELECT * FROM Player LIMIT 4")
 
-                    # Set the text fields for current player box
-                    player_names = []
-                    while query.next():
-                        player_names.append(query.value(1))
+                        # Set the text fields for current player box
+                        player_names = []
+                        while query.next():
+                            player_names.append(query.value(1))
 
-                    # Set current player name in text box
-                    player_name = player_names[(current_index) % len(players)]
+                        # Set current player name in text box
+                        player_name = player_names[(current_index) % len(players)]
 
-                    message_box.setWindowTitle("Winner")
-                    message_box.setText(f"{player_name} Wins!")
-                    message_box.exec_()
+                        message_box.setWindowTitle("Winner")
+                        message_box.setText(f"{player_name} Wins!")
+                        message_box.exec_()
+                
+            # Change State
+            self.current_instr = 'Roll Die'
+            # Set current instruction name in text box
+            self.txt_currentInstruct.setText(self.current_instr)
+            self.txt_currentInstruct.setAlignment(QtCore.Qt.AlignCenter)
 
     def checkColor(self, category):
         # Get the palette of the button
