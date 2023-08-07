@@ -34,19 +34,6 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 127);</string>
   </property>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>70</y>
-     <width>741</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>https://www.google.com/search?q=create+dynamic+text+field+QT+Designer&amp;rlz=1C1CHZL_enUS757US757&amp;oq=create+dynamic+text+field+QT+Designer&amp;aqs=chrome..69i57.6383j0j1&amp;sourceid=chrome&amp;ie=UTF-8#fpstate=ive&amp;vld=cid:2accae9b,vid:fNTnU7mMgK4</string>
-   </property>
-  </widget>
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
     <rect>

@@ -142,8 +142,8 @@ class PlayerMenu(QDialog):
         # the database
         board=Board()
         board.setNames()
-        widget.setFixedHeight(980)
-        widget.setFixedWidth(1890)
+        widget.setFixedHeight(950)
+        widget.setFixedWidth(1700)
         widget.addWidget(board)
         # Update the widget menu to point to board
         widget.setCurrentWidget(board)
