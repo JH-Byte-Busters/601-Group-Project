@@ -618,10 +618,10 @@ class Board(QDialog):
 
     def promptQuestion(self):
         if self.current_instr == 'Answer Question':
-            cat1_positions = [75, 59, 40, 44, 79, 54, 46, 18, 10, 5]
-            cat2_positions = [64, 38, 28, 3, 23, 77, 72, 36, 7]
-            cat3_positions = [74, 37, 2, 50, 14, 6, 7, 63, 27]
-            cat4_positions = [55, 39, 19, 76, 4, 32, 68, 80, 45, 8]
+            cat1_positions = [5, 10, 18, 40, 44, 46, 54, 59, 75, 79]
+            cat2_positions = [3,  7, 23, 28, 36, 38, 42, 64, 72, 77]
+            cat3_positions = [2,  6, 14, 27, 37, 43, 50, 63, 74, 78]
+            cat4_positions = [4,  8, 19, 32, 39, 45, 55, 68, 76, 80]
 
             player_pointer = getattr(self, f"pointer_{self.current_player}")
 
