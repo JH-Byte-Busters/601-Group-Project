@@ -33,11 +33,23 @@
     <rect>
      <x>210</x>
      <y>140</y>
-     <width>461</width>
+     <width>496</width>
      <height>267</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="3" column="0">
+     <widget class="QLabel" name="label_4">
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Category 4:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="1">
      <widget class="QLineEdit" name="line_catHead2">
       <property name="minimumSize">
@@ -62,6 +74,69 @@
       </property>
       <property name="placeholderText">
        <string>Category 2 Name</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_3">
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Category 3:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Category 1:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Category 2:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="line_catHead1">
+      <property name="minimumSize">
+       <size>
+        <width>301</width>
+        <height>61</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>301</width>
+        <height>61</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="placeholderText">
+       <string>Category 1 Name</string>
       </property>
      </widget>
     </item>
@@ -119,78 +194,117 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="line_catHead1">
+    <item row="0" column="2">
+     <widget class="QPushButton" name="btn_cat1">
       <property name="minimumSize">
        <size>
-        <width>301</width>
-        <height>61</height>
+        <width>40</width>
+        <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>301</width>
-        <height>61</height>
+        <width>40</width>
+        <height>40</height>
        </size>
       </property>
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>30</pointsize>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-color: rgb(0, 0, 0);</string>
+       <string notr="true">background-color: rgb(255, 0, 77);</string>
       </property>
-      <property name="placeholderText">
-       <string>Category 1 Name</string>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
       </property>
      </widget>
     </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label">
+    <item row="1" column="2">
+     <widget class="QPushButton" name="btn_29">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>30</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 236, 39);</string>
+      </property>
       <property name="text">
-       <string>Category 1:</string>
+       <string/>
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_2">
+    <item row="2" column="2">
+     <widget class="QPushButton" name="btn_cat3">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>30</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 228, 54);</string>
+      </property>
       <property name="text">
-       <string>Category 2:</string>
+       <string/>
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_3">
+    <item row="3" column="2">
+     <widget class="QPushButton" name="btn_cat4">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>30</pointsize>
        </font>
       </property>
-      <property name="text">
-       <string>Category 3:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="label_4">
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(41, 173, 255);</string>
       </property>
       <property name="text">
-       <string>Category 4:</string>
+       <string/>
       </property>
      </widget>
     </item>
