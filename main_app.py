@@ -454,7 +454,7 @@ class Board(QDialog):
         widget.setFixedWidth(880)
         widget.setCurrentWidget(main_app)
 
-    # In the board make sure to load up the player names
+    # In the board make sure to load up the player and category names
     # properly to set each text box
     def setNames(self):
         # Query the database to retrieve the first four rows from the "Player" table
@@ -466,6 +466,16 @@ class Board(QDialog):
             exec(f"self.txt_playerName{player_num}.setText('{str(query.value(1))}')")
             exec(f"self.txt_playerName{player_num}.setAlignment(QtCore.Qt.AlignCenter)")
             player_num += 1
+            
+        # Query the database to retrieve the first four rows from the "Category" table
+        query = QSqlQuery("SELECT * FROM Category LIMIT 4")
+
+        # Set the text fields for the category names
+        cat_num = 1
+        while query.next():
+            exec(f"self.txt_catName{cat_num}.setText('{str(query.value(1))}')")
+            exec(f"self.txt_catName{cat_num}.setAlignment(QtCore.Qt.AlignCenter)")
+            cat_num += 1
 
     ######################
     # Navigation methods:
