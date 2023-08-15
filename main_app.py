@@ -131,7 +131,6 @@ class PlayerMenu(QDialog):
         # Based on the button push perform certain action
         # Load the data and move to the game board
         self.btn_playGame.clicked.connect(self.insertData)
-        self.btn_playGame.clicked.connect(self.gotoBoard)
         # Go back to the menu if requested by user
         self.btn_backToMenu.clicked.connect(self.gotoMenu)
 
@@ -166,26 +165,39 @@ class PlayerMenu(QDialog):
         # Prepare the values to be written
         values = [self.line_playerName1.text(), self.line_playerName2.text(),
                   self.line_playerName3.text(), self.line_playerName4.text()]
+        
+        # Check if all text fields are empty
+        all_empty = all(value.strip() == "" for value in values)
 
-        # Check if there are at least four rows in the table
-        query = QSqlQuery("SELECT COUNT(*) FROM Player")
-        query.first()
-        row_count = query.value(0)
-
-        # Use the appropriate SQL statement based on the number of existing rows
-        if row_count >= 4:
-            # If there are four or more rows, update the first four rows with new data
-            for i, value in enumerate(values, start=1):
-                query.prepare("UPDATE Player SET player_name = :player_name WHERE user_id = :user_id")
-                query.bindValue(":player_name", value)
-                query.bindValue(":user_id", i)
-                query.exec_()
+        if all_empty:
+            # If error during login post warning message
+            message_box = QMessageBox()
+            message_box.setIcon(QMessageBox.Warning)
+            message_box.setWindowTitle("No Players Entered")
+            message_box.setText("Please enter at least one player name.")
+            message_box.exec_()
         else:
-            # If there are less than four rows, insert new rows
-            query.prepare("INSERT INTO Player (player_name) VALUES (:player_name)")
-            for value in values:
-                query.bindValue(":player_name", value)
-                query.exec_()
+            # Check if there are at least four rows in the table
+            query = QSqlQuery("SELECT COUNT(*) FROM Player")
+            query.first()
+            row_count = query.value(0)
+
+            # Use the appropriate SQL statement based on the number of existing rows
+            if row_count >= 4:
+                # If there are four or more rows, update the first four rows with new data
+                for i, value in enumerate(values, start=1):
+                    query.prepare("UPDATE Player SET player_name = :player_name WHERE user_id = :user_id")
+                    query.bindValue(":player_name", value)
+                    query.bindValue(":user_id", i)
+                    query.exec_()
+            else:
+                # If there are less than four rows, insert new rows
+                query.prepare("INSERT INTO Player (player_name) VALUES (:player_name)")
+                for value in values:
+                    query.bindValue(":player_name", value)
+                    query.exec_()
+                        
+            self.gotoBoard()
 
 # Category Menu
 class CategoryMenu(QDialog):
