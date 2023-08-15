@@ -264,7 +264,7 @@ class QuestionMenu(QDialog):
 
         # Link all load file buttons for questions
         self.buttons = []
-        for i in range(1, 10):
+        for i in range(1, 12):
             exec(f"self.btn_load{i}.clicked.connect(self.openFile)")
             self.buttons.append(f"self.btn_load{i}")
 
@@ -274,15 +274,17 @@ class QuestionMenu(QDialog):
         sender_btn_name = "self." + sender_btn.objectName()
 
         # Open File Dialog
-        fname = QFileDialog.getOpenFileName(self, "Open File", "", "JPEG (*.jpg;*.jpeg;*.jpe;*.jiff);;PNG (*.png);;MP4 (*.mp4);;MOV (*.mov)")
+        fname = QFileDialog.getOpenFileName(self, "Open File", "", "JPEG (*.jpg;*.jpeg;*.jpe;*.jiff);;PNG (*.png);;MP4 (*.mp4);;MOV (*.mov);;MP3 (*.mp3)")
 
         # Output filename to line edit field
         if fname:
             line_edits = [self.line_ques1, self.line_ques2, self.line_ques3, self.line_ques4, self.line_ques5,
-                          self.line_ques6, self.line_ques7, self.line_ques8, self.line_ques9]
+                          self.line_ques6, self.line_ques7, self.line_ques8, self.line_ques9, self.line_ques10,
+                          self.line_ques11]
 
             for i, btn_name in enumerate(["self.btn_load1", "self.btn_load2", "self.btn_load3", "self.btn_load4", "self.btn_load5",
-                                          "self.btn_load6", "self.btn_load7", "self.btn_load8", "self.btn_load9"]):
+                                          "self.btn_load6", "self.btn_load7", "self.btn_load8", "self.btn_load9", "self.btn_load10",
+                                          "self.btn_load11"]):
                 if sender_btn_name == btn_name:
                     line_edits[i].setText(fname[0])
                     break
@@ -305,7 +307,7 @@ class QuestionMenu(QDialog):
             row_index += 1
 
     def clearQandA(self):
-        for i in range(1, 10):
+        for i in range(1, 12):
             line_edit_question_name = f"self.line_ques{i}"
             line_edit_answer_name = f"self.line_answ{i}"
 
@@ -335,6 +337,8 @@ class QuestionMenu(QDialog):
             (self.comboBox_category.currentText(), self.line_ques7.text(), self.line_answ7.text()),
             (self.comboBox_category.currentText(), self.line_ques8.text(), self.line_answ8.text()),
             (self.comboBox_category.currentText(), self.line_ques9.text(), self.line_answ9.text()),
+            (self.comboBox_category.currentText(), self.line_ques10.text(), self.line_answ10.text()),
+            (self.comboBox_category.currentText(), self.line_ques11.text(), self.line_answ11.text()),
         ]
 
         # Loop through the questions data and add each question to the database
@@ -450,7 +454,7 @@ class Board(QDialog):
         widget.setFixedWidth(880)
         widget.setCurrentWidget(main_app)
 
-    # In the board make sure to load up the player names
+    # In the board make sure to load up the player and category names
     # properly to set each text box
     def setNames(self):
         # Query the database to retrieve the first four rows from the "Player" table
@@ -462,6 +466,16 @@ class Board(QDialog):
             exec(f"self.txt_playerName{player_num}.setText('{str(query.value(1))}')")
             exec(f"self.txt_playerName{player_num}.setAlignment(QtCore.Qt.AlignCenter)")
             player_num += 1
+            
+        # Query the database to retrieve the first four rows from the "Category" table
+        query = QSqlQuery("SELECT * FROM Category LIMIT 4")
+
+        # Set the text fields for the category names
+        cat_num = 1
+        while query.next():
+            exec(f"self.txt_catName{cat_num}.setText('{str(query.value(1))}')")
+            exec(f"self.txt_catName{cat_num}.setAlignment(QtCore.Qt.AlignCenter)")
+            cat_num += 1
 
     ######################
     # Navigation methods:

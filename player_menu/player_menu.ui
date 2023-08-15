@@ -26,33 +26,6 @@
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="line_playerName2">
-      <property name="minimumSize">
-       <size>
-        <width>301</width>
-        <height>61</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>301</width>
-        <height>61</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border-color: rgb(0, 0, 0);</string>
-      </property>
-      <property name="placeholderText">
-       <string>Player 2 Name</string>
-      </property>
-     </widget>
-    </item>
     <item row="2" column="1">
      <widget class="QLineEdit" name="line_playerName3">
       <property name="minimumSize">
@@ -77,6 +50,33 @@
       </property>
       <property name="placeholderText">
        <string>Player 3 Name</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="line_playerName2">
+      <property name="minimumSize">
+       <size>
+        <width>301</width>
+        <height>61</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>301</width>
+        <height>61</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="placeholderText">
+       <string>Player 2 Name</string>
       </property>
      </widget>
     </item>
@@ -107,6 +107,18 @@
       </property>
      </widget>
     </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Player 1:</string>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="1">
      <widget class="QLineEdit" name="line_playerName1">
       <property name="minimumSize">
@@ -134,15 +146,15 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label">
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_3">
       <property name="font">
        <font>
         <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>Player 1:</string>
+       <string>Player 3:</string>
       </property>
      </widget>
     </item>
@@ -158,18 +170,6 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_3">
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Player 3:</string>
-      </property>
-     </widget>
-    </item>
     <item row="3" column="0">
      <widget class="QLabel" name="label_4">
       <property name="font">
@@ -179,6 +179,38 @@
       </property>
       <property name="text">
        <string>Player 4:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QDial" name="dial_player1">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(0, 0, 0);
+background-color: rgb(255, 0, 77);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QDial" name="dial_player3">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(0, 0, 0);
+background-color: rgb(255, 236, 39);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2">
+     <widget class="QDial" name="dial_player2">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(0, 0, 0);
+background-color: rgb(41, 173, 255);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QDial" name="dial_player4">
+      <property name="styleSheet">
+       <string notr="true">border-color: rgb(0, 0, 0);
+background-color: rgb(0, 228, 54);</string>
       </property>
      </widget>
     </item>
