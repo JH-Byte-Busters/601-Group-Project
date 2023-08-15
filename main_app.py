@@ -426,7 +426,9 @@ class Board(QDialog):
         self.pointer_player2 = 41
         self.pointer_player3 = 41
         self.pointer_player4 = 41
-
+        
+        self.player_active = [0,0,0,0] 
+        
         self.category = "NONE"
 
         # Create a 2D list to store the button objects
@@ -463,7 +465,10 @@ class Board(QDialog):
         # Set the text fields for the player names
         player_num = 1
         while query.next():
-            exec(f"self.txt_playerName{player_num}.setText('{str(query.value(1))}')")
+            player_name = query.value(1)
+            if player_name is not None and str(player_name).strip() != "":
+                self.player_active[player_num - 1] = 1           
+            exec(f"self.txt_playerName{player_num}.setText('{str(player_name)}')")
             exec(f"self.txt_playerName{player_num}.setAlignment(QtCore.Qt.AlignCenter)")
             player_num += 1
             
@@ -596,7 +601,6 @@ class Board(QDialog):
         if self.current_instr == 'Vote Answer':
             players = ["player1", "player2", "player3", "player4"]
             current_index = players.index(self.current_player)
-            self.current_player = players[(current_index + 1) % len(players)]
 
             # Query the database to retrieve the first four rows from the "Player" table
             query = QSqlQuery("SELECT * FROM Player LIMIT 4")
@@ -607,6 +611,11 @@ class Board(QDialog):
                 player_names.append(query.value(1))
 
             # Set current player name in text box
+            while self.player_active[(current_index + 1) % len(players)] == 0:
+                current_index = current_index + 1
+
+            self.current_player = players[(current_index + 1) % len(players)]
+
             self.txt_currentPlayer.setText(player_names[(current_index + 1) % len(players)])
             self.txt_currentPlayer.setAlignment(QtCore.Qt.AlignCenter)
             
