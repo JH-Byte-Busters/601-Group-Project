@@ -131,7 +131,6 @@ class PlayerMenu(QDialog):
         # Based on the button push perform certain action
         # Load the data and move to the game board
         self.btn_playGame.clicked.connect(self.insertData)
-        self.btn_playGame.clicked.connect(self.gotoBoard)
         # Go back to the menu if requested by user
         self.btn_backToMenu.clicked.connect(self.gotoMenu)
 
@@ -166,26 +165,39 @@ class PlayerMenu(QDialog):
         # Prepare the values to be written
         values = [self.line_playerName1.text(), self.line_playerName2.text(),
                   self.line_playerName3.text(), self.line_playerName4.text()]
+        
+        # Check if all text fields are empty
+        all_empty = all(value.strip() == "" for value in values)
 
-        # Check if there are at least four rows in the table
-        query = QSqlQuery("SELECT COUNT(*) FROM Player")
-        query.first()
-        row_count = query.value(0)
-
-        # Use the appropriate SQL statement based on the number of existing rows
-        if row_count >= 4:
-            # If there are four or more rows, update the first four rows with new data
-            for i, value in enumerate(values, start=1):
-                query.prepare("UPDATE Player SET player_name = :player_name WHERE user_id = :user_id")
-                query.bindValue(":player_name", value)
-                query.bindValue(":user_id", i)
-                query.exec_()
+        if all_empty:
+            # If error during login post warning message
+            message_box = QMessageBox()
+            message_box.setIcon(QMessageBox.Warning)
+            message_box.setWindowTitle("No Players Entered")
+            message_box.setText("Please enter at least one player name.")
+            message_box.exec_()
         else:
-            # If there are less than four rows, insert new rows
-            query.prepare("INSERT INTO Player (player_name) VALUES (:player_name)")
-            for value in values:
-                query.bindValue(":player_name", value)
-                query.exec_()
+            # Check if there are at least four rows in the table
+            query = QSqlQuery("SELECT COUNT(*) FROM Player")
+            query.first()
+            row_count = query.value(0)
+
+            # Use the appropriate SQL statement based on the number of existing rows
+            if row_count >= 4:
+                # If there are four or more rows, update the first four rows with new data
+                for i, value in enumerate(values, start=1):
+                    query.prepare("UPDATE Player SET player_name = :player_name WHERE user_id = :user_id")
+                    query.bindValue(":player_name", value)
+                    query.bindValue(":user_id", i)
+                    query.exec_()
+            else:
+                # If there are less than four rows, insert new rows
+                query.prepare("INSERT INTO Player (player_name) VALUES (:player_name)")
+                for value in values:
+                    query.bindValue(":player_name", value)
+                    query.exec_()
+                        
+            self.gotoBoard()
 
 # Category Menu
 class CategoryMenu(QDialog):
@@ -426,7 +438,9 @@ class Board(QDialog):
         self.pointer_player2 = 41
         self.pointer_player3 = 41
         self.pointer_player4 = 41
-
+        
+        self.player_active = [0,0,0,0] 
+        
         self.category = "NONE"
 
         # Create a 2D list to store the button objects
@@ -463,7 +477,10 @@ class Board(QDialog):
         # Set the text fields for the player names
         player_num = 1
         while query.next():
-            exec(f"self.txt_playerName{player_num}.setText('{str(query.value(1))}')")
+            player_name = query.value(1)
+            if player_name is not None and str(player_name).strip() != "":
+                self.player_active[player_num - 1] = 1           
+            exec(f"self.txt_playerName{player_num}.setText('{str(player_name)}')")
             exec(f"self.txt_playerName{player_num}.setAlignment(QtCore.Qt.AlignCenter)")
             player_num += 1
             
@@ -596,7 +613,6 @@ class Board(QDialog):
         if self.current_instr == 'Vote Answer':
             players = ["player1", "player2", "player3", "player4"]
             current_index = players.index(self.current_player)
-            self.current_player = players[(current_index + 1) % len(players)]
 
             # Query the database to retrieve the first four rows from the "Player" table
             query = QSqlQuery("SELECT * FROM Player LIMIT 4")
@@ -607,6 +623,11 @@ class Board(QDialog):
                 player_names.append(query.value(1))
 
             # Set current player name in text box
+            while self.player_active[(current_index + 1) % len(players)] == 0:
+                current_index = current_index + 1
+
+            self.current_player = players[(current_index + 1) % len(players)]
+
             self.txt_currentPlayer.setText(player_names[(current_index + 1) % len(players)])
             self.txt_currentPlayer.setAlignment(QtCore.Qt.AlignCenter)
             
