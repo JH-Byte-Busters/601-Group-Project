@@ -208,7 +208,6 @@ class CategoryMenu(QDialog):
         # Based on the button push perform certain action
         # Load the data and move to the question menu
         self.btn_questionSetup.clicked.connect(self.insertData)
-        self.btn_questionSetup.clicked.connect(self.gotoQuestions)
         # Go back to the menu if requested by user
         self.btn_backToMenu.clicked.connect(self.gotoMenu)
 
@@ -238,27 +237,40 @@ class CategoryMenu(QDialog):
         # Prepare the values to be written
         values = [self.line_catHead1.text(), self.line_catHead2.text(),
                   self.line_catHead3.text(), self.line_catHead4.text()]
+        
+        # Check if all text fields are empty
+        all_empty = all(value.strip() == "" for value in values)
 
-        # Check if there are at least four rows in the table
-        query = QSqlQuery("SELECT COUNT(*) FROM Category")
-        query.first()
-        row_count = query.value(0)
-
-        # Use the appropriate SQL statement based on the number of existing rows
-        if row_count >= 4:
-            # If there are four or more rows, update the first four rows with new data
-            for i, value in enumerate(values, start=1):
-                print(i)
-                query.prepare("UPDATE Category SET category_name = :category_name WHERE user_id = :user_id")
-                query.bindValue(":category_name", value)
-                query.bindValue(":user_id", i)
-                query.exec_()
+        if all_empty:
+            # If error during login post warning message
+            message_box = QMessageBox()
+            message_box.setIcon(QMessageBox.Warning)
+            message_box.setWindowTitle("No Categories Entered")
+            message_box.setText("Please enter four category names.")
+            message_box.exec_()
         else:
-            # If there are less than four rows, insert new rows
-            query.prepare("INSERT INTO Category (category_name) VALUES (:category_name)")
-            for value in values:
-                query.bindValue(":category_name", value)
-                query.exec_()
+            # Check if there are at least four rows in the table
+            query = QSqlQuery("SELECT COUNT(*) FROM Category")
+            query.first()
+            row_count = query.value(0)
+
+            # Use the appropriate SQL statement based on the number of existing rows
+            if row_count >= 4:
+                # If there are four or more rows, update the first four rows with new data
+                for i, value in enumerate(values, start=1):
+                    print(i)
+                    query.prepare("UPDATE Category SET category_name = :category_name WHERE user_id = :user_id")
+                    query.bindValue(":category_name", value)
+                    query.bindValue(":user_id", i)
+                    query.exec_()
+            else:
+                # If there are less than four rows, insert new rows
+                query.prepare("INSERT INTO Category (category_name) VALUES (:category_name)")
+                for value in values:
+                    query.bindValue(":category_name", value)
+                    query.exec_()
+                        
+            self.gotoQuestions()
 
 # Question Menu
 class QuestionMenu(QDialog):
