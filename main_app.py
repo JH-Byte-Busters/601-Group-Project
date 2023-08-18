@@ -264,7 +264,6 @@ class CategoryMenu(QDialog):
             if row_count >= 4:
                 # If there are four or more rows, update the first four rows with new data
                 for i, value in enumerate(values, start=1):
-                    print(i)
                     query.prepare("UPDATE Category SET category_name = :category_name WHERE user_id = :user_id")
                     query.bindValue(":category_name", value)
                     query.bindValue(":user_id", i)
@@ -308,13 +307,11 @@ class QuestionMenu(QDialog):
 
         # Output filename to line edit field
         if fname:
-            line_edits = [self.line_ques1, self.line_ques2, self.line_ques3, self.line_ques4, self.line_ques5,
-                          self.line_ques6, self.line_ques7, self.line_ques8, self.line_ques9, self.line_ques10,
-                          self.line_ques11]
+            line_edits = [getattr(self, f"line_ques{i}") for i in range(1, 31)]
 
-            for i, btn_name in enumerate(["self.btn_load1", "self.btn_load2", "self.btn_load3", "self.btn_load4", "self.btn_load5",
-                                          "self.btn_load6", "self.btn_load7", "self.btn_load8", "self.btn_load9", "self.btn_load10",
-                                          "self.btn_load11"]):
+            btn_names = [f"self.btn_load{i}" for i in range(1, 31)]
+
+            for i, btn_name in enumerate(btn_names):
                 if sender_btn_name == btn_name:
                     line_edits[i].setText(fname[0])
                     break
@@ -337,7 +334,7 @@ class QuestionMenu(QDialog):
             row_index += 1
 
     def clearQandA(self):
-        for i in range(1, 12):
+        for i in range(1, 31):
             line_edit_question_name = f"self.line_ques{i}"
             line_edit_answer_name = f"self.line_answ{i}"
 
@@ -355,21 +352,11 @@ class QuestionMenu(QDialog):
 
     def insertData(self):
         # Sample data for multiple questions
-        questions_data = [
-            # ("Category", "Question Text", "Correct Answer", "Incorrect Answers (comma-separated)", "Difficulty"),
-            # Ex. ("Geography", "What is the capital of France?", "Paris", "London, Berlin, Rome", "Easy"),
-            (self.comboBox_category.currentText(), self.line_ques1.text(), self.line_answ1.text()),
-            (self.comboBox_category.currentText(), self.line_ques2.text(), self.line_answ2.text()),
-            (self.comboBox_category.currentText(), self.line_ques3.text(), self.line_answ3.text()),
-            (self.comboBox_category.currentText(), self.line_ques4.text(), self.line_answ4.text()),
-            (self.comboBox_category.currentText(), self.line_ques5.text(), self.line_answ5.text()),
-            (self.comboBox_category.currentText(), self.line_ques6.text(), self.line_answ6.text()),
-            (self.comboBox_category.currentText(), self.line_ques7.text(), self.line_answ7.text()),
-            (self.comboBox_category.currentText(), self.line_ques8.text(), self.line_answ8.text()),
-            (self.comboBox_category.currentText(), self.line_ques9.text(), self.line_answ9.text()),
-            (self.comboBox_category.currentText(), self.line_ques10.text(), self.line_answ10.text()),
-            (self.comboBox_category.currentText(), self.line_ques11.text(), self.line_answ11.text()),
-        ]
+        # ("Category", "Question Text", "Correct Answer", "Incorrect Answers (comma-separated)", "Difficulty"),
+        # Ex. ("Geography", "What is the capital of France?", "Paris", "London, Berlin, Rome", "Easy"),
+        questions_data = [ (self.comboBox_category.currentText(), 
+                            getattr(self, f"line_ques{i}").text(), 
+                            getattr(self, f"line_answ{i}").text()) for i in range(1, 31)]
 
         # Loop through the questions data and add each question to the database
         for question_data in questions_data:
@@ -398,8 +385,6 @@ class QuestionMenu(QDialog):
         # Execute the query
         if not query.exec_():
             print("Error:", query.lastError().text())
-        else:
-            print("Question added successfully.")
 
         # Close the database connection
         database.close()
@@ -537,8 +522,6 @@ class Board(QDialog):
                 setattr(self, f"pointer_{self.current_player}", player_pointer)
                 exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() + 95, self.dial_{self.current_player}.y())")
 
-            print(player_pointer)
-
     def move_right(self):
         if self.current_instr == 'Move Chip':
             right_border = [10, 19, 28, 37, 46, 55, 64, 73, 82] # Board right border cells
@@ -561,8 +544,6 @@ class Board(QDialog):
                 setattr(self, f"pointer_{self.current_player}", player_pointer)
                 exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x() - 95, self.dial_{self.current_player}.y())")
 
-            print(player_pointer)
-
     def move_up(self):
         if self.current_instr == 'Move Chip':
             player_pointer = getattr(self, f"pointer_{self.current_player}")
@@ -582,8 +563,6 @@ class Board(QDialog):
                 setattr(self, f"pointer_{self.current_player}", player_pointer)
                 exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() + 100)")
 
-            print(player_pointer)
-
     def move_down(self):
         if self.current_instr == 'Move Chip':
             player_pointer = getattr(self, f"pointer_{self.current_player}")
@@ -602,8 +581,6 @@ class Board(QDialog):
                 player_pointer = player_pointer - 9
                 setattr(self, f"pointer_{self.current_player}", player_pointer)
                 exec(f"self.dial_{self.current_player}.move(self.dial_{self.current_player}.x(), self.dial_{self.current_player}.y() - 100)")
-
-            print(player_pointer)
 
     def getCellObject(self):
         for obj in self.cells:
