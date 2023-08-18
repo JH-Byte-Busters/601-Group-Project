@@ -1975,7 +1975,7 @@ background-color: rgb(255, 0, 77);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">border-color: rgb(0, 0, 0);
-background-color: rgb(41, 173, 255);</string>
+background-color: rgb(255, 236, 39);</string>
    </property>
   </widget>
   <widget class="QDial" name="dial_player3">
@@ -1989,7 +1989,7 @@ background-color: rgb(41, 173, 255);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">border-color: rgb(0, 0, 0);
-background-color: rgb(255, 236, 39);</string>
+background-color: rgb(0, 228, 54);</string>
    </property>
   </widget>
   <widget class="QDial" name="dial_player4">
@@ -2003,7 +2003,7 @@ background-color: rgb(255, 236, 39);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">border-color: rgb(0, 0, 0);
-background-color: rgb(0, 228, 54);</string>
+background-color: rgb(41, 173, 255);</string>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
