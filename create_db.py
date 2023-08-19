@@ -19,13 +19,13 @@ def create_database():
     query.exec("CREATE TABLE IF NOT EXISTS Player ("
             "user_id INTEGER PRIMARY KEY AUTOINCREMENT,"
             "player_name TEXT NOT NULL)")
-    
+
     # Create the "Categories" table
     query = QSqlQuery()
     query.exec("CREATE TABLE IF NOT EXISTS Category ("
             "user_id INTEGER PRIMARY KEY AUTOINCREMENT,"
             "category_name TEXT NOT NULL)")
-    
+
     # Create the "Users" table
     query = QSqlQuery()
     query.exec("CREATE TABLE IF NOT EXISTS Users ("
@@ -38,15 +38,16 @@ def create_database():
 
     # Create the "Questions" table
     query.exec("CREATE TABLE IF NOT EXISTS Questions ("
-               "question_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-               "category TEXT NOT NULL,"
-               "question_text TEXT NOT NULL,"
-               "correct_answer TEXT NOT NULL,"
-               "incorrect_answers TEXT,"
-               "difficulty TEXT)")
+           "question_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+           "category TEXT NOT NULL,"
+           "question_text TEXT NOT NULL,"
+           "correct_answer TEXT NOT NULL,"
+           "incorrect_answers TEXT,"
+           "difficulty TEXT,"
+           "used BOOLEAN DEFAULT 0)")
 
     print("Database and table created successfully!")
-    
+
     return database
 
 # Create a function to create the database and table

@@ -5,10 +5,16 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.uic import loadUi
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QWidget, QMessageBox, QFileDialog
+from PyQt5.QtWidgets import QDialog, QApplication, QWidget, QMessageBox, QFileDialog,QLabel
 import create_db
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
 from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import *
+from PyQt5.QtMultimedia import *
+from PyQt5.QtMultimediaWidgets import *
+from PyQt5.QtCore import *
+import subprocess
+import threading
 
 # Main Window Menu
 class MainWindow(QDialog):
@@ -495,7 +501,7 @@ class Board(QDialog):
             exec(f"self.txt_playerName{player_num}.setText('{str(player_name)}')")
             exec(f"self.txt_playerName{player_num}.setAlignment(QtCore.Qt.AlignCenter)")
             player_num += 1
-            
+
         # Query the database to retrieve the first four rows from the "Category" table
         query = QSqlQuery("SELECT * FROM Category LIMIT 4")
 
@@ -614,7 +620,7 @@ class Board(QDialog):
             die = random.randint (1,6)
             image2 = QPixmap("board/dice-"+str(die)+".png")
             self.die_image.setPixmap(image2)
-            
+
             # Change State
             self.current_instr = 'Move Chip'
             # Set current instruction name in text box
@@ -642,7 +648,7 @@ class Board(QDialog):
 
             self.txt_currentPlayer.setText(player_names[(current_index + 1) % len(players)])
             self.txt_currentPlayer.setAlignment(QtCore.Qt.AlignCenter)
-            
+
             # Change State
             self.current_instr = 'Roll Die'
             # Set current instruction name in text box
@@ -669,6 +675,7 @@ class Board(QDialog):
             cat2_positions = [3,  7, 23, 28, 36, 38, 42, 64, 72, 77]
             cat3_positions = [2,  6, 14, 27, 37, 43, 50, 63, 74, 78]
             cat4_positions = [4,  8, 19, 32, 39, 45, 55, 68, 76, 80]
+            center_position = [41]
 
             player_pointer = getattr(self, f"pointer_{self.current_player}")
 
@@ -695,58 +702,98 @@ class Board(QDialog):
             cat2 = string_categories[1]
             cat3 = string_categories[2]
             cat4 = string_categories[3]
-            print(cat1)
 
             if player_pointer in cat1_positions:
-                query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
+                query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ?  AND used = 0 ORDER BY RANDOM() LIMIT 1 ")
                 query.addBindValue(cat1)
                 if query.exec():
                     if query.next():
                         question_text = query.value(0)
                         correct_answer_text = query.value(1)
                         category = query.value(2)
+                        updateQuery = QSqlQuery("UPDATE Questions SET used = 1 WHERE question_text = ?")
+                        updateQuery.addBindValue(question_text)
+                        updateQuery.exec()
             elif player_pointer in cat2_positions:
-                query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
+                query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ?  AND used = 0 ORDER BY RANDOM() LIMIT 1 ")
                 query.addBindValue(cat2)
                 if query.exec():
                     if query.next():
                         question_text = query.value(0)
                         correct_answer_text = query.value(1)
                         category = query.value(2)
+                        updateQuery = QSqlQuery("UPDATE Questions SET used = 1 WHERE question_text = ?")
+                        updateQuery.addBindValue(question_text)
+                        updateQuery.exec()
             elif player_pointer in cat3_positions:
-                query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
+                query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ?  AND used = 0 ORDER BY RANDOM() LIMIT 1 ")
                 query.addBindValue(cat3)
                 if query.exec():
                     if query.next():
                         question_text = query.value(0)
                         correct_answer_text = query.value(1)
                         category = query.value(2)
+                        updateQuery = QSqlQuery("UPDATE Questions SET used = 1 WHERE question_text = ?")
+                        updateQuery.addBindValue(question_text)
+                        updateQuery.exec()
             elif player_pointer in cat4_positions:
-                query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
+                query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? AND used = 0 ORDER BY RANDOM() LIMIT 1 ")
                 query.addBindValue(cat4)
                 if query.exec():
                     if query.next():
                         question_text = query.value(0)
                         correct_answer_text = query.value(1)
                         category = query.value(2)
+                        updateQuery = QSqlQuery("UPDATE Questions SET used = 1 WHERE question_text = ?")
+                        updateQuery.addBindValue(question_text)
+                        updateQuery.exec()
+            elif player_pointer in center_position:
+                for category in string_categories:
+                    message_box = QMessageBox()
+                    message_box.setIcon(QMessageBox.Question)
+                    message_box.setText(f"Do you want to proceed with {category}?")
+                    message_box.setWindowTitle("Confirmation")
+                    message_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+
+                    result = message_box.exec_()
+
+                    if result == QMessageBox.Yes:
+                        query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
+                        query.addBindValue(f"{category}")
+                        if query.exec():
+                            if query.next():
+                                question_text = query.value(0)
+                                correct_answer_text = query.value(1)
+                        category = query.value(2)
+                        print('{category}')
+                        break
+                    elif result == QMessageBox.No:
+                        print("No")
             else:
                 print("No rows found for the specified category.")
 
+            media_extensions = ['.mp4', '.mp3', '.png', '.jpeg', '.jpg', '.jpe', '.jiff']
 
-            message_box = QMessageBox()
-            message_box.setIcon(QMessageBox.Question)
-            message_box.setWindowTitle("Please Answer the Question")
-            message_box.setText(question_text)
-            message_box.setStandardButtons(QMessageBox.Open)
-            message_box.setInformativeText("Press 'Open' to reveal answer")
-            message_box.exec_()
+            file_extension = os.path.splitext(question_text)[-1].lower()
+
+            if file_extension in media_extensions:
+                video_thread = threading.Thread(target=lambda: subprocess.Popen(['start', '', question_text], shell=True))
+                video_thread.start()
+            else:
+                message_box = QMessageBox()
+                message_box.setIcon(QMessageBox.Question)
+                message_box.setWindowTitle("Please Answer the Question")
+                message_box.setText(question_text)
+                message_box.setStandardButtons(QMessageBox.Open)
+                message_box.setInformativeText("Press 'Open' to reveal answer")
+                message_box.exec_()
 
             message_box = QMessageBox()
             message_box.setIcon(QMessageBox.Information)
             message_box.setWindowTitle("Correct Answer")
             message_box.setText(correct_answer_text)
             message_box.exec_()
-            
+
             # Change State
             self.current_instr = 'Vote Answer'
             # Set current instruction name in text box
@@ -806,7 +853,7 @@ class Board(QDialog):
                         message_box.setWindowTitle("Winner")
                         message_box.setText(f"{player_name} Wins!")
                         message_box.exec_()
-                
+
             # Change State
             self.current_instr = 'Roll Die'
             # Set current instruction name in text box
