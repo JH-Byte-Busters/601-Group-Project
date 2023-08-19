@@ -756,6 +756,12 @@ class Board(QDialog):
             if file_extension in media_extensions:
                 video_thread = threading.Thread(target=lambda: subprocess.Popen(['start', '', question_text], shell=True))
                 video_thread.start()
+                message_box = QMessageBox()
+                message_box.setIcon(QMessageBox.Question)
+                message_box.setWindowTitle("Please Answer the Question")
+                message_box.setText("Press 'Open' to reveal answer")
+                message_box.setStandardButtons(QMessageBox.Open)
+                message_box.exec_()
             else:
                 message_box = QMessageBox()
                 message_box.setIcon(QMessageBox.Question)
