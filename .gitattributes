@@ -1,0 +1,1 @@
+trivial_compute.exe filter=lfs diff=lfs merge=lfs -text
