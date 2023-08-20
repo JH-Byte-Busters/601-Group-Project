@@ -171,7 +171,7 @@ class PlayerMenu(QDialog):
         # Prepare the values to be written
         values = [self.line_playerName1.text(), self.line_playerName2.text(),
                   self.line_playerName3.text(), self.line_playerName4.text()]
-        
+
         # Check if all text fields are empty
         all_empty = all(value.strip() == "" for value in values)
 
@@ -202,7 +202,7 @@ class PlayerMenu(QDialog):
                 for value in values:
                     query.bindValue(":player_name", value)
                     query.exec_()
-                        
+
             self.gotoBoard()
 
 # Category Menu
@@ -243,7 +243,7 @@ class CategoryMenu(QDialog):
         # Prepare the values to be written
         values = [self.line_catHead1.text(), self.line_catHead2.text(),
                   self.line_catHead3.text(), self.line_catHead4.text()]
-        
+
         # Check if all text fields are empty
         all_empty = all(value.strip() == "" for value in values)
 
@@ -275,7 +275,7 @@ class CategoryMenu(QDialog):
                 for value in values:
                     query.bindValue(":category_name", value)
                     query.exec_()
-                        
+
             self.gotoQuestions()
 
 # Question Menu
@@ -456,9 +456,9 @@ class Board(QDialog):
         self.pointer_player2 = 41
         self.pointer_player3 = 41
         self.pointer_player4 = 41
-        
-        self.player_active = [0,0,0,0] 
-        
+
+        self.player_active = [0,0,0,0]
+
         self.category = "NONE"
 
         # Create a 2D list to store the button objects
@@ -497,7 +497,7 @@ class Board(QDialog):
         while query.next():
             player_name = query.value(1)
             if player_name is not None and str(player_name).strip() != "":
-                self.player_active[player_num - 1] = 1           
+                self.player_active[player_num - 1] = 1
             exec(f"self.txt_playerName{player_num}.setText('{str(player_name)}')")
             exec(f"self.txt_playerName{player_num}.setAlignment(QtCore.Qt.AlignCenter)")
             player_num += 1
@@ -748,27 +748,30 @@ class Board(QDialog):
                         updateQuery.addBindValue(question_text)
                         updateQuery.exec()
             elif player_pointer in center_position:
-                for category in string_categories:
-                    message_box = QMessageBox()
-                    message_box.setIcon(QMessageBox.Question)
-                    message_box.setText(f"Do you want to proceed with {category}?")
-                    message_box.setWindowTitle("Confirmation")
-                    message_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+                selected_category = None
+                while selected_category is None:
+                    for category in string_categories:
+                        message_box = QMessageBox()
+                        message_box.setIcon(QMessageBox.Question)
+                        message_box.setText(f"Do you want to proceed with {category}?")
+                        message_box.setWindowTitle("Confirmation")
+                        message_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
 
-                    result = message_box.exec_()
+                        result = message_box.exec_()
 
-                    if result == QMessageBox.Yes:
-                        query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
-                        query.addBindValue(f"{category}")
-                        if query.exec():
-                            if query.next():
-                                question_text = query.value(0)
-                                correct_answer_text = query.value(1)
-                        category = query.value(2)
-                        print('{category}')
-                        break
-                    elif result == QMessageBox.No:
-                        print("No")
+                        if result == QMessageBox.Yes:
+                            query = QSqlQuery("SELECT question_text, correct_answer,category FROM Questions  WHERE category = ? ORDER BY RANDOM() LIMIT 1 ")
+                            query.addBindValue(f"{category}")
+                            if query.exec():
+                                if query.next():
+                                    question_text = query.value(0)
+                                    correct_answer_text = query.value(1)
+                                    selected_category = "Category selected"
+                            category = query.value(2)
+                            print('{category}')
+                            break
+                        elif result == QMessageBox.No:
+                            print("No")
             else:
                 print("No rows found for the specified category.")
 
